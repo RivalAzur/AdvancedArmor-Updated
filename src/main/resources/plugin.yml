@@ -1,0 +1,12 @@
+name: AdvancedArmor
+version: '${project.version}'
+main: me.ilucah.advancedarmor.AdvancedArmor
+api-version: 1.13
+authors: [ iLucaH ]
+description: An advanced armor plugin for adding extra depth to your minecraft server
+softdepend: [ PlaceholderAPI ]
+commands:
+  armor:
+    description: Main hub command to manage Cusom Armor
+    usage: /<command>
+    aliases: [ carmour, carmor, customarmour, customarmor, armour, advancedarmor, advancedarmour, aarmor, aarmour ]

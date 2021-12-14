@@ -1,0 +1,197 @@
+#################################################
+##        AdvancedArmor by iLucaH              ##
+###                                           ###
+####                                         ####
+##### # # # # # # # # # # # # # # # # # # # #####
+####                                         ####
+###                                           ###
+##                                             ##
+#################################################
+
+Armor:
+  Types:
+    Helix: 
+      Name: '&2&lHelix &f&l%armor_type%'
+      ArmorColor: 'LIME'
+      Lore:
+        - '&2&l * &fExperience Boost Armor'
+        - '&r'
+        - '&2&l * &fHelmet Piece: 10% EXP Boost'
+        - '&2&l * &fChestplate Piece: 20% EXP Boost'
+        - '&2&l * &fLeggings Piece: 30% EXP Boost'
+        - '&2&l * &fBoots Piece: 40% EXP Boost'
+      Enchants:
+        Unbreaking: 10
+      Boost:
+        Type: 'EXP'      
+        Helmet-Percentage: 10
+        Chestplate-Percentage: 20
+        Leggings-Percentage: 30
+        Boots-Percentage: 40
+    Ocean: 
+      Name: '&b&lOcean &f&l%armor_type%'
+      ArmorColor: 'AQUABLUE'
+      Lore:
+        - '&b&l * &fExperience Boost Armor'
+        - '&r'
+        - '&b&l * &fHelmet Piece: 30% EXP Boost'
+        - '&b&l * &fChestplate Piece: 40% EXP Boost'
+        - '&b&l * &fLeggings Piece: 50% EXP Boost'
+        - '&b&l * &fBoots Piece: 60% EXP Boost'
+      Enchants:
+        Unbreaking: 10
+      Boost:
+        Type: 'EXP'      
+        Helmet-Percentage: 30
+        Chestplate-Percentage: 40
+        Leggings-Percentage: 50
+        Boots-Percentage: 60
+    Ravanger: 
+      Name: '&7&lRavanger &f&l%armor_type%'
+      ArmorColor: 'GRAY'
+      Lore:
+        - '&7&l * &fExperience Boost Armor'
+        - '&r'
+        - '&7&l * &fHelmet Piece: 50% EXP Boost'
+        - '&7&l * &fChestplate Piece: 60% EXP Boost'
+        - '&7&l * &fLeggings Piece: 70% EXP Boost'
+        - '&7&l * &fBoots Piece: 80% EXP Boost'
+      Enchants:
+        Unbreaking: 10
+      Boost:
+        Type: 'EXP'      
+        Helmet-Percentage: 50
+        Chestplate-Percentage: 60
+        Leggings-Percentage: 70
+        Boots-Percentage: 80
+    Santa:
+      Name: '&c&lSanta &a&l%armor_type%'
+      ArmorColor: 'RED'
+      Lore:
+        - '&c&l * &aExperience Boost Armor'
+        - '&r'
+        - '&c&l * &a1 Piece: &210% EXP Boost'
+        - '&c&l * &a2 Piece: &220% EXP Boost'
+        - '&c&l * &a3 Piece: &230% EXP Boost'
+        - '&c&l * &a4 Piece: &240% EXP Boost'
+      Enchants:
+        Unbreaking: 10
+      Boost:
+        Type: 'EXP'
+        Helmet-Percentage: 10
+        Chestplate-Percentage: 10
+        Leggings-Percentage: 10
+        Boots-Percentage: 10
+    Grinch:
+      Name: '&2&lGrinch &a&l%armor_type%'
+      ArmorColor: 'PALEGREEN'
+      Lore:
+        - '&2&l * &aExperience Boost Armor'
+        - '&r'
+        - '&2&l * &a1 Piece: &750% EXP Boost'
+        - '&2&l * &a2 Piece: &7100% EXP Boost'
+        - '&2&l * &a3 Piece: &7150% EXP Boost'
+        - '&2&l * &a4 Piece: &7200% EXP Boost'
+      Enchants:
+        Unbreaking: 10
+        Protection_: 10
+      Boost:
+        Type: 'EXP'
+        Helmet-Percentage: 50
+        Chestplate-Percentage: 50
+        Leggings-Percentage: 50
+        Boots-Percentage: 50
+
+ArmorColor:
+  RED:
+    R: 255
+    G: 0
+    B: 0
+  GREEN:
+    R: 0
+    G: 255
+    B: 0
+  BLUE:
+    R: 0
+    G: 0
+    B: 255
+  YELLOW:
+    R: 255
+    G: 243
+    B: 0
+  ORANGE:
+    R: 255
+    G: 135
+    B: 0
+  PINK:
+    R: 255
+    G: 115
+    B: 225
+  GRAY:
+    R: 170
+    G: 167
+    B: 168
+  HOTPINK: 
+    R: 255
+    G: 0
+    B: 108
+  LIGHTBLUE:
+    R: 216
+    G: 251
+    B: 255
+  PALEGREEN:
+    R: 0
+    G: 255
+    B: 184
+  LIME:
+    R: 13
+    G: 255
+    B: 0
+  AQUABLUE:  
+    R: 0
+    G: 255
+    B: 218
+  MAROON:
+    R: 140
+    G: 22
+    B: 22
+
+Messages:
+  Console-Name: 'Server'
+  No-Permission:
+    - '&cYou do not have permission to execute this command.'
+  Armor-Correct-Usage:
+    - '&cCorrect Usage:'
+    - '&c* &7/armor give <name> <armor_type> <piece> - Give someone an armor piece.'
+    - '&c* &7/armor types - List the armor types.'
+    - '&c* &7/armor reload - Reloads the config.'
+  Command-Info:
+    - '&b&l -= &7&l&nAdvanced Armor Commands: &b&l=-'
+    - '&b&l* &7/armor give <name> <armor_type> <piece> - Give someone an armor piece.'
+    - '&b&l* &7/armor types - List the armor types.'
+    - '&b&l* &7/armor reload - Reloads the config.'
+  Armor-Types-Message:
+    - '&b&lHere are the armor types:'
+  Incorrect-Type-Of-Piece:
+    - '&cPlease enter a correct piece:'
+    - '&7&oHELMET, CHESTPLATE, LEGGINGS, BOOTS'
+  Incorrect-Armor-Type:
+    - '&cPlease enter a correct armor type:'
+  Player-Not-Online:
+    - '&c{username} is not online.'
+  Player-Does-Not-Exist:
+    - '&c{username} does not exist.'
+  Sent-Player-Armor-Message:
+    - '&bYou sent {username} an {armor_type} {armor_piece}.'
+  Received-Armor-Message:
+    - '&bYou received an {armor_type} {armor_piece} from {username}'
+  Reload-Failed:
+    - '&cThere was an issue when reloading the config'
+    - '%issue-printout%'
+  Reload-Config:
+    - '&aYou Reloaded The Config'
+
+Debug:
+  Enabled: false
+  Cosole: true
+  Player: true
