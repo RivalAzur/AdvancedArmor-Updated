@@ -42,7 +42,6 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <outputFile>C:\Users\17hautrivel\Desktop\PluginOutput\AdvancedArmor.jar</outputFile>
                     <relocations>
                         <relocation>
                             <pattern>de.tr7zw.changeme.nbtapi</pattern>
