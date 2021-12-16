@@ -4,11 +4,11 @@ import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
 import org.bukkit.inventory.ItemStack;
 
-public class ExpUtils {
+public class MoneyUtils {
 
-    private final Handler handler;
+    private Handler handler;
 
-    public ExpUtils(Handler handler) {
+    public MoneyUtils(Handler handler) {
         this.handler = handler;
     }
 
@@ -17,25 +17,25 @@ public class ExpUtils {
         int percentage = 0;
         if (helmet != null) {
             if (nbtUtils.hasArmorNBTTag(helmet)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(helmet)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(helmet)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(helmet)).getHelmetBoost();
             }
         }
         if (chestplate != null) {
             if (nbtUtils.hasArmorNBTTag(chestplate)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(chestplate)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(chestplate)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(chestplate)).getChestplateBoost();
             }
         }
         if (leggings != null) {
             if (nbtUtils.hasArmorNBTTag(leggings)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(leggings)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(leggings)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(leggings)).getLeggingsBoost();
             }
         }
         if (boots != null) {
             if (nbtUtils.hasArmorNBTTag(boots)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(boots)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(boots)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(boots)).getBootsBoost();
             }
         }
@@ -49,29 +49,29 @@ public class ExpUtils {
         int percentage = 0;
         if (helmet != null) {
             if (nbtUtils.hasArmorNBTTag(helmet)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(helmet)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(helmet)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(helmet)).getHelmetBoost();
             }
         }
         if (chestplate != null) {
             if (nbtUtils.hasArmorNBTTag(chestplate)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(chestplate)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(chestplate)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(chestplate)).getChestplateBoost();
             }
         }
         if (leggings != null) {
             if (nbtUtils.hasArmorNBTTag(leggings)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(leggings)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(leggings)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(leggings)).getLeggingsBoost();
             }
         }
         if (boots != null) {
             if (nbtUtils.hasArmorNBTTag(boots)) {
-                if (handler.getArmorFromString(nbtUtils.getArmorName(boots)).getBoostType() == BoostType.EXP)
+                if (handler.getArmorFromString(nbtUtils.getArmorName(boots)).getBoostType() == BoostType.MONEY)
                     percentage += handler.getArmorFromString(nbtUtils.getArmorName(boots)).getBootsBoost();
             }
         }
-        if (percentage == 1)
+        if (percentage == 0)
             percentage++;
         return percentage;
     }

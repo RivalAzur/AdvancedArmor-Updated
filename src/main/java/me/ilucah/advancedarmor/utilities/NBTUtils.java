@@ -13,6 +13,8 @@ public class NBTUtils {
     }
 
     public boolean hasArmorNBTTag(ItemStack item) {
+        if (item == null)
+            return false;
         NBTItem nbtItem = new NBTItem(item);
         if (nbtItem.hasKey("CustomArmor"))
             return true;

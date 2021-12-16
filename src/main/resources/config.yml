@@ -1,12 +1,8 @@
-#################################################
-##        AdvancedArmor by iLucaH              ##
-###                                           ###
-####                                         ####
-##### # # # # # # # # # # # # # # # # # # # #####
-####                                         ####
-###                                           ###
-##                                             ##
-#################################################
+# Advanced Armor by iLucaH
+# Please if you encounter any issues, report it
+# Discord: https://discord.gg/GquPc7h
+# Wiki: https://github.com/iLucaH/AdvancedArmor/wiki
+# Config Info:
 
 Armor:
   Types:
@@ -84,7 +80,7 @@ Armor:
         Boots-Percentage: 10
     Grinch:
       Name: '&2&lGrinch &a&l%armor_type%'
-      ArmorColor: 'PALEGREEN'
+      ArmorColor: 'GREEN'
       Lore:
         - '&2&l * &aExperience Boost Armor'
         - '&r'
@@ -94,13 +90,90 @@ Armor:
         - '&2&l * &a4 Piece: &7200% EXP Boost'
       Enchants:
         Unbreaking: 10
-        Protection_: 10
+        Protection: 10
       Boost:
         Type: 'EXP'
         Helmet-Percentage: 50
         Chestplate-Percentage: 50
         Leggings-Percentage: 50
         Boots-Percentage: 50
+    Rainbow:
+      Name: '<RAINBOW1>&lRainbow %armor_type%</RAINBOW>'
+      ArmorColor: 'PINK'
+      Lore:
+        - '&d&l * <RAINBOW70>Experience Boost Armor</RAINBOW>'
+        - '&r'
+        - '&d&l * <RAINBOW70>1 Piece: 12% EXP Boost</RAINBOW>'
+        - '&d&l * <RAINBOW70>2 Piece: 24% EXP Boost</RAINBOW>'
+        - '&d&l * <RAINBOW70>3 Piece: 36% EXP Boost</RAINBOW>'
+        - '&d&l * <RAINBOW70>4 Piece: 48% EXP Boost</RAINBOW>'
+      Enchants:
+        Unbreaking: 10
+        Protection: 10
+      Boost:
+        Type: 'EXP'
+        Helmet-Percentage: 12
+        Chestplate-Percentage: 12
+        Leggings-Percentage: 12
+        Boots-Percentage: 12
+    Fire:
+      Name: '<GRADIENT:FF4200>&lFire %armor_type%</GRADIENT:FFC800>'
+      ArmorColor: 'ORANGE'
+      Lore:
+        - '&4&l * <SOLID:FFDC00>Experience Boost Armor'
+        - '&r'
+        - '&4&l * <SOLID:FFC800>1 Piece: 15% EXP Boost'
+        - '&4&l * <SOLID:FFBD00>2 Piece: 30% EXP Boost'
+        - '&4&l * <SOLID:FFAA00>3 Piece: 45% EXP Boost'
+        - '&4&l * <SOLID:FF9E00>4 Piece: 60% EXP Boost'
+      Enchants:
+        Unbreaking: 10
+        Protection: 10
+        Fireprotection: 10
+      Boost:
+        Type: 'EXP'
+        Helmet-Percentage: 15
+        Chestplate-Percentage: 15
+        Leggings-Percentage: 15
+        Boots-Percentage: 15
+    PiggyBank:
+      Name: '<GRADIENT:00F9FF>&lPiggyBank %armor_type%</GRADIENT:2D8789>'
+      ArmorColor: 'AQUABLUE'
+      Lore:
+        - '&b&l * <SOLID:00F9FF>Money Boost Armor'
+        - '&r'
+        - '&b&l * <SOLID:08D6DB>1 Piece: 15% Money Boost'
+        - '&b&l * <SOLID:06B3B7>2 Piece: 30% Money Boost'
+        - '&b&l * <SOLID:078D90>3 Piece: 45% Money Boost'
+        - '&b&l * <SOLID:066D6F>4 Piece: 60% Money Boost'
+      Enchants:
+        Unbreaking: 10
+        Protection: 10
+      Boost:
+        Type: 'MONEY'
+        Helmet-Percentage: 15
+        Chestplate-Percentage: 15
+        Leggings-Percentage: 15
+        Boots-Percentage: 15
+    Coin:
+      Name: '&6&lCoin &e&l%armor_type%'
+      ArmorColor: 'GOLD'
+      Lore:
+        - '&6&l * &eMoney Boost Armor'
+        - '&r'
+        - '&6&l * &eHelmet Piece: &f&n10% Money Boost'
+        - '&6&l * &eChestplate Piece: &f&n20% Money Boost'
+        - '&6&l * &eLeggings Piece: &f&n30% Money Boost'
+        - '&6&l * &eBoots Piece: &f&n40% Money Boost'
+      Enchants:
+        Unbreaking: 10
+        Protection: 10
+      Boost:
+        Type: 'MONEY'
+        Helmet-Percentage: 10
+        Chestplate-Percentage: 20
+        Leggings-Percentage: 30
+        Boots-Percentage: 40
 
 ArmorColor:
   RED:
@@ -155,6 +228,10 @@ ArmorColor:
     R: 140
     G: 22
     B: 22
+  GOLD:
+    R: 255
+    G: 215
+    B: 0
 
 Messages:
   Console-Name: 'Server'
@@ -190,6 +267,15 @@ Messages:
     - '%issue-printout%'
   Reload-Config:
     - '&aYou Reloaded The Config'
+  BoostMessages:
+    EXP:
+      Enabled: true
+      Message:
+        - '&a&l+ %amount% Experience &7(EXP Armor)'
+    Money:
+      Enabled: true
+      Message:
+        - '&a&l+ $%amount% &7(Money Armor)'
 
 Debug:
   Enabled: false

@@ -1,6 +1,7 @@
 package me.ilucah.advancedarmor;
 
 import me.ilucah.advancedarmor.armor.listeners.ExperienceHandling;
+import me.ilucah.advancedarmor.armor.listeners.MoneyHandler;
 import me.ilucah.advancedarmor.utilities.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,6 +33,13 @@ public class AdvancedArmor extends JavaPlugin {
 
     private void registerEvents() {
         getServer().getPluginManager().registerEvents(new ExperienceHandling(handler, this), this);
+
+        if (getServer().getPluginManager().getPlugin("Essentials") != null || getServer().getPluginManager().getPlugin("EssentialsX") != null) {
+            getServer().getPluginManager().registerEvents(new MoneyHandler(handler, this), this);
+            Bukkit.getLogger().info("[AdvancedArmor] Successfully hooked into EssentialsX");
+        } else {
+            Bukkit.getLogger().info("[AdvancedArmor] Failed to hook into EssentialsX. Money component disabled.");
+        }
     }
 
     private void registerCommands() {

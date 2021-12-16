@@ -70,7 +70,7 @@ public class ArmorCommand implements CommandExecutor {
                             });
                             return true;
                         }
-                    }else {
+                    } else {
                         messageUtils.getConfigMessage("Armor-Correct-Usage").iterator().forEachRemaining(s -> {
                             p.sendMessage(s);
                         });
@@ -174,88 +174,97 @@ public class ArmorCommand implements CommandExecutor {
                         p.sendMessage(ChatColor.AQUA + armorSet.getName());
                     }
                     return true;
+                } else if (args[0].equalsIgnoreCase("reload")) {
+                    messageUtils.getConfigMessage("Reload-Config").iterator().forEachRemaining(s -> {
+                        p.sendMessage(s);
+                    });
+                    try {
+                        plugin.reloadConfig();
+                    } catch (Exception e) {
+                        messageUtils.getConfigMessage("Reload-Failed").iterator().forEachRemaining(s -> {
+                            s.replace("%issue-printout%", e.getMessage());
+                            p.sendMessage(s);
+                        });
+                    }
+                    return true;
+                } else if (args.length < 4) {
+                    messageUtils.getConfigMessage("Armor-Correct-Usage").iterator().forEachRemaining(s -> {
+                        p.sendMessage(s);
+                    });
+                    return true;
+                } else if (args.length == 4) {
+                    if (p.hasPermission("advancedarmor.command.give")) {
+                        ArmorType type = ArmorType.HELMET;
+                        if (args[3].equalsIgnoreCase("chestplate")) {
+                            type = ArmorType.CHESTPLATE;
+                        } else if (args[3].equalsIgnoreCase("leggings")) {
+                            type = ArmorType.LEGGINGS;
+                        } else if (args[3].equalsIgnoreCase("boots")) {
+                            type = ArmorType.BOOTS;
+                        } else if (args[3].equalsIgnoreCase("helmet")) {
+                            type = ArmorType.HELMET;
+                        } else {
+                            messageUtils.getConfigMessage("Incorrect-Type-Of-Piece").iterator().forEachRemaining(s -> {
+                                p.sendMessage(s);
+                            });
+                            return true;
+                        }
+                        Armor armor = null;
+                        for (Armor armorType : plugin.getHandler().getArmor()) {
+                            if (args[2].toLowerCase().contains(armorType.getName().toLowerCase())) {
+                                armor = armorType;
+                                break;
+                            }
+                        }
+                        if (armor == null) {
+                            messageUtils.getConfigMessage("Incorrect-Armor-Type").iterator().forEachRemaining(s -> {
+                                p.sendMessage(s);
+                            });
+                            for (Armor armorSet : plugin.getHandler().getArmor()) {
+                                p.sendMessage(ChatColor.AQUA + armorSet.getName());
+                            }
+                            return true;
+                        }
+                        try {
+                            @SuppressWarnings("deprecation")
+                            OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+                            if (player.isOnline()) {
+                                player.getPlayer().getInventory().addItem(armor.getItemStackFromType(type));
+
+                                Armor finalArmor = armor;
+                                messageUtils.getConfigMessage("Sent-Player-Armor-Message").iterator().forEachRemaining(s -> {
+                                    p.sendMessage(s.replace("{username}", player.getName()).replace("{armor_type}", finalArmor.getName()).replace("{armor_piece}", args[3].toUpperCase()));
+                                });
+                                messageUtils.getConfigMessage("Received-Armor-Message").iterator().forEachRemaining(s -> {
+                                    player.getPlayer().sendMessage(s.replace("{username}", messageUtils.getServerName()).replace("{armor_type}", finalArmor.getName()).replace("{armor_piece}", args[3].toUpperCase()));
+                                });
+                                return true;
+                            } else {
+                                messageUtils.getConfigMessage("Player-Not-Online").iterator().forEachRemaining(s -> {
+                                    p.sendMessage(s.replace("{username}", args[1]));
+                                });
+                                return true;
+                            }
+                        } catch (Exception e) {
+                            messageUtils.getConfigMessage("Player-Does-Not-Exist").iterator().forEachRemaining(s -> {
+                                p.sendMessage(s.replace("{username}", args[1]));
+                            });
+                            return true;
+                        }
+                    } else {
+                        messageUtils.getConfigMessage("No-Permission").iterator().forEachRemaining(s -> {
+                            p.sendMessage(s);
+                        });
+                        return true;
+                    }
                 } else {
                     messageUtils.getConfigMessage("Armor-Correct-Usage").iterator().forEachRemaining(s -> {
                         p.sendMessage(s);
                     });
                     return true;
                 }
-            } else if (args.length < 4) {
-                messageUtils.getConfigMessage("Armor-Correct-Usage").iterator().forEachRemaining(s -> {
-                    p.sendMessage(s);
-                });
-                return true;
-            } else if (args.length == 4) {
-                if (p.hasPermission("advancedarmor.command.give")) {
-                    ArmorType type = ArmorType.HELMET;
-                    if (args[3].equalsIgnoreCase("chestplate")) {
-                        type = ArmorType.CHESTPLATE;
-                    } else if (args[3].equalsIgnoreCase("leggings")) {
-                        type = ArmorType.LEGGINGS;
-                    } else if (args[3].equalsIgnoreCase("boots")) {
-                        type = ArmorType.BOOTS;
-                    } else if (args[3].equalsIgnoreCase("helmet")) {
-                        type = ArmorType.HELMET;
-                    } else {
-                        messageUtils.getConfigMessage("Incorrect-Type-Of-Piece").iterator().forEachRemaining(s -> {
-                            p.sendMessage(s);
-                        });
-                        return true;
-                    }
-                    Armor armor = null;
-                    for (Armor armorType : plugin.getHandler().getArmor()) {
-                        if (args[2].toLowerCase().contains(armorType.getName().toLowerCase())) {
-                            armor = armorType;
-                            break;
-                        }
-                    }
-                    if (armor == null) {
-                        messageUtils.getConfigMessage("Incorrect-Armor-Type").iterator().forEachRemaining(s -> {
-                            p.sendMessage(s);
-                        });
-                        for (Armor armorSet : plugin.getHandler().getArmor()) {
-                            p.sendMessage(ChatColor.AQUA + armorSet.getName());
-                        }
-                        return true;
-                    }
-                    try {
-                        @SuppressWarnings("deprecation")
-                        OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
-                        if (player.isOnline()) {
-                            player.getPlayer().getInventory().addItem(armor.getItemStackFromType(type));
-
-                            Armor finalArmor = armor;
-                            messageUtils.getConfigMessage("Sent-Player-Armor-Message").iterator().forEachRemaining(s -> {
-                                p.sendMessage(s.replace("{username}", player.getName()).replace("{armor_type}", finalArmor.getName()).replace("{armor_piece}", args[3].toUpperCase()));
-                            });
-                            messageUtils.getConfigMessage("Received-Armor-Message").iterator().forEachRemaining(s -> {
-                                player.getPlayer().sendMessage(s.replace("{username}", messageUtils.getServerName()).replace("{armor_type}", finalArmor.getName()).replace("{armor_piece}", args[3].toUpperCase()));
-                            });
-                            return true;
-                        } else {
-                            messageUtils.getConfigMessage("Player-Not-Online").iterator().forEachRemaining(s -> {
-                                p.sendMessage(s.replace("{username}", args[1]));
-                            });
-                            return true;
-                        }
-                    } catch (Exception e) {
-                        messageUtils.getConfigMessage("Player-Does-Not-Exist").iterator().forEachRemaining(s -> {
-                            p.sendMessage(s.replace("{username}", args[1]));
-                        });
-                        return true;
-                    }
-                } else {
-                    messageUtils.getConfigMessage("No-Permission").iterator().forEachRemaining(s -> {
-                        p.sendMessage(s);
-                    });
-                    return true;
-                }
-            } else {
-                messageUtils.getConfigMessage("Armor-Correct-Usage").iterator().forEachRemaining(s -> {
-                    p.sendMessage(s);
-                });
-                return true;
             }
         }
+        return false;
     }
 }

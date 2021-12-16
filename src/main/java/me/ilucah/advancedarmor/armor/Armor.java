@@ -5,12 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
-
-import net.md_5.bungee.api.ChatColor;
 
 public class Armor {
 
@@ -45,7 +44,7 @@ public class Armor {
 
         this.armorLore = new ArrayList<String>();
         for (String string : armorLore) {
-            this.armorLore.add(ChatColor.translateAlternateColorCodes('&', string));
+            this.armorLore.add(RGBParser.parse(string));
         }
 
         this.enchants = enchants;
@@ -61,8 +60,8 @@ public class Armor {
     public void initialiseHelmet() {
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
-        meta.setDisplayName(
-                ChatColor.translateAlternateColorCodes('&', this.displayName).replace("%armor_type%", "Helmet"));
+        this.displayName.replace("%armor_type%", "Helmet");
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Helmet")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         helmet.addUnsafeEnchantments(enchants);
@@ -76,8 +75,8 @@ public class Armor {
     public void initialiseChestplate() {
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         LeatherArmorMeta meta = (LeatherArmorMeta) chestplate.getItemMeta();
-        meta.setDisplayName(
-                ChatColor.translateAlternateColorCodes('&', this.displayName).replace("%armor_type%", "Chestplate"));
+        this.displayName.replace("%armor_type%", "Chestplate");
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Chestplate")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         chestplate.setItemMeta(meta);
@@ -90,8 +89,8 @@ public class Armor {
     public void initialiseLeggings() {
         ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
         LeatherArmorMeta meta = (LeatherArmorMeta) leggings.getItemMeta();
-        meta.setDisplayName(
-                ChatColor.translateAlternateColorCodes('&', this.displayName).replace("%armor_type%", "Leggings"));
+        this.displayName.replace("%armor_type%", "Leggings");
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Leggings")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         leggings.setItemMeta(meta);
@@ -104,8 +103,8 @@ public class Armor {
     public void initialiseBoots() {
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         LeatherArmorMeta meta = (LeatherArmorMeta) boots.getItemMeta();
-        meta.setDisplayName(
-                ChatColor.translateAlternateColorCodes('&', this.displayName).replace("%armor_type%", "Boots"));
+        this.displayName.replace("%armor_type%", "Boots");
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Boots")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         boots.setItemMeta(meta);
