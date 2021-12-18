@@ -15,12 +15,12 @@ import org.bukkit.event.Listener;
 
 import java.math.BigDecimal;
 
-public class MoneyHandler implements Listener {
+public class EssentialsMoneyListener implements Listener {
 
     private AdvancedArmor plugin;
     private Handler handler;
 
-    public MoneyHandler(Handler handler, AdvancedArmor plugin) {
+    public EssentialsMoneyListener(Handler handler, AdvancedArmor plugin) {
         this.plugin = plugin;
         this.handler = handler;
     }
@@ -40,12 +40,14 @@ public class MoneyHandler implements Listener {
                         player.getInventory().getBoots());
 
                 event.setNewBalance(event.getOldBalance().add(BigDecimal.valueOf((amountReceived.doubleValue() * moneyMulti))));
-                if (((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue()) > 0.0) {
-                    messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {
-                        if (s.contains("%amount%"))
-                            s = s.replace("%amount%", String.valueOf((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue()));
-                        player.sendMessage(s);
-                    });
+                if (plugin.getConfig().getBoolean("Messages.BoostMessages.Money.Enabled")) {
+                    if (((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue()) != 0) {
+                        messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {
+                            if (s.contains("%amount%"))
+                                s = s.replace("%amount%", String.valueOf((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue()));
+                            player.sendMessage(s);
+                        });
+                    }
                 }
 
                 if (debugManager.isEnabled()) {

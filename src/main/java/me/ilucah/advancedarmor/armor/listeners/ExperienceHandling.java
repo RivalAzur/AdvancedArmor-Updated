@@ -30,12 +30,16 @@ public class ExperienceHandling implements Listener {
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
         player.giveExp((int) ((event.getAmount() * expMulti) - event.getAmount()));
-        if (((event.getAmount() * expMulti) - event.getAmount()) > 0.0) {
-            messageUtils.getConfigMessage("BoostMessages.EXP.Message").iterator().forEachRemaining(s -> {
-                if (s.contains("%amount%"))
-                    s = s.replace("%amount%", String.valueOf((int) ((event.getAmount() * expMulti) - event.getAmount())));
-                player.sendMessage(s);
-            });
+
+        if (main.getConfig().getBoolean("Messages.BoostMessages.EXP.Enabled")) {
+            if (((int) ((event.getAmount() * expMulti) - event.getAmount())) != 0) {
+                System.out.println(String.valueOf((event.getAmount() * expMulti) - event.getAmount()));
+                messageUtils.getConfigMessage("BoostMessages.EXP.Message").iterator().forEachRemaining(s -> {
+                    if (s.contains("%amount%"))
+                        s = s.replace("%amount%", String.valueOf((int) ((event.getAmount() * expMulti) - event.getAmount())));
+                    player.sendMessage(s);
+                });
+            }
         }
 
         if (debugManager.isEnabled()) {

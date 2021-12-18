@@ -2,7 +2,12 @@
 # Please if you encounter any issues, report it
 # Discord: https://discord.gg/GquPc7h
 # Wiki: https://github.com/iLucaH/AdvancedArmor/wiki
-# Config Info:
+# Config Info: https://github.com/iLucaH/AdvancedArmor/wiki/Documented-config
+
+Money-Armor:
+  Economy-Dependencies:
+    Essentials-Enabled: false
+    ShopGUIPlus-Enabled: false
 
 Armor:
   Types:
@@ -269,7 +274,7 @@ Messages:
     - '&aYou Reloaded The Config'
   BoostMessages:
     EXP:
-      Enabled: true
+      Enabled: false
       Message:
         - '&a&l+ %amount% Experience &7(EXP Armor)'
     Money:
@@ -279,5 +284,5 @@ Messages:
 
 Debug:
   Enabled: false
-  Cosole: true
-  Player: true
+  Cosole: false
+  Player: false
