@@ -1,9 +1,10 @@
 package me.ilucah.advancedarmor;
 
-import me.ilucah.advancedarmor.armor.listeners.ExperienceHandling;
-import me.ilucah.advancedarmor.armor.listeners.EssentialsMoneyListener;
-import me.ilucah.advancedarmor.armor.listeners.ShopGUIPlusListener;
+import me.ilucah.advancedarmor.armor.listeners.*;
 import me.ilucah.advancedarmor.utilities.Placeholders;
+import me.ilucah.advancedarmor.utilities.config.ConfigManager;
+import me.ilucah.advancedarmor.utilities.ichest.HookType;
+import me.ilucah.advancedarmor.utilities.ichest.IChestHookManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,13 +17,13 @@ public class AdvancedArmor extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        new ConfigManager(this).load();
         this.handler = new Handler(this);
 
         registerEvents();
         registerCommands();
         registerPlaceholderAPI();
 
-        loadConfig();
         handler.initialiseColors();
         handler.initialiseArmor();
 
@@ -33,42 +34,72 @@ public class AdvancedArmor extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ExperienceHandling(handler, this), this);
         registerEssentials();
         registerShopGUIPlus();
+        registerInfiniteChestPro();
+        registerUltraPrisonCore();
     }
 
     private void registerCommands() {
         getCommand("armor").setExecutor(new ArmorCommand(this));
     }
 
-    public void loadConfig() {
-        getConfig().options().copyDefaults(true);
-        saveConfig();
-    }
-
-    public void registerPlaceholderAPI() {
+    private void registerPlaceholderAPI() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new Placeholders(handler, this).register();
         }
     }
 
-    public void registerShopGUIPlus() {
+    private void registerShopGUIPlus() {
         if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.ShopGUIPlus-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("ShopGuiPlus") != null
-                    || getServer().getPluginManager().getPlugin("ShopGui+") != null) {
+            if (getServer().getPluginManager().getPlugin("ShopGUIPlus") != null
+                    || getServer().getPluginManager().getPlugin("ShopGUI+") != null) {
                 getServer().getPluginManager().registerEvents(new ShopGUIPlusListener(this), this);
-                Bukkit.getLogger().info("[AdvancedArmor] Successfully hooked into ShopGui+");
+                getLogger().info("Successfully hooked into ShopGui+");
             } else {
-                Bukkit.getLogger().info("[AdvancedArmor] Failed to hook into ShopGUIPlus. Money component disabled.");
+                getLogger().warning("Failed to hook into ShopGUIPlus. Money component disabled.");
             }
         }
     }
 
-    public void registerEssentials() {
+    private void registerEssentials() {
         if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.Essentials-Enabled")) {
             if (getServer().getPluginManager().getPlugin("Essentials") != null || getServer().getPluginManager().getPlugin("EssentialsX") != null) {
                 getServer().getPluginManager().registerEvents(new EssentialsMoneyListener(handler, this), this);
-                Bukkit.getLogger().info("[AdvancedArmor] Successfully hooked into EssentialsX");
+                getLogger().info("Successfully hooked into EssentialsX");
             } else {
-                Bukkit.getLogger().info("[AdvancedArmor] Failed to hook into EssentialsX. Money component disabled.");
+                getLogger().warning("Failed to hook into EssentialsX. Money component disabled.");
+            }
+        }
+    }
+
+    private void registerInfiniteChestPro() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.InfiniteChestPro.Enabled")) {
+            if (getServer().getPluginManager().getPlugin("InfiniteChest-Pro") != null) {
+                HookType hookType;
+                if (getConfig().getString("Money-Armor.Economy-Dependencies.InfiniteChestPro.HookType").equalsIgnoreCase("Essentials")) {
+                    hookType = HookType.ESSENTIALS;
+                } else if (getConfig().getString("Money-Armor.Economy-Dependencies.InfiniteChestPro.HookType").equalsIgnoreCase("Shopguiplus") ||
+                        getConfig().getString("Money-Armor.Economy-Dependencies.InfiniteChestPro.HookType").equalsIgnoreCase("shopgui+")) {
+                    hookType = HookType.SHOPGUIPLUS;
+                } else {
+                    getLogger().warning("Failed to register InfiniteChestsPro hook. Please use 'Essentials' or 'ShopGUIPlus' as a HookType.");
+                    return;
+                }
+                IChestHookManager hookManager = new IChestHookManager(this, hookType);
+                getServer().getPluginManager().registerEvents(new InfiniteChestProListener(this, hookManager), this);
+                getLogger().info("Successfully hooked into InfiniteChest-Pro");
+            } else {
+                getLogger().warning("Failed to hook into InfiniteChest-Pro. Money component disabled.");
+            }
+        }
+    }
+
+    private void registerUltraPrisonCore() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("UltraPrisonCore") != null) {
+                getServer().getPluginManager().registerEvents(new UltraPrisonCoreListener(this), this);
+                getLogger().info("Successfully hooked into UltraPrisonCore");
+            } else {
+                getLogger().warning("Failed to hook into UltraPrisonCore. Money component disabled.");
             }
         }
     }

@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class EssentialsMoneyListener implements Listener {
 
@@ -31,6 +32,7 @@ public class EssentialsMoneyListener implements Listener {
         final MoneyUtils moneyUtils = new MoneyUtils(handler);
         final DebugManager debugManager = new DebugManager(plugin);
         final MessageUtils messageUtils = new MessageUtils(plugin);
+        final DecimalFormat decimalFormat = new DecimalFormat( "###,###.00" );
         if (event.getCause() != UserBalanceUpdateEvent.Cause.COMMAND_PAY && event.getCause() != UserBalanceUpdateEvent.Cause.COMMAND_ECO) {
             if (event.getNewBalance().compareTo(event.getOldBalance()) > 0) {
                 BigDecimal amountReceived = event.getNewBalance().subtract(event.getOldBalance());
@@ -44,7 +46,7 @@ public class EssentialsMoneyListener implements Listener {
                     if (((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue()) != 0) {
                         messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {
                             if (s.contains("%amount%"))
-                                s = s.replace("%amount%", String.valueOf((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue()));
+                                s = s.replace("%amount%", String.valueOf(decimalFormat.format((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue())));
                             player.sendMessage(s);
                         });
                     }

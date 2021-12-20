@@ -4,57 +4,60 @@ import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.MoneyUtils;
-import net.brcdev.shopgui.event.ShopPreTransactionEvent;
-import net.brcdev.shopgui.shop.ShopManager;
+import me.ilucah.advancedarmor.utilities.ichest.IChestHookManager;
+import net.luckyfeed.events.InfiniteChestSellEvent;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.text.DecimalFormat;
 
-public class ShopGUIPlusListener implements Listener {
+public class InfiniteChestProListener implements Listener {
 
     private final AdvancedArmor plugin;
+    private final IChestHookManager hookManager;
 
-    public ShopGUIPlusListener(AdvancedArmor plugin) {
+    public InfiniteChestProListener(AdvancedArmor plugin, IChestHookManager hookManager) {
         this.plugin = plugin;
+        this.hookManager = hookManager;
     }
 
     @EventHandler
-    public void onShopGUIPlusSell(ShopPreTransactionEvent event) {
-        final Player player = event.getPlayer();
+    public void onSell(InfiniteChestSellEvent event) {
+        final OfflinePlayer offlinePlayer = event.getRecipient();
         final MoneyUtils moneyUtils = new MoneyUtils(plugin.getHandler());
         final DebugManager debugManager = new DebugManager(plugin);
         final MessageUtils messageUtils = new MessageUtils(plugin);
         final DecimalFormat decimalFormat = new DecimalFormat( "###,###.00" );
+        double sellAmount = event.getFinalPrice();
 
-        if (event.getShopAction() == ShopManager.ShopAction.SELL ||
-                event.getShopAction() == ShopManager.ShopAction.SELL_ALL) {
-            double amountReceived = event.getPrice();
+        if (offlinePlayer.isOnline()) {
+            final Player player = offlinePlayer.getPlayer();
             double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
 
-            event.setPrice(amountReceived * moneyMulti);
+            hookManager.getEconomyHook().deposit(offlinePlayer, ((sellAmount * moneyMulti) - sellAmount));
+
             if (plugin.getConfig().getBoolean("Messages.BoostMessages.Money.Enabled")) {
-                if (((amountReceived * moneyMulti) - amountReceived) != 0) {
+                if (((sellAmount * moneyMulti) - sellAmount) != 0) {
                     messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%"))
-                            s = s.replace("%amount%", String.valueOf((decimalFormat.format((amountReceived * moneyMulti) - amountReceived))));
+                            s = s.replace("%amount%", String.valueOf(decimalFormat.format(((sellAmount * moneyMulti) - sellAmount))));
                         player.sendMessage(s);
                     });
                 }
             }
 
             if (debugManager.isEnabled()) {
-                debugManager.moneyEventDebugInfoSend(amountReceived,
-                        (amountReceived * moneyMulti) - amountReceived,
-                        (amountReceived * moneyMulti), moneyMulti);
-                debugManager.moneyEventDebugInfoSend(player, amountReceived,
-                        (amountReceived * moneyMulti) - amountReceived,
-                        (amountReceived * moneyMulti), moneyMulti);
+                debugManager.moneyEventDebugInfoSend(sellAmount,
+                        (sellAmount * moneyMulti) - sellAmount,
+                        (sellAmount * moneyMulti), moneyMulti);
+                debugManager.moneyEventDebugInfoSend(player, sellAmount,
+                        (sellAmount * moneyMulti) - sellAmount,
+                        (sellAmount * moneyMulti), moneyMulti);
             }
         }
     }
 }
-

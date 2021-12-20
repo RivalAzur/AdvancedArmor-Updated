@@ -10,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerExpChangeEvent;
 
+import java.text.DecimalFormat;
+
 public class ExperienceHandling implements Listener {
 
     private final Handler handler;
@@ -26,6 +28,8 @@ public class ExperienceHandling implements Listener {
         final ExpUtils expUtils = new ExpUtils(handler);
         final DebugManager debugManager = new DebugManager(main);
         final MessageUtils messageUtils = new MessageUtils(main);
+        final DecimalFormat decimalFormat = new DecimalFormat( "###,###.00" );
+
         double expMulti = expUtils.calculatePercentage(player.getInventory().getHelmet(),
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
@@ -36,7 +40,7 @@ public class ExperienceHandling implements Listener {
                 System.out.println(String.valueOf((event.getAmount() * expMulti) - event.getAmount()));
                 messageUtils.getConfigMessage("BoostMessages.EXP.Message").iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%"))
-                        s = s.replace("%amount%", String.valueOf((int) ((event.getAmount() * expMulti) - event.getAmount())));
+                        s = s.replace("%amount%", String.valueOf(decimalFormat.format((int) ((event.getAmount() * expMulti) - event.getAmount()))));
                     player.sendMessage(s);
                 });
             }

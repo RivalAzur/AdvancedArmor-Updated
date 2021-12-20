@@ -8,6 +8,10 @@ Money-Armor:
   Economy-Dependencies:
     Essentials-Enabled: false
     ShopGUIPlus-Enabled: false
+    UltraPrisonCore-Enabled: true
+    InfiniteChestPro:
+      Enabled: false
+      HookType: 'Essentials'
 
 Armor:
   Types:
@@ -29,79 +33,6 @@ Armor:
         Chestplate-Percentage: 20
         Leggings-Percentage: 30
         Boots-Percentage: 40
-    Ocean: 
-      Name: '&b&lOcean &f&l%armor_type%'
-      ArmorColor: 'AQUABLUE'
-      Lore:
-        - '&b&l * &fExperience Boost Armor'
-        - '&r'
-        - '&b&l * &fHelmet Piece: 30% EXP Boost'
-        - '&b&l * &fChestplate Piece: 40% EXP Boost'
-        - '&b&l * &fLeggings Piece: 50% EXP Boost'
-        - '&b&l * &fBoots Piece: 60% EXP Boost'
-      Enchants:
-        Unbreaking: 10
-      Boost:
-        Type: 'EXP'      
-        Helmet-Percentage: 30
-        Chestplate-Percentage: 40
-        Leggings-Percentage: 50
-        Boots-Percentage: 60
-    Ravanger: 
-      Name: '&7&lRavanger &f&l%armor_type%'
-      ArmorColor: 'GRAY'
-      Lore:
-        - '&7&l * &fExperience Boost Armor'
-        - '&r'
-        - '&7&l * &fHelmet Piece: 50% EXP Boost'
-        - '&7&l * &fChestplate Piece: 60% EXP Boost'
-        - '&7&l * &fLeggings Piece: 70% EXP Boost'
-        - '&7&l * &fBoots Piece: 80% EXP Boost'
-      Enchants:
-        Unbreaking: 10
-      Boost:
-        Type: 'EXP'      
-        Helmet-Percentage: 50
-        Chestplate-Percentage: 60
-        Leggings-Percentage: 70
-        Boots-Percentage: 80
-    Santa:
-      Name: '&c&lSanta &a&l%armor_type%'
-      ArmorColor: 'RED'
-      Lore:
-        - '&c&l * &aExperience Boost Armor'
-        - '&r'
-        - '&c&l * &a1 Piece: &210% EXP Boost'
-        - '&c&l * &a2 Piece: &220% EXP Boost'
-        - '&c&l * &a3 Piece: &230% EXP Boost'
-        - '&c&l * &a4 Piece: &240% EXP Boost'
-      Enchants:
-        Unbreaking: 10
-      Boost:
-        Type: 'EXP'
-        Helmet-Percentage: 10
-        Chestplate-Percentage: 10
-        Leggings-Percentage: 10
-        Boots-Percentage: 10
-    Grinch:
-      Name: '&2&lGrinch &a&l%armor_type%'
-      ArmorColor: 'GREEN'
-      Lore:
-        - '&2&l * &aExperience Boost Armor'
-        - '&r'
-        - '&2&l * &a1 Piece: &750% EXP Boost'
-        - '&2&l * &a2 Piece: &7100% EXP Boost'
-        - '&2&l * &a3 Piece: &7150% EXP Boost'
-        - '&2&l * &a4 Piece: &7200% EXP Boost'
-      Enchants:
-        Unbreaking: 10
-        Protection: 10
-      Boost:
-        Type: 'EXP'
-        Helmet-Percentage: 50
-        Chestplate-Percentage: 50
-        Leggings-Percentage: 50
-        Boots-Percentage: 50
     Rainbow:
       Name: '<RAINBOW1>&lRainbow %armor_type%</RAINBOW>'
       ArmorColor: 'PINK'
