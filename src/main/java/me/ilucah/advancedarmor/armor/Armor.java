@@ -30,9 +30,10 @@ public class Armor {
     private ArmorColor color;
 
     private Map<Enchantment, Integer> enchants;
+    private List<Flag> itemFlags;
 
     public Armor(String name, String displayName, BoostType boostType, int helmetBoost, int chestBoost, int legsBoost,
-                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants) {
+                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants, List<Flag> itemFlags) {
         this.name = name;
         this.displayName = displayName;
         this.boostType = boostType;
@@ -48,6 +49,7 @@ public class Armor {
         }
 
         this.enchants = enchants;
+        this.itemFlags = itemFlags;
 
         this.color = color;
 
@@ -64,7 +66,7 @@ public class Armor {
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Helmet")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
-        helmet.addUnsafeEnchantments(enchants);
+        Flag.addItemFlags(itemFlags, meta);
         helmet.setItemMeta(meta);
         helmet.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(helmet);
@@ -79,6 +81,7 @@ public class Armor {
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Chestplate")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
+        Flag.addItemFlags(itemFlags, meta);
         chestplate.setItemMeta(meta);
         chestplate.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(chestplate);
@@ -93,6 +96,7 @@ public class Armor {
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Leggings")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
+        Flag.addItemFlags(itemFlags, meta);
         leggings.setItemMeta(meta);
         leggings.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(leggings);
@@ -107,6 +111,7 @@ public class Armor {
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Boots")));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
+        Flag.addItemFlags(itemFlags, meta);
         boots.setItemMeta(meta);
         boots.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(boots);
@@ -230,6 +235,10 @@ public class Armor {
 
     public void setArmorLore(List<String> armorLore) {
         this.armorLore = armorLore;
+    }
+
+    public List<Flag> getItemFlags() {
+        return this.itemFlags;
     }
 
 }

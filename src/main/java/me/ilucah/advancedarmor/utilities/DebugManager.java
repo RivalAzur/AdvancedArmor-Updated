@@ -69,6 +69,32 @@ public class DebugManager {
         }
     }
 
+    public void coinEventDebugInfoSend (double coinChangeAmount, double giveCoinAmount, double totalCoinAmount, double coinBoost) {
+        if (main.getConfig().getBoolean("Debug.Console")) {
+            Bukkit.getLogger().info("%debug% - open");
+            Bukkit.getLogger().info("%debug% onMoneyChangeEvent has been run");
+            Bukkit.getLogger().info("%debug% ");
+            Bukkit.getLogger().info("%debug% Boost Amount: " + coinBoost);
+            Bukkit.getLogger().info("%debug% Balance Before Boost: " + coinChangeAmount);
+            Bukkit.getLogger().info("%debug% Balance Boost Amount: " + giveCoinAmount);
+            Bukkit.getLogger().info("%debug% Balance Total: " + totalCoinAmount);
+            Bukkit.getLogger().info("%debug% - close");
+        }
+    }
+
+    public void coinEventDebugInfoSend (Player player, double coinChangeAmount, double giveCoinAmount, double totalCoinAmount, double coinBoost) {
+        if (main.getConfig().getBoolean("Debug.Player")) {
+            player.sendMessage("%debug% - open");
+            player.sendMessage("%debug% onCoinChangeEvent has been run");
+            player.sendMessage("%debug% ");
+            player.sendMessage("%debug% Boost Amount: " + coinBoost);
+            player.sendMessage("%debug% Balance Before Boost: " + coinChangeAmount);
+            player.sendMessage("%debug% Balance Boost Amount: " + giveCoinAmount);
+            player.sendMessage("%debug% Balance Total: " + totalCoinAmount);
+            player.sendMessage("%debug% - close");
+        }
+    }
+
     // Unused. Unset
     public void percentageCalculationInfoSend (Player player, int a, int b, double c, double d) {
         player.sendMessage("%debug% - open");

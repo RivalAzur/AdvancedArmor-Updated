@@ -36,6 +36,7 @@ public class AdvancedArmor extends JavaPlugin {
         registerShopGUIPlus();
         registerInfiniteChestPro();
         registerUltraPrisonCore();
+        registerSuperMobCoins();
     }
 
     private void registerCommands() {
@@ -100,6 +101,17 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into UltraPrisonCore");
             } else {
                 getLogger().warning("Failed to hook into UltraPrisonCore. Money component disabled.");
+            }
+        }
+    }
+
+    private void registerSuperMobCoins() {
+        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.SuperMobCoins-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("SuperMobCoins") != null) {
+                getServer().getPluginManager().registerEvents(new SuperMobCoinListener(this), this);
+                getLogger().info("Successfully hooked into SuperMobCoins");
+            } else {
+                getLogger().warning("Failed to hook into SuperMobCoins. Money component disabled.");
             }
         }
     }

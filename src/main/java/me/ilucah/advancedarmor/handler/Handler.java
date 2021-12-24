@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import me.ilucah.advancedarmor.armor.Flag;
 import org.bukkit.enchantments.Enchantment;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
@@ -12,6 +13,7 @@ import me.ilucah.advancedarmor.armor.Armor;
 import me.ilucah.advancedarmor.armor.ArmorColor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.utilities.EnchantmentUtils;
+import org.bukkit.inventory.ItemFlag;
 
 public class Handler {
 
@@ -51,12 +53,25 @@ public class Handler {
             ArmorColor color = ArmorColor.valueOf(plugin, plugin.getConfig().getString("Armor.Types." + type + ".ArmorColor"));
 
             Map<Enchantment, Integer> enchants = new HashMap<Enchantment, Integer>();
-            for (String enchant : plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Enchants").getKeys(false)) {
-                enchants.put(EnchantmentUtils.getEnchantment(enchant), plugin.getConfig().getInt("Armor.Types." + type + ".Enchants." + enchant));
+            if (plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Enchants") != null) {
+                for (String enchant : plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Enchants").getKeys(false)) {
+                    enchants.put(EnchantmentUtils.getEnchantment(enchant), plugin.getConfig().getInt("Armor.Types." + type + ".Enchants." + enchant));
+                }
             }
 
+            List<Flag> itemFlags = new ArrayList<Flag>();
+            if (plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Flags") != null) {
+                for (String itemFlag : plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Flags").getKeys(false)) {
+                    if (plugin.getConfig().getBoolean("Armor.Types." + type + ".Flags." + itemFlag)) {
+                        if (itemFlag.contains("Unbreakable"))
+                            itemFlags.add(new Flag(null, true));
+                        else
+                            itemFlags.add(new Flag(ItemFlag.valueOf(itemFlag), false));
+                    }
+                }
+            }
             armor.add(new Armor(type, name, boostType, helmetBoost, chestplateBoost, leggingsBoost, bootsBoost, armorLore,
-                    color, enchants));
+                    color, enchants, itemFlags));
         }
     }
 
@@ -70,7 +85,7 @@ public class Handler {
 
     public Armor getArmorFromString(String name) {
         for (Armor armor : armor) {
-            if (armor.getName().contains(name)){
+            if (armor.getName().contains(name)) {
                 return armor;
             }
         }

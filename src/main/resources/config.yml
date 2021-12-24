@@ -8,31 +8,16 @@ Money-Armor:
   Economy-Dependencies:
     Essentials-Enabled: false
     ShopGUIPlus-Enabled: false
-    UltraPrisonCore-Enabled: true
+    UltraPrisonCore-Enabled: false
     InfiniteChestPro:
       Enabled: false
       HookType: 'Essentials'
+Coin-Armor:
+  Economy-Dependencies:
+    SuperMobCoins-Enabled: false
 
 Armor:
   Types:
-    Helix: 
-      Name: '&2&lHelix &f&l%armor_type%'
-      ArmorColor: 'LIME'
-      Lore:
-        - '&2&l * &fExperience Boost Armor'
-        - '&r'
-        - '&2&l * &fHelmet Piece: 10% EXP Boost'
-        - '&2&l * &fChestplate Piece: 20% EXP Boost'
-        - '&2&l * &fLeggings Piece: 30% EXP Boost'
-        - '&2&l * &fBoots Piece: 40% EXP Boost'
-      Enchants:
-        Unbreaking: 10
-      Boost:
-        Type: 'EXP'      
-        Helmet-Percentage: 10
-        Chestplate-Percentage: 20
-        Leggings-Percentage: 30
-        Boots-Percentage: 40
     Rainbow:
       Name: '<RAINBOW1>&lRainbow %armor_type%</RAINBOW>'
       ArmorColor: 'PINK'
@@ -46,6 +31,11 @@ Armor:
       Enchants:
         Unbreaking: 10
         Protection: 10
+      Flags:
+        Unbreakable: false
+        HIDE_UNBREAKABLE: false
+        HIDE_ATTRIBUTES: false
+        HIDE_ENCHANTS: false
       Boost:
         Type: 'EXP'
         Helmet-Percentage: 12
@@ -66,6 +56,11 @@ Armor:
         Unbreaking: 10
         Protection: 10
         Fireprotection: 10
+      Flags:
+        Unbreakable: false
+        HIDE_UNBREAKABLE: false
+        HIDE_ATTRIBUTES: false
+        HIDE_ENCHANTS: false
       Boost:
         Type: 'EXP'
         Helmet-Percentage: 15
@@ -85,6 +80,11 @@ Armor:
       Enchants:
         Unbreaking: 10
         Protection: 10
+      Flags:
+        Unbreakable: false
+        HIDE_UNBREAKABLE: false
+        HIDE_ATTRIBUTES: false
+        HIDE_ENCHANTS: false
       Boost:
         Type: 'MONEY'
         Helmet-Percentage: 15
@@ -95,17 +95,22 @@ Armor:
       Name: '&6&lCoin &e&l%armor_type%'
       ArmorColor: 'GOLD'
       Lore:
-        - '&6&l * &eMoney Boost Armor'
+        - '&6&l * &eMobCoin Boost Armor'
         - '&r'
-        - '&6&l * &eHelmet Piece: &f&n10% Money Boost'
-        - '&6&l * &eChestplate Piece: &f&n20% Money Boost'
-        - '&6&l * &eLeggings Piece: &f&n30% Money Boost'
-        - '&6&l * &eBoots Piece: &f&n40% Money Boost'
+        - '&6&l * &eHelmet Piece: &f&n10% Mobcoin Boost'
+        - '&6&l * &eChestplate Piece: &f&n20% Mobcoin Boost'
+        - '&6&l * &eLeggings Piece: &f&n30% Mobcoin Boost'
+        - '&6&l * &eBoots Piece: &f&n40% Mobcoin Boost'
       Enchants:
         Unbreaking: 10
         Protection: 10
+      Flags:
+        Unbreakable: false
+        HIDE_UNBREAKABLE: false
+        HIDE_ATTRIBUTES: false
+        HIDE_ENCHANTS: false
       Boost:
-        Type: 'MONEY'
+        Type: 'COIN'
         Helmet-Percentage: 10
         Chestplate-Percentage: 20
         Leggings-Percentage: 30
@@ -212,6 +217,10 @@ Messages:
       Enabled: true
       Message:
         - '&a&l+ $%amount% &7(Money Armor)'
+    Coins:
+      Enabled: true
+      Message:
+        - '&a&l+ %amount% &7(Coin Armor)'
 
 Debug:
   Enabled: false
