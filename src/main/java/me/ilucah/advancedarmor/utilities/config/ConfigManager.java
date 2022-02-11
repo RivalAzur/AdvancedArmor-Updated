@@ -16,6 +16,9 @@ public class ConfigManager {
     }
 
     public void load() {
+        File configFile = new File(plugin.getDataFolder(), "config.yml");
+        if (configFile.exists())
+            return;
         plugin.getConfig().options().copyDefaults(true);
         plugin.saveConfig();
     }

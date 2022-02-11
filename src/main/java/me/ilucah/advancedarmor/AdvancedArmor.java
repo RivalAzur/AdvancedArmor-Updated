@@ -37,6 +37,10 @@ public class AdvancedArmor extends JavaPlugin {
         registerInfiniteChestPro();
         registerUltraPrisonCore();
         registerSuperMobCoins();
+        registerKrakenMobCoins();
+        registerTheOnlyMobCoins();
+        registerQuadrexMobCoins();
+        registerClipAutoSell();
     }
 
     private void registerCommands() {
@@ -95,13 +99,18 @@ public class AdvancedArmor extends JavaPlugin {
     }
 
     private void registerUltraPrisonCore() {
-        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("UltraPrisonCore") != null) {
+        if (getServer().getPluginManager().getPlugin("UltraPrisonCore") != null) {
+            if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
                 getServer().getPluginManager().registerEvents(new UltraPrisonCoreListener(this), this);
-                getLogger().info("Successfully hooked into UltraPrisonCore");
-            } else {
-                getLogger().warning("Failed to hook into UltraPrisonCore. Money component disabled.");
+                getLogger().info("Successfully hooked into UltraPrisonCore MoneyAPI");
             }
+            if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
+                getServer().getPluginManager().registerEvents(new UPCTokenListener(this), this);
+                getLogger().info("Successfully hooked into UltraPrisonCore TokenAPI");
+            }
+        } else {
+            getLogger().warning("If UltraPrisonCoreHook import was disabled, ignore this message;");
+            getLogger().warning("UPC failed to registered.");
         }
     }
 
@@ -111,7 +120,56 @@ public class AdvancedArmor extends JavaPlugin {
                 getServer().getPluginManager().registerEvents(new SuperMobCoinListener(this), this);
                 getLogger().info("Successfully hooked into SuperMobCoins");
             } else {
-                getLogger().warning("Failed to hook into SuperMobCoins. Money component disabled.");
+                getLogger().warning("Failed to hook into SuperMobCoins. Coin component disabled.");
+            }
+        }
+    }
+
+    private void registerKrakenMobCoins() {
+        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.KrakenMobCoins-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("KrakenMobcoins") != null) {
+                getServer().getPluginManager().registerEvents(new KrakenMobCoinsListener(this), this);
+                getLogger().info("Successfully hooked into KrakenMobCoins");
+            } else {
+                getLogger().warning("Failed to hook into KrakenMobCoins. Coin component disabled.");
+            }
+        }
+    }
+
+    private void registerTheOnlyMobCoins() {
+        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.TheOnlyMobCoins-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("TheOnly-MobCoins") != null) {
+                try {
+                    getServer().getPluginManager().registerEvents(new TheOnlyMobCoinsListener(this), this);
+                } catch (NoClassDefFoundError e) {
+                    getLogger().warning("Failed to hook into TheOnlyMobCoins, MythicMobs Required. Coin component disabled.");
+                    return;
+                }
+                getLogger().info("Successfully hooked into TheOnlyMobCoins");
+            } else {
+                getLogger().warning("Failed to hook into TheOnlyMobCoins. Coin component disabled.");
+            }
+        }
+    }
+
+    private void registerQuadrexMobCoins() {
+        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.QuadrexMobCoins-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("QuadrexMobCoins") != null) {
+                getServer().getPluginManager().registerEvents(new QuadrexMobCoinsListener(this), this);
+                getLogger().info("Successfully hooked into QuadrexMobCoins");
+            } else {
+                getLogger().warning("Failed to hook into KrakenMobCoins. Coin component disabled.");
+            }
+        }
+    }
+
+    private void registerClipAutoSell() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.ClipAutoSell-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("AutoSell") != null && getServer().getPluginManager().getPlugin("Vault") != null) {
+                getServer().getPluginManager().registerEvents(new ClipAutoSellListener(this), this);
+                getLogger().info("Successfully hooked into AutoSell");
+            } else {
+                getLogger().warning("Failed to hook into AutoSell. Money component disabled.");
             }
         }
     }

@@ -9,39 +9,22 @@ Money-Armor:
     Essentials-Enabled: false
     ShopGUIPlus-Enabled: false
     UltraPrisonCore-Enabled: false
+    ClipAutoSell-Enabled: false
     InfiniteChestPro:
       Enabled: false
       HookType: 'Essentials'
 Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false
+    KrakenMobCoins-Enabled: false
+    TheOnlyMobCoins-Enabled: false
+    QuadrexMobCoins-Enabled: false
+Token-Armor:
+  Economy-Dependencies:
+    UltraPrisonCore-Enabled: false
 
 Armor:
   Types:
-    Rainbow:
-      Name: '<RAINBOW1>&lRainbow %armor_type%</RAINBOW>'
-      ArmorColor: 'PINK'
-      Lore:
-        - '&d&l * <RAINBOW70>Experience Boost Armor</RAINBOW>'
-        - '&r'
-        - '&d&l * <RAINBOW70>1 Piece: 12% EXP Boost</RAINBOW>'
-        - '&d&l * <RAINBOW70>2 Piece: 24% EXP Boost</RAINBOW>'
-        - '&d&l * <RAINBOW70>3 Piece: 36% EXP Boost</RAINBOW>'
-        - '&d&l * <RAINBOW70>4 Piece: 48% EXP Boost</RAINBOW>'
-      Enchants:
-        Unbreaking: 10
-        Protection: 10
-      Flags:
-        Unbreakable: false
-        HIDE_UNBREAKABLE: false
-        HIDE_ATTRIBUTES: false
-        HIDE_ENCHANTS: false
-      Boost:
-        Type: 'EXP'
-        Helmet-Percentage: 12
-        Chestplate-Percentage: 12
-        Leggings-Percentage: 12
-        Boots-Percentage: 12
     Fire:
       Name: '<GRADIENT:FF4200>&lFire %armor_type%</GRADIENT:FFC800>'
       ArmorColor: 'ORANGE'
@@ -115,6 +98,30 @@ Armor:
         Chestplate-Percentage: 20
         Leggings-Percentage: 30
         Boots-Percentage: 40
+    Sunkist:
+      Name: '<GRADIENT:F4FF00>&lPiggyBank %armor_type%</GRADIENT:FF7400>'
+      ArmorColor: 'ORANGE'
+      Lore:
+        - '<GRADIENT:F4FF00> * Token Boost Armor</GRADIENT:FF7400>'
+        - '&r'
+        - '<GRADIENT:F4FF00> * 1 Piece: 30% Money Boost</GRADIENT:FF7400>'
+        - '<GRADIENT:F4FF00> * 2 Piece: 60% Money Boost</GRADIENT:FF7400>'
+        - '<GRADIENT:F4FF00> * 3 Piece: 90% Money Boost</GRADIENT:FF7400>'
+        - '<GRADIENT:F4FF00> * 4 Piece: 120% Money Boost</GRADIENT:FF7400>'
+      Enchants:
+        Unbreaking: 10
+        Protection: 10
+      Flags:
+        Unbreakable: true
+        HIDE_UNBREAKABLE: false
+        HIDE_ATTRIBUTES: false
+        HIDE_ENCHANTS: false
+      Boost:
+        Type: 'TOKEN'
+        Helmet-Percentage: 30
+        Chestplate-Percentage: 30
+        Leggings-Percentage: 30
+        Boots-Percentage: 30
 
 ArmorColor:
   RED:
@@ -221,6 +228,10 @@ Messages:
       Enabled: true
       Message:
         - '&a&l+ %amount% &7(Coin Armor)'
+    Tokens:
+      Enabled: true
+      Message:
+        - '&e&l+ %amount% &7(Tokens Armor)'
 
 Debug:
   Enabled: false

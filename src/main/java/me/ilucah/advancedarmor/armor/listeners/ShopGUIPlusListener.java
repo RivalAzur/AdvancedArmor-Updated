@@ -36,6 +36,7 @@ public class ShopGUIPlusListener implements Listener {
                     player.getInventory().getBoots());
 
             event.setPrice(amountReceived * moneyMulti);
+
             if (plugin.getConfig().getBoolean("Messages.BoostMessages.Money.Enabled")) {
                 if (((amountReceived * moneyMulti) - amountReceived) != 0) {
                     messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {

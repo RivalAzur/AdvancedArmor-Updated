@@ -9,10 +9,15 @@ public class Flag {
 
     public static void addItemFlags(List<Flag> itemFlags, ItemMeta meta) {
         itemFlags.iterator().forEachRemaining(itemFlag -> {
-            if (itemFlag.isUnbreakable())
-                meta.setUnbreakable(true);
-            else
+            if (itemFlag.isUnbreakable()) {
+                try {
+                    meta.setUnbreakable(true);
+                } catch (NoClassDefFoundError exc) {
+
+                }
+            } else {
                 meta.addItemFlags(itemFlag.getItemFlag());
+            }
         });
     }
 

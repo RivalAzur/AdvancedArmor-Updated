@@ -6,12 +6,12 @@
 
     <groupId>me.ilucah</groupId>
     <artifactId>AdvancedArmor</artifactId>
-    <version>1.0.6</version>
+    <version>1.2.4</version>
     <packaging>jar</packaging>
 
     <name>AdvancedArmor</name>
 
-    <description>An advanced armor plugin for adding extra depth to your minecraft server</description>
+    <description>An advanced armor plugin for adding extra depth to your minecraft server experience</description>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +26,9 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <excludes>
+                        <exclude>*io.lumine.xikage.mythicmobs.mobs.MythicMob**</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -42,6 +45,11 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <artifactSet>
+                        <excludes>
+                            <exclude>io.lumine.xikage.mythicmobs.mobs.MythicMob</exclude>
+                        </excludes>
+                    </artifactSet>
                     <outputFile>C:\Users\17hautrivel\Desktop\PluginOutput\AdvancedArmor.jar</outputFile>
                     <relocations>
                         <relocation>
@@ -85,6 +93,14 @@
         <repository>
             <id>essentials-releases</id>
             <url>https://repo.essentialsx.net/releases/</url>
+        </repository>
+        <repository>
+            <id>teamvk-repo</id>
+            <url>https://raw.githubusercontent.com/TeamVK/maven-repository/master/release/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
         </repository>
     </repositories>
 
@@ -144,6 +160,49 @@
             <scope>system</scope>
             <version>1.0</version>
             <systemPath>${project.basedir}/libs/mobcoins-api.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>KrakenMobcoins</groupId>
+            <artifactId>KrakenMobcoins</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/KrakenMobcoins.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>TheOnlyMobCoins</groupId>
+            <artifactId>TheOnlyMobCoins</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/TheOnlyMobCoins.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>helper</groupId>
+            <artifactId>helper</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/helper.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>QuadrexMobCoins</groupId>
+            <artifactId>QuadrexMobCoins</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/QuadrexMobCoins.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.clip.autosell</groupId>
+            <artifactId>AutoSellAPI</artifactId>
+            <version>1.9.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

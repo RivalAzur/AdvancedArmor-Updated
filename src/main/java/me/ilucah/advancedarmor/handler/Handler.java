@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import me.ilucah.advancedarmor.armor.Flag;
+import me.ilucah.advancedarmor.utilities.DebugManager;
 import org.bukkit.enchantments.Enchantment;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
@@ -21,12 +22,18 @@ public class Handler {
 
     private List<ArmorColor> armorColors;
     private List<Armor> armor;
+    private Map<String, Armor> armorMapped;
+
+    private final DebugManager debugManager;
 
     public Handler(AdvancedArmor plugin) {
         this.plugin = plugin;
 
         this.armorColors = new ArrayList<ArmorColor>();
         this.armor = new ArrayList<Armor>();
+        this.armorMapped = new HashMap<String, Armor>();
+
+        this.debugManager = new DebugManager(plugin);
     }
 
     public void initialiseColors() {
@@ -70,8 +77,10 @@ public class Handler {
                     }
                 }
             }
-            armor.add(new Armor(type, name, boostType, helmetBoost, chestplateBoost, leggingsBoost, bootsBoost, armorLore,
-                    color, enchants, itemFlags));
+            Armor a = new Armor(type, name, boostType, helmetBoost, chestplateBoost, leggingsBoost, bootsBoost, armorLore,
+                    color, enchants, itemFlags);
+            armor.add(a);
+            armorMapped.put(type, a);
         }
     }
 
@@ -84,12 +93,10 @@ public class Handler {
     }
 
     public Armor getArmorFromString(String name) {
-        for (Armor armor : armor) {
-            if (armor.getName().contains(name)) {
-                return armor;
-            }
-        }
-        return null;
+        return this.armorMapped.get(name);
     }
 
+    public DebugManager getDebugManager() {
+        return debugManager;
+    }
 }
