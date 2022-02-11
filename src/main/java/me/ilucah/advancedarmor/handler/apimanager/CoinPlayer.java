@@ -2,6 +2,7 @@ package me.ilucah.advancedarmor.handler.apimanager;
 
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
+import me.ilucah.advancedarmor.utilities.CoinUtils;
 import me.ilucah.advancedarmor.utilities.NBTUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -54,6 +55,13 @@ public class CoinPlayer {
             return true;
         else
             return false;
+    }
+
+    public int getRawPlayerArmorExpBoost() {
+        CoinUtils coinUtils = new CoinUtils(handler);
+        return coinUtils.calculateRawArmorMultiPercentage(player.getInventory().getHelmet(),
+                player.getInventory().getChestplate(), player.getInventory().getLeggings(),
+                player.getInventory().getBoots());
     }
 
 }

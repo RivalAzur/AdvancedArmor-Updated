@@ -49,7 +49,7 @@ public class AdvancedArmor extends JavaPlugin {
 
     private void registerPlaceholderAPI() {
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
-            new Placeholders(handler, this).register();
+            new Placeholders(this).register();
         }
     }
 
@@ -173,8 +173,6 @@ public class AdvancedArmor extends JavaPlugin {
             }
         }
     }
-
-    //
 
     public Handler getHandler() {
         return this.handler;

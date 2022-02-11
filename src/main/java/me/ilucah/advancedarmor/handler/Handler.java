@@ -84,6 +84,15 @@ public class Handler {
         }
     }
 
+    public void reloadCaches() {
+        this.armorColors = new ArrayList<ArmorColor>();
+        this.armor = new ArrayList<Armor>();
+        this.armorMapped = new HashMap<String, Armor>();
+
+        initialiseColors();
+        initialiseArmor();
+    }
+
     public List<ArmorColor> getArmorColors() {
         return this.armorColors;
     }

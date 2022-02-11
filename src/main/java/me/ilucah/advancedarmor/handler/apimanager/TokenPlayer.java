@@ -1,8 +1,10 @@
 package me.ilucah.advancedarmor.handler.apimanager;
 
+import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.utilities.NBTUtils;
+import me.ilucah.advancedarmor.utilities.TokenUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -54,5 +56,12 @@ public class TokenPlayer {
             return true;
         else
             return false;
+    }
+
+    public int getRawPlayerArmorExpBoost() {
+        TokenUtils tokenUtils = new TokenUtils(handler);
+        return tokenUtils.calculateRawArmorMultiPercentage(player.getInventory().getHelmet(),
+                player.getInventory().getChestplate(), player.getInventory().getLeggings(),
+                player.getInventory().getBoots());
     }
 }

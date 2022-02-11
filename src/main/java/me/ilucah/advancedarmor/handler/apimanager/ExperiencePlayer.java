@@ -1,5 +1,6 @@
 package me.ilucah.advancedarmor.handler.apimanager;
 
+import me.ilucah.advancedarmor.armor.ArmorType;
 import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.utilities.ExpUtils;
 import me.ilucah.advancedarmor.utilities.NBTUtils;
@@ -98,6 +99,23 @@ public class ExperiencePlayer {
             return nbtUtils.getArmorName(player.getInventory().getHelmet());
         else
             return "No Custom Armor :(";
+    }
+
+    public String getPlayerArmorType(ArmorType type) {
+        if (type == ArmorType.HELMET) {
+            if (nbtUtils.hasArmorNBTTag(player.getInventory().getHelmet()))
+                return nbtUtils.getArmorName(player.getInventory().getHelmet());
+        } else if (type == ArmorType.CHESTPLATE) {
+            if (nbtUtils.hasArmorNBTTag(player.getInventory().getChestplate()))
+                return nbtUtils.getArmorName(player.getInventory().getChestplate());
+        } else if (type == ArmorType.LEGGINGS) {
+            if (nbtUtils.hasArmorNBTTag(player.getInventory().getLeggings()))
+                return nbtUtils.getArmorName(player.getInventory().getLeggings());
+        } else if (type == ArmorType.BOOTS) {
+            if (nbtUtils.hasArmorNBTTag(player.getInventory().getBoots()))
+                return nbtUtils.getArmorName(player.getInventory().getBoots());
+        }
+        return "No Custom Armor :(";
     }
 
     public int getRawPlayerArmorExpBoost() {

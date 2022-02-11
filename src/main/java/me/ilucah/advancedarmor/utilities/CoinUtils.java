@@ -13,6 +13,10 @@ public class CoinUtils {
         this.handler = plugin.getHandler();
     }
 
+    public CoinUtils(Handler handler) {
+        this.handler = handler;
+    }
+
     public double calculatePercentage(ItemStack helmet, ItemStack chestplate, ItemStack leggings, ItemStack boots) {
         NBTUtils nbtUtils = new NBTUtils(handler);
         int percentage = 0;

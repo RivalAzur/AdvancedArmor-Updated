@@ -57,8 +57,7 @@ public class ArmorCommand implements CommandExecutor {
                             });
                             try {
                                 plugin.reloadConfig();
-                                plugin.getHandler().initialiseArmor();
-                                plugin.getHandler().initialiseColors();
+                                plugin.getHandler().reloadCaches();
                             } catch (Exception e) {
                                 messageUtils.getConfigMessage("Reload-Failed").iterator().forEachRemaining(s -> {
                                     s.replace("%issue-printout%", e.getMessage());

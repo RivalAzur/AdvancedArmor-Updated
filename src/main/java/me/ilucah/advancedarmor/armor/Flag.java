@@ -12,7 +12,7 @@ public class Flag {
             if (itemFlag.isUnbreakable()) {
                 try {
                     meta.setUnbreakable(true);
-                } catch (NoClassDefFoundError exc) {
+                } catch (NoSuchMethodError exc) {
 
                 }
             } else {
@@ -26,10 +26,8 @@ public class Flag {
 
     public Flag(ItemFlag itemFlag, boolean unbreakable) {
         isUnbreakable = false;
-        if (itemFlag == null)
-            isUnbreakable = true;
-        else
-            this.itemFlag = itemFlag;
+        if (itemFlag == null) isUnbreakable = true;
+        else this.itemFlag = itemFlag;
     }
 
     public boolean isUnbreakable() {
@@ -39,4 +37,5 @@ public class Flag {
     public ItemFlag getItemFlag() {
         return this.itemFlag;
     }
+
 }

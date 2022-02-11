@@ -99,7 +99,7 @@ Armor:
         Leggings-Percentage: 30
         Boots-Percentage: 40
     Sunkist:
-      Name: '<GRADIENT:F4FF00>&lPiggyBank %armor_type%</GRADIENT:FF7400>'
+      Name: '<GRADIENT:F4FF00>&lSunkist %armor_type%</GRADIENT:FF7400>'
       ArmorColor: 'ORANGE'
       Lore:
         - '<GRADIENT:F4FF00> * Token Boost Armor</GRADIENT:FF7400>'
