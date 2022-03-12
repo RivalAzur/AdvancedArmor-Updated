@@ -1,11 +1,11 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
-import me.drawethree.ultraprisoncore.UltraPrisonCore;
-import me.drawethree.ultraprisoncore.api.enums.ReceiveCause;
-import me.drawethree.ultraprisoncore.tokens.api.events.PlayerTokensReceiveEvent;
+import dev.drawethree.ultraprisoncore.UltraPrisonCore;
+import dev.drawethree.ultraprisoncore.api.enums.ReceiveCause;
+import dev.drawethree.ultraprisoncore.tokens.api.events.PlayerTokensReceiveEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.handler.apimanager.TokenPlayer;
-import me.ilucah.advancedarmor.utilities.MessageUtils;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import me.ilucah.advancedarmor.utilities.TokenUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,9 +14,11 @@ import org.bukkit.event.Listener;
 public class UPCTokenListener implements Listener {
 
     private AdvancedArmor plugin;
+    private TokenUtils tokenUtils;
 
     public UPCTokenListener(AdvancedArmor plugin) {
         this.plugin = plugin;
+        this.tokenUtils = new TokenUtils(plugin);
     }
 
     @EventHandler
@@ -28,9 +30,6 @@ public class UPCTokenListener implements Listener {
             final TokenPlayer tokenPlayer = new TokenPlayer(plugin.getHandler(), player);
             if (!tokenPlayer.hasCustomArmorEquipped())
                 return;
-
-            final TokenUtils tokenUtils = new TokenUtils(plugin);
-            final MessageUtils messageUtils = new MessageUtils(plugin);
             long amount = event.getAmount();
 
             double coinMulti = tokenUtils.calculatePercentage(player.getInventory().getHelmet(),
@@ -40,14 +39,14 @@ public class UPCTokenListener implements Listener {
 
             UltraPrisonCore.getInstance().getTokens().getApi().addTokens(event.getPlayer(), amountToGive, ReceiveCause.GIVE);
 
-            if (plugin.getConfig().getBoolean("Messages.BoostMessages.Tokens.Enabled")) {
+            if (plugin.getHandler().getMessageManager().isTokenIsEnabled()) {
                 if (((amount * coinMulti) - amount) != 0) {
-                    messageUtils.getConfigMessage("BoostMessages.Tokens.Message").iterator().forEachRemaining(s -> {
+                   plugin.getHandler().getMessageManager().getTokenMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%")) {
                             int string = (int) ((amount * coinMulti) - amount);
                             s = s.replace("%amount%", Integer.toString(string));
                         }
-                        player.sendMessage(s);
+                        player.sendMessage(RGBParser.parse(s));
                     });
                 }
             }

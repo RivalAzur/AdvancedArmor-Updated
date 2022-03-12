@@ -1,11 +1,10 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
-import me.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonAutoSellEvent;
-import me.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonSellAllEvent;
+import dev.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonAutoSellEvent;
+import dev.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonSellAllEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
-import me.ilucah.advancedarmor.utilities.DebugManager;
-import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.MoneyUtils;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,18 +14,18 @@ import java.text.DecimalFormat;
 public class UltraPrisonCoreListener implements Listener {
 
     private final AdvancedArmor plugin;
+    private final MoneyUtils moneyUtils;
+    private final DecimalFormat decimalFormat;
 
     public UltraPrisonCoreListener(AdvancedArmor plugin) {
         this.plugin = plugin;
+        this.moneyUtils = new MoneyUtils(plugin.getHandler());
+        this.decimalFormat = new DecimalFormat( "###,###.00" );
     }
 
     @EventHandler
     public void onSellAll(UltraPrisonSellAllEvent event) {
         final Player player = event.getPlayer();
-        final MoneyUtils moneyUtils = new MoneyUtils(plugin.getHandler());
-        final DebugManager debugManager = new DebugManager(plugin);
-        final MessageUtils messageUtils = new MessageUtils(plugin);
-        final DecimalFormat decimalFormat = new DecimalFormat( "###,###.00" );
         double amount = event.getSellPrice();
 
         double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
@@ -35,21 +34,21 @@ public class UltraPrisonCoreListener implements Listener {
 
         event.setSellPrice(amount * moneyMulti);
 
-        if (plugin.getConfig().getBoolean("Messages.BoostMessages.Money.Enabled")) {
+        if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
             if (((amount * moneyMulti) - amount) != 0) {
-                messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {
+                plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%"))
                         s = s.replace("%amount%",(String.valueOf(decimalFormat.format((amount * moneyMulti) - amount))));
-                    player.sendMessage(s);
+                    player.sendMessage(RGBParser.parse(s));
                 });
             }
         }
 
-        if (debugManager.isEnabled()) {
-            debugManager.moneyEventDebugInfoSend(amount,
+        if (plugin.getHandler().getDebugManager().isEnabled()) {
+            plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(amount,
                     (amount * moneyMulti) - amount,
                     (amount * moneyMulti), moneyMulti);
-            debugManager.moneyEventDebugInfoSend(player, amount,
+            plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(player, amount,
                     (amount * moneyMulti) - amount,
                     (amount * moneyMulti), moneyMulti);
         }
@@ -58,10 +57,6 @@ public class UltraPrisonCoreListener implements Listener {
     @EventHandler
     public void onAutoSell(UltraPrisonAutoSellEvent event) {
         final Player player = event.getPlayer();
-        final MoneyUtils moneyUtils = new MoneyUtils(plugin.getHandler());
-        final DebugManager debugManager = new DebugManager(plugin);
-        final MessageUtils messageUtils = new MessageUtils(plugin);
-        final DecimalFormat decimalFormat = new DecimalFormat( "###,###.00" );
         double amount = event.getMoneyToDeposit();
 
         double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
@@ -70,21 +65,21 @@ public class UltraPrisonCoreListener implements Listener {
 
         event.setMoneyToDeposit(amount * moneyMulti);
 
-        if (plugin.getConfig().getBoolean("Messages.BoostMessages.Money.Enabled")) {
+        if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
             if (((amount * moneyMulti) - amount) != 0) {
-                messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {
+                plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%"))
-                        s = s.replace("%amount%", decimalFormat.format(String.valueOf((amount * moneyMulti) - amount)));
-                    player.sendMessage(s);
+                        s = s.replace("%amount%", decimalFormat.format((amount * moneyMulti) - amount));
+                    player.sendMessage(RGBParser.parse(s));
                 });
             }
         }
 
-        if (debugManager.isEnabled()) {
-            debugManager.moneyEventDebugInfoSend(amount,
+        if (plugin.getHandler().getDebugManager().isEnabled()) {
+            plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(amount,
                     (amount * moneyMulti) - amount,
                     (amount * moneyMulti), moneyMulti);
-            debugManager.moneyEventDebugInfoSend(player, amount,
+            plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(player, amount,
                     (amount * moneyMulti) - amount,
                     (amount * moneyMulti), moneyMulti);
         }

@@ -29,11 +29,13 @@ public class Armor {
     private ItemStack boots;
     private ArmorColor color;
 
+    private String[] translations;
+
     private Map<Enchantment, Integer> enchants;
     private List<Flag> itemFlags;
 
     public Armor(String name, String displayName, BoostType boostType, int helmetBoost, int chestBoost, int legsBoost,
-                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants, List<Flag> itemFlags) {
+                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants, List<Flag> itemFlags, String[] translations) {
         this.name = name;
         this.displayName = displayName;
         this.boostType = boostType;
@@ -44,13 +46,14 @@ public class Armor {
         this.helmetBoost = helmetBoost;
 
         this.armorLore = new ArrayList<String>();
+
         for (String string : armorLore) {
             this.armorLore.add(RGBParser.parse(string));
         }
 
+        this.translations = translations == null ? createTranslations() : translations;
         this.enchants = enchants;
         this.itemFlags = itemFlags;
-
         this.color = color;
 
         initialiseHelmet();
@@ -59,11 +62,17 @@ public class Armor {
         initialiseBoots();
     }
 
+    @Deprecated
+    public Armor(String name, String displayName, BoostType boostType, int helmetBoost, int chestBoost, int legsBoost,
+                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants, List<Flag> itemFlags) {
+        this(name, displayName, boostType, helmetBoost, chestBoost, legsBoost, bootsBoost, armorLore, color, enchants, itemFlags, null);
+    }
+
     public void initialiseHelmet() {
         ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
         LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
-        this.displayName.replace("%armor_type%", "Helmet");
-        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Helmet")));
+        this.displayName.replace("%armor_type%", translations[0]);
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[0])));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
@@ -77,8 +86,8 @@ public class Armor {
     public void initialiseChestplate() {
         ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
         LeatherArmorMeta meta = (LeatherArmorMeta) chestplate.getItemMeta();
-        this.displayName.replace("%armor_type%", "Chestplate");
-        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Chestplate")));
+        this.displayName.replace("%armor_type%", translations[1]);
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[1])));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
@@ -92,8 +101,8 @@ public class Armor {
     public void initialiseLeggings() {
         ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
         LeatherArmorMeta meta = (LeatherArmorMeta) leggings.getItemMeta();
-        this.displayName.replace("%armor_type%", "Leggings");
-        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Leggings")));
+        this.displayName.replace("%armor_type%", translations[2]);
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[2])));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
@@ -107,8 +116,8 @@ public class Armor {
     public void initialiseBoots() {
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
         LeatherArmorMeta meta = (LeatherArmorMeta) boots.getItemMeta();
-        this.displayName.replace("%armor_type%", "Boots");
-        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", "Boots")));
+        this.displayName.replace("%armor_type%",  translations[3]);
+        meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[3])));
         meta.setLore(this.armorLore);
         meta.setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
@@ -239,6 +248,15 @@ public class Armor {
 
     public List<Flag> getItemFlags() {
         return this.itemFlags;
+    }
+
+    private String[] createTranslations() {
+        String[] translations = new String[4];
+        translations[0] = "Helmet";
+        translations[1] = "Chestplate";
+        translations[2] = "Leggings";
+        translations[3] = "Boots";
+        return translations;
     }
 
 }

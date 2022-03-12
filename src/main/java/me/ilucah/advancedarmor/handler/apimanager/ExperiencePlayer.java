@@ -4,6 +4,7 @@ import me.ilucah.advancedarmor.armor.ArmorType;
 import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.utilities.ExpUtils;
 import me.ilucah.advancedarmor.utilities.NBTUtils;
+import me.ilucah.advancedarmor.utilities.Placeholders;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
@@ -88,7 +89,7 @@ public class ExperiencePlayer {
             return false;
     }
 
-    public String getPlayerArmorType() {
+    public String getPlayerArmorType(Placeholders placeholders) {
         if (nbtUtils.hasArmorNBTTag(player.getInventory().getBoots()))
             return nbtUtils.getArmorName(player.getInventory().getBoots());
         else if (nbtUtils.hasArmorNBTTag(player.getInventory().getChestplate()))
@@ -98,10 +99,10 @@ public class ExperiencePlayer {
         else if (nbtUtils.hasArmorNBTTag(player.getInventory().getHelmet()))
             return nbtUtils.getArmorName(player.getInventory().getHelmet());
         else
-            return "No Custom Armor :(";
+            return placeholders.getNoArmorEquipped();
     }
 
-    public String getPlayerArmorType(ArmorType type) {
+    public String getPlayerArmorType(ArmorType type, Placeholders placeholders) {
         if (type == ArmorType.HELMET) {
             if (nbtUtils.hasArmorNBTTag(player.getInventory().getHelmet()))
                 return nbtUtils.getArmorName(player.getInventory().getHelmet());
@@ -115,7 +116,7 @@ public class ExperiencePlayer {
             if (nbtUtils.hasArmorNBTTag(player.getInventory().getBoots()))
                 return nbtUtils.getArmorName(player.getInventory().getBoots());
         }
-        return "No Custom Armor :(";
+        return placeholders.getNoArmorEquipped();
     }
 
     public int getRawPlayerArmorExpBoost() {

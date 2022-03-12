@@ -24,6 +24,7 @@ public class AdvancedArmor extends JavaPlugin {
         registerCommands();
         registerPlaceholderAPI();
 
+        handler.initialiseTranslations();
         handler.initialiseColors();
         handler.initialiseArmor();
 
@@ -41,6 +42,7 @@ public class AdvancedArmor extends JavaPlugin {
         registerTheOnlyMobCoins();
         registerQuadrexMobCoins();
         registerClipAutoSell();
+        registerUltraBackpacks();
     }
 
     private void registerCommands() {
@@ -108,6 +110,10 @@ public class AdvancedArmor extends JavaPlugin {
                 getServer().getPluginManager().registerEvents(new UPCTokenListener(this), this);
                 getLogger().info("Successfully hooked into UltraPrisonCore TokenAPI");
             }
+            if (getConfig().getBoolean("Gem-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
+                getServer().getPluginManager().registerEvents(new UPCGemListener(this), this);
+                getLogger().info("Successfully hooked into UltraPrisonCore GemAPI");
+            }
         } else {
             getLogger().warning("If UltraPrisonCoreHook import was disabled, ignore this message;");
             getLogger().warning("UPC failed to registered.");
@@ -170,6 +176,17 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into AutoSell");
             } else {
                 getLogger().warning("Failed to hook into AutoSell. Money component disabled.");
+            }
+        }
+    }
+
+    private void registerUltraBackpacks() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.UltraBackpacks-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("UltraBackpacks") != null && getServer().getPluginManager().getPlugin("UltraBackpacks") != null) {
+                getServer().getPluginManager().registerEvents(new UltraBackpackListener(this), this);
+                getLogger().info("Successfully hooked into UltraBackpacks");
+            } else {
+                getLogger().warning("Failed to hook into UltraBackpacks. Money component disabled.");
             }
         }
     }

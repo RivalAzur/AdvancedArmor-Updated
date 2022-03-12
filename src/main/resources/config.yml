@@ -9,6 +9,7 @@ Money-Armor:
     Essentials-Enabled: false
     ShopGUIPlus-Enabled: false
     UltraPrisonCore-Enabled: false
+    UltraBackpacks-Enabled: false
     ClipAutoSell-Enabled: false
     InfiniteChestPro:
       Enabled: false
@@ -20,6 +21,9 @@ Coin-Armor:
     TheOnlyMobCoins-Enabled: false
     QuadrexMobCoins-Enabled: false
 Token-Armor:
+  Economy-Dependencies:
+    UltraPrisonCore-Enabled: false
+Gem-Armor:
   Economy-Dependencies:
     UltraPrisonCore-Enabled: false
 
@@ -122,6 +126,30 @@ Armor:
         Chestplate-Percentage: 30
         Leggings-Percentage: 30
         Boots-Percentage: 30
+    Crystal:
+      Name: '<GRADIENT:9B00FF>&lSunkist %armor_type%</GRADIENT:F1DAFF>'
+      ArmorColor: 'HOTPINK'
+      Lore:
+        - '<GRADIENT:9B00FF> * Token Boost Armor</GRADIENT:F1DAFF>'
+        - '&r'
+        - '<GRADIENT:9B00FF> * 1 Piece: 50% Money Boost</GRADIENT:F1DAFF>'
+        - '<GRADIENT:9B00FF> * 2 Piece: 100% Money Boost</GRADIENT:F1DAFF>'
+        - '<GRADIENT:9B00FF> * 3 Piece: 150% Money Boost</GRADIENT:F1DAFF>'
+        - '<GRADIENT:9B00FF> * 4 Piece: 200% Money Boost</GRADIENT:F1DAFF>'
+      Enchants:
+        Unbreaking: 10
+        Protection: 10
+      Flags:
+        Unbreakable: true
+        HIDE_UNBREAKABLE: false
+        HIDE_ATTRIBUTES: false
+        HIDE_ENCHANTS: false
+      Boost:
+        Type: 'GEM'
+        Helmet-Percentage: 50
+        Chestplate-Percentage: 50
+        Leggings-Percentage: 50
+        Boots-Percentage: 50
 
 ArmorColor:
   RED:
@@ -181,6 +209,14 @@ ArmorColor:
     G: 215
     B: 0
 
+Translations:
+  Helmet: 'Helmet'
+  Chestplate: 'Chestplate'
+  Leggings: 'Leggings'
+  Boots: 'Boots'
+  Placeholders:
+    No-Armor-Equipped: '&cNo Armor Equipped!'
+
 Messages:
   Console-Name: 'Server'
   No-Permission:
@@ -232,7 +268,10 @@ Messages:
       Enabled: true
       Message:
         - '&e&l+ %amount% &7(Tokens Armor)'
-
+    Gems:
+      Enabled: true
+      Message:
+        - '&de&l+ %amount% &7(Gem Armor)'
 Debug:
   Enabled: false
   Cosole: false

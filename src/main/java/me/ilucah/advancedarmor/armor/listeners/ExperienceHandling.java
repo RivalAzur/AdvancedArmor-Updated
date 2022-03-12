@@ -5,6 +5,7 @@ import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.ExpUtils;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,41 +17,40 @@ public class ExperienceHandling implements Listener {
 
     private final Handler handler;
     private final AdvancedArmor main;
+    private final ExpUtils expUtils;
+    private final DecimalFormat decimalFormat;
 
     public ExperienceHandling(Handler handler, AdvancedArmor main) {
         this.handler = handler;
         this.main = main;
+        this.expUtils = new ExpUtils(handler);
+        this.decimalFormat = new DecimalFormat("###,###.00");
     }
 
     @EventHandler
     public void onExperienceReceive(PlayerExpChangeEvent event) {
         final Player player = event.getPlayer();
-        final ExpUtils expUtils = new ExpUtils(handler);
-        final DebugManager debugManager = new DebugManager(main);
-        final MessageUtils messageUtils = new MessageUtils(main);
-        final DecimalFormat decimalFormat = new DecimalFormat( "###,###.00" );
 
         double expMulti = expUtils.calculatePercentage(player.getInventory().getHelmet(),
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
         player.giveExp((int) ((event.getAmount() * expMulti) - event.getAmount()));
 
-        if (main.getConfig().getBoolean("Messages.BoostMessages.EXP.Enabled")) {
+        if (main.getHandler().getMessageManager().isExpIsEnabled()) {
             if (((int) ((event.getAmount() * expMulti) - event.getAmount())) != 0) {
-                System.out.println(String.valueOf((event.getAmount() * expMulti) - event.getAmount()));
-                messageUtils.getConfigMessage("BoostMessages.EXP.Message").iterator().forEachRemaining(s -> {
+                main.getHandler().getMessageManager().getExpMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%"))
                         s = s.replace("%amount%", String.valueOf(decimalFormat.format((int) ((event.getAmount() * expMulti) - event.getAmount()))));
-                    player.sendMessage(s);
+                    player.sendMessage(RGBParser.parse(s));
                 });
             }
         }
 
-        if (debugManager.isEnabled()) {
-            debugManager.expEventDebugInfoSend(event.getAmount(),
+        if (main.getHandler().getDebugManager().isEnabled()) {
+            main.getHandler().getDebugManager().expEventDebugInfoSend(event.getAmount(),
                     (int) ((event.getAmount() * expMulti) - event.getAmount()),
                     (int) ((event.getAmount() * expMulti)), expMulti);
-            debugManager.expEventDebugInfoSend(player, event.getAmount(),
+            main.getHandler().getDebugManager().expEventDebugInfoSend(player, event.getAmount(),
                     (int) ((event.getAmount() * expMulti) - event.getAmount()),
                     (int) ((event.getAmount() * expMulti)), expMulti);
         }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import me.ilucah.advancedarmor.armor.Flag;
 import me.ilucah.advancedarmor.utilities.DebugManager;
+import me.ilucah.advancedarmor.utilities.MessageManager;
 import org.bukkit.enchantments.Enchantment;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
@@ -23,8 +24,10 @@ public class Handler {
     private List<ArmorColor> armorColors;
     private List<Armor> armor;
     private Map<String, Armor> armorMapped;
+    private String[] translations;
 
     private final DebugManager debugManager;
+    private final MessageManager messageManager;
 
     public Handler(AdvancedArmor plugin) {
         this.plugin = plugin;
@@ -32,8 +35,10 @@ public class Handler {
         this.armorColors = new ArrayList<ArmorColor>();
         this.armor = new ArrayList<Armor>();
         this.armorMapped = new HashMap<String, Armor>();
+        this.translations = new String[4];
 
         this.debugManager = new DebugManager(plugin);
+        this.messageManager = new MessageManager(plugin);
     }
 
     public void initialiseColors() {
@@ -78,9 +83,24 @@ public class Handler {
                 }
             }
             Armor a = new Armor(type, name, boostType, helmetBoost, chestplateBoost, leggingsBoost, bootsBoost, armorLore,
-                    color, enchants, itemFlags);
+                    color, enchants, itemFlags, translations);
             armor.add(a);
             armorMapped.put(type, a);
+        }
+    }
+
+    public void initialiseTranslations() {
+        if (plugin.getConfig().getConfigurationSection("Translations").getKeys(false) != null) {
+            translations[0] = plugin.getConfig().getString("Translations.Helmet");
+            translations[1] = plugin.getConfig().getString("Translations.Chestplate");
+            translations[2] = plugin.getConfig().getString("Translations.Leggings");
+            translations[3] = plugin.getConfig().getString("Translations.Boots");
+            return;
+        } else {
+            translations[0] = "Helmet";
+            translations[1] = "Chestplate";
+            translations[2] = "Leggings";
+            translations[3] = "Boots";
         }
     }
 
@@ -107,5 +127,13 @@ public class Handler {
 
     public DebugManager getDebugManager() {
         return debugManager;
+    }
+
+    public String[] getTranslations() {
+        return translations;
+    }
+
+    public MessageManager getMessageManager() {
+        return messageManager;
     }
 }

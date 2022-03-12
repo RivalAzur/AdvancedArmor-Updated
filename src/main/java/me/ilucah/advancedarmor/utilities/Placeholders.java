@@ -4,19 +4,22 @@ import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.ArmorType;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.handler.apimanager.CoinPlayer;
-import me.ilucah.advancedarmor.handler.apimanager.ExperiencePlayer;
-import me.ilucah.advancedarmor.handler.apimanager.MoneyPlayer;
-import me.ilucah.advancedarmor.handler.apimanager.TokenPlayer;
+import me.ilucah.advancedarmor.handler.apimanager.*;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
 public class Placeholders extends PlaceholderExpansion {
 
     private AdvancedArmor plugin;
+    private String noArmorEquipped;
 
     public Placeholders(AdvancedArmor plugin) {
         this.plugin = plugin;
+        this.noArmorEquipped = RGBParser.parse(plugin.getConfig().getString("Translations.Placeholders.No-Armor-Equipped"));
+    }
+
+    public String getNoArmorEquipped() {
+        return noArmorEquipped;
     }
 
     @Override
@@ -50,65 +53,67 @@ public class Placeholders extends PlaceholderExpansion {
         MoneyPlayer moneyPlayer = new MoneyPlayer(plugin.getHandler(), offlinePlayer);
         if (params.equalsIgnoreCase("armortype")) {
             if (player.hasCustomArmorEquipped()) {
-                return player.getPlayerArmorType();
+                return player.getPlayerArmorType(this);
             } else {
-                return "No Armor Equipped";
+                return noArmorEquipped;
             }
         }
         if (params.equalsIgnoreCase("helmettype")) {
             if (player.hasCustomArmorEquipped()) {
-                return player.getPlayerArmorType(ArmorType.HELMET);
+                return player.getPlayerArmorType(ArmorType.HELMET, this);
             } else {
-                return "No Armor Equipped";
+                return noArmorEquipped;
             }
         }
         if (params.equalsIgnoreCase("chesttype")) {
             if (player.hasCustomArmorEquipped()) {
-                return player.getPlayerArmorType(ArmorType.CHESTPLATE);
+                return player.getPlayerArmorType(ArmorType.CHESTPLATE, this);
             } else {
-                return "No Armor Equipped";
+                return noArmorEquipped;
             }
         }
         if (params.equalsIgnoreCase("legstype")) {
             if (player.hasCustomArmorEquipped()) {
-                return player.getPlayerArmorType(ArmorType.LEGGINGS);
+                return player.getPlayerArmorType(ArmorType.LEGGINGS, this);
             } else {
-                return "No Armor Equipped";
+                return noArmorEquipped;
             }
         }
         if (params.equalsIgnoreCase("bootstype")) {
             if (player.hasCustomArmorEquipped()) {
-                return player.getPlayerArmorType(ArmorType.BOOTS);
+                return player.getPlayerArmorType(ArmorType.BOOTS, this);
             } else {
-                return "No Armor Equipped";
+                return noArmorEquipped;
             }
         }
         if (params.equalsIgnoreCase("boosttype")) {
             if (player.hasCustomArmorEquipped()) {
-                if (plugin.getHandler().getArmorFromString(player.getPlayerArmorType()).getBoostType() == BoostType.EXP)
+                if (plugin.getHandler().getArmorFromString(player.getPlayerArmorType(this)).getBoostType() == BoostType.EXP)
                     return "EXP";
-                else if (plugin.getHandler().getArmorFromString(player.getPlayerArmorType()).getBoostType() == BoostType.TOKEN)
+                else if (plugin.getHandler().getArmorFromString(player.getPlayerArmorType(this)).getBoostType() == BoostType.TOKEN)
                     return "TOKEN";
-                else if (plugin.getHandler().getArmorFromString(player.getPlayerArmorType()).getBoostType() == BoostType.TOKEN)
+                else if (plugin.getHandler().getArmorFromString(player.getPlayerArmorType(this)).getBoostType() == BoostType.TOKEN)
                     return "COINS";
+                else if (plugin.getHandler().getArmorFromString(player.getPlayerArmorType(this)).getBoostType() == BoostType.GEM)
+                    return "GEMS";
                 else
                     return "MONEY";
             } else {
-                return "No Custom Armor Equipped";
+                return noArmorEquipped;
             }
         }
         if (params.equalsIgnoreCase("expboost")) {
             if (player.hasCustomArmorEquipped()) {
                 return String.valueOf(player.getRawPlayerArmorExpBoost());
             } else {
-                return "1";
+                return "0";
             }
         }
         if (params.equalsIgnoreCase("moneyboost")) {
             if (player.hasCustomArmorEquipped()) {
                 return String.valueOf(moneyPlayer.getRawBoostAmount());
             } else {
-                return "1";
+                return "0";
             }
         }
         if (params.equalsIgnoreCase("tokenboost")) {
@@ -116,7 +121,7 @@ public class Placeholders extends PlaceholderExpansion {
             if (player.hasCustomArmorEquipped()) {
                 return String.valueOf(tokenPlayer.getRawPlayerArmorExpBoost());
             } else {
-                return "1";
+                return "0";
             }
         }
         if (params.equalsIgnoreCase("coinboost")) {
@@ -124,7 +129,15 @@ public class Placeholders extends PlaceholderExpansion {
             if (player.hasCustomArmorEquipped()) {
                 return String.valueOf(coinPlayer.getRawPlayerArmorExpBoost());
             } else {
-                return "1";
+                return "0";
+            }
+        }
+        if (params.equalsIgnoreCase("gemboost")) {
+            GemPlayer coinPlayer = new GemPlayer(plugin.getHandler(), offlinePlayer);
+            if (player.hasCustomArmorEquipped()) {
+                return String.valueOf(coinPlayer.getRawPlayerArmorExpBoost());
+            } else {
+                return "0";
             }
         }
         return "Null, contact author"; // Placeholder is unknown by the expansion

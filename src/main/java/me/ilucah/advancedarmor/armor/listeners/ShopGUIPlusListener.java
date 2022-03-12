@@ -4,6 +4,7 @@ import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.MoneyUtils;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import net.brcdev.shopgui.event.ShopPreTransactionEvent;
 import net.brcdev.shopgui.shop.ShopManager;
 import org.bukkit.entity.Player;
@@ -15,18 +16,18 @@ import java.text.DecimalFormat;
 public class ShopGUIPlusListener implements Listener {
 
     private final AdvancedArmor plugin;
+    private final MoneyUtils moneyUtils;
+    private final DecimalFormat decimalFormat;
 
     public ShopGUIPlusListener(AdvancedArmor plugin) {
         this.plugin = plugin;
+        this.moneyUtils = new MoneyUtils(plugin.getHandler());
+        this.decimalFormat = new DecimalFormat( "###,###.00" );
     }
 
     @EventHandler
     public void onShopGUIPlusSell(ShopPreTransactionEvent event) {
         final Player player = event.getPlayer();
-        final MoneyUtils moneyUtils = new MoneyUtils(plugin.getHandler());
-        final DebugManager debugManager = new DebugManager(plugin);
-        final MessageUtils messageUtils = new MessageUtils(plugin);
-        final DecimalFormat decimalFormat = new DecimalFormat( "###,###.00" );
 
         if (event.getShopAction() == ShopManager.ShopAction.SELL ||
                 event.getShopAction() == ShopManager.ShopAction.SELL_ALL) {
@@ -37,21 +38,21 @@ public class ShopGUIPlusListener implements Listener {
 
             event.setPrice(amountReceived * moneyMulti);
 
-            if (plugin.getConfig().getBoolean("Messages.BoostMessages.Money.Enabled")) {
+            if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
                 if (((amountReceived * moneyMulti) - amountReceived) != 0) {
-                    messageUtils.getConfigMessage("BoostMessages.Money.Message").iterator().forEachRemaining(s -> {
+                    plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%"))
                             s = s.replace("%amount%", String.valueOf((decimalFormat.format((amountReceived * moneyMulti) - amountReceived))));
-                        player.sendMessage(s);
+                        player.sendMessage(RGBParser.parse(s));
                     });
                 }
             }
 
-            if (debugManager.isEnabled()) {
-                debugManager.moneyEventDebugInfoSend(amountReceived,
+            if (plugin.getHandler().getDebugManager().isEnabled()) {
+                plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(amountReceived,
                         (amountReceived * moneyMulti) - amountReceived,
                         (amountReceived * moneyMulti), moneyMulti);
-                debugManager.moneyEventDebugInfoSend(player, amountReceived,
+                plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(player, amountReceived,
                         (amountReceived * moneyMulti) - amountReceived,
                         (amountReceived * moneyMulti), moneyMulti);
             }

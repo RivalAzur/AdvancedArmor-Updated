@@ -3,7 +3,7 @@ package me.ilucah.advancedarmor.armor.listeners;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.handler.apimanager.CoinPlayer;
 import me.ilucah.advancedarmor.utilities.CoinUtils;
-import me.ilucah.advancedarmor.utilities.MessageUtils;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,10 +13,12 @@ import org.quadrex.mobcoins.storage.Database;
 
 public class QuadrexMobCoinsListener implements Listener {
 
-    private AdvancedArmor plugin;
+    private final AdvancedArmor plugin;
+    private final CoinUtils coinUtils;
 
     public QuadrexMobCoinsListener(AdvancedArmor plugin) {
         this.plugin = plugin;
+        this.coinUtils = new CoinUtils(plugin);
     }
 
     @EventHandler
@@ -25,8 +27,6 @@ public class QuadrexMobCoinsListener implements Listener {
         final CoinPlayer coinPlayer = new CoinPlayer(plugin.getHandler(), player);
         if (!coinPlayer.hasCustomArmorEquipped())
             return;
-        final CoinUtils coinUtils = new CoinUtils(plugin);
-        final MessageUtils messageUtils = new MessageUtils(plugin);
         double amount = event.getAmount();
 
         double coinMulti = coinUtils.calculatePercentage(player.getInventory().getHelmet(),
@@ -36,16 +36,16 @@ public class QuadrexMobCoinsListener implements Listener {
 
         addCoins(player, (long) amountToGive);
 
-        if (plugin.getConfig().getBoolean("Messages.BoostMessages.Coins.Enabled")) {
+        if (plugin.getHandler().getMessageManager().isCoinIsEnabled()) {
             if ((amountToGive) > 0) {
-                messageUtils.getConfigMessage("BoostMessages.Coins.Message").iterator().forEachRemaining(s -> {
+                plugin.getHandler().getMessageManager().getCoinMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%")) {
                         int string = (int) (amountToGive);
                         if (string < 1)
                             string = 1;
                         s = s.replace("%amount%", Integer.toString(string));
                     }
-                    player.sendMessage(s);
+                    player.sendMessage(RGBParser.parse(s));
                 });
             }
         }
