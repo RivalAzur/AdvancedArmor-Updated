@@ -1,7 +1,5 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
-import dev.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonAutoSellEvent;
-import dev.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonSellAllEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
@@ -11,32 +9,35 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
+import dev.drawethree.ultrabackpacks.api.event.BackpackSellEvent;
+
 import java.text.DecimalFormat;
 
-public class UltraPrisonCoreListener implements Listener {
+public class UltraBackpackListener implements Listener {
 
     private final AdvancedArmor plugin;
     private final MoneyUtils moneyUtils;
     private final DecimalFormat decimalFormat;
 
-    public UltraPrisonCoreListener(AdvancedArmor plugin) {
+    public UltraBackpackListener(AdvancedArmor plugin) {
         this.plugin = plugin;
         this.moneyUtils = new MoneyUtils(plugin.getHandler());
         this.decimalFormat = new DecimalFormat( "###,###.00" );
     }
 
     @EventHandler
-    public void onSellAll(UltraPrisonSellAllEvent event) {
+    public void onSell(BackpackSellEvent event) {
         final Player player = event.getPlayer();
-        double amount = event.getSellPrice();
+        double amount = event.getMoneyToDeposit();
 
         double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
+
         ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (amount * moneyMulti) - amount, BoostType.MONEY);
         plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-        event.setSellPrice(amount * moneyMulti);
+        event.setMoneyToDeposit(amount * moneyMulti);
 
         if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
             if (((amount * moneyMulti) - amount) != 0) {
@@ -58,34 +59,4 @@ public class UltraPrisonCoreListener implements Listener {
         }
     }
 
-    @EventHandler
-    public void onAutoSell(UltraPrisonAutoSellEvent event) {
-        final Player player = event.getPlayer();
-        double amount = event.getMoneyToDeposit();
-
-        double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
-                player.getInventory().getChestplate(), player.getInventory().getLeggings(),
-                player.getInventory().getBoots());
-
-        event.setMoneyToDeposit(amount * moneyMulti);
-
-        if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
-            if (((amount * moneyMulti) - amount) != 0) {
-                plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
-                    if (s.contains("%amount%"))
-                        s = s.replace("%amount%", decimalFormat.format((amount * moneyMulti) - amount));
-                    player.sendMessage(RGBParser.parse(s));
-                });
-            }
-        }
-
-        if (plugin.getHandler().getDebugManager().isEnabled()) {
-            plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(amount,
-                    (amount * moneyMulti) - amount,
-                    (amount * moneyMulti), moneyMulti);
-            plugin.getHandler().getDebugManager().moneyEventDebugInfoSend(player, amount,
-                    (amount * moneyMulti) - amount,
-                    (amount * moneyMulti), moneyMulti);
-        }
-    }
 }

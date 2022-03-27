@@ -1,11 +1,14 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.ExpUtils;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.RGBParser;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,6 +38,8 @@ public class ExperienceHandling implements Listener {
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
         player.giveExp((int) ((event.getAmount() * expMulti) - event.getAmount()));
+        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (event.getAmount() * expMulti) - event.getAmount(), BoostType.EXP);
+        Bukkit.getPluginManager().callEvent(boostEvent);
 
         if (main.getHandler().getMessageManager().isExpIsEnabled()) {
             if (((int) ((event.getAmount() * expMulti) - event.getAmount())) != 0) {

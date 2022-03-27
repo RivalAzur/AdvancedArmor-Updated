@@ -2,52 +2,55 @@ package me.ilucah.advancedarmor.armor.listeners;
 
 import dev.drawethree.ultraprisoncore.UltraPrisonCore;
 import dev.drawethree.ultraprisoncore.api.enums.ReceiveCause;
-import dev.drawethree.ultraprisoncore.tokens.api.events.PlayerTokensReceiveEvent;
+import dev.drawethree.ultraprisoncore.gems.api.events.PlayerGemsReceiveEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.handler.apimanager.TokenPlayer;
+import me.ilucah.advancedarmor.handler.apimanager.GemPlayer;
 import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
+import me.ilucah.advancedarmor.utilities.GemUtils;
 import me.ilucah.advancedarmor.utilities.RGBParser;
-import me.ilucah.advancedarmor.utilities.TokenUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
-public class UPCTokenListener implements Listener {
+import java.text.DecimalFormat;
 
-    private AdvancedArmor plugin;
-    private TokenUtils tokenUtils;
+public class UPCGemListener implements Listener {
 
-    public UPCTokenListener(AdvancedArmor plugin) {
+    private final AdvancedArmor plugin;
+    private final GemUtils gemUtils;
+    private final DecimalFormat decimalFormat;
+
+    public UPCGemListener(AdvancedArmor plugin) {
         this.plugin = plugin;
-        this.tokenUtils = new TokenUtils(plugin);
+        this.gemUtils = new GemUtils(plugin.getHandler());
+        this.decimalFormat = new DecimalFormat("###,###.00");
     }
 
     @EventHandler
-    public void onTokenRecieveEvent(PlayerTokensReceiveEvent event) {
+    public void onGemReceive(PlayerGemsReceiveEvent event) {
         if (event.getCause() == ReceiveCause.MINING ||
                 event.getCause() == ReceiveCause.LUCKY_BLOCK ||
                 event.getCause() == ReceiveCause.MINING_OTHERS) {
             final Player player = event.getPlayer().getPlayer();
-            final TokenPlayer tokenPlayer = new TokenPlayer(plugin.getHandler(), player);
-            if (!tokenPlayer.hasCustomArmorEquipped())
+            final GemPlayer gemPlayer = new GemPlayer(plugin.getHandler(), player);
+            if (!gemPlayer.hasCustomArmorEquipped())
                 return;
             long amount = event.getAmount();
-
-            double coinMulti = tokenUtils.calculatePercentage(player.getInventory().getHelmet(),
+            double gemMulti = gemUtils.calculatePercentage(player.getInventory().getHelmet(),
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
-            long amountToGive = (long) ((amount * coinMulti) - amount);
-            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.TOKEN);
+            long amountToGive = (long) ((amount * gemMulti) - amount);
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.GEM);
             plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-            UltraPrisonCore.getInstance().getTokens().getApi().addTokens(event.getPlayer(), amountToGive, ReceiveCause.GIVE);
+            UltraPrisonCore.getInstance().getGems().getApi().addGems(event.getPlayer(), amountToGive, ReceiveCause.GIVE);
 
-            if (plugin.getHandler().getMessageManager().isTokenIsEnabled()) {
-                if (((amount * coinMulti) - amount) != 0) {
-                   plugin.getHandler().getMessageManager().getTokenMessage().iterator().forEachRemaining(s -> {
+            if (plugin.getHandler().getMessageManager().isGemIsEnabled()) {
+                if (amountToGive != 0) {
+                    plugin.getHandler().getMessageManager().getGemMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%")) {
-                            int string = (int) ((amount * coinMulti) - amount);
+                            int string = (int) (amountToGive);
                             s = s.replace("%amount%", Integer.toString(string));
                         }
                         player.sendMessage(RGBParser.parse(s));
@@ -57,7 +60,7 @@ public class UPCTokenListener implements Listener {
 
             if (plugin.getHandler().getDebugManager().isEnabled()) {
                 player.sendMessage("Amount" + amount);
-                player.sendMessage("Multi" + coinMulti);
+                player.sendMessage("Multi" + gemMulti);
                 player.sendMessage("AmountToGive" + amountToGive);
             }
         }

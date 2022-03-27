@@ -67,7 +67,12 @@ public class Handler {
             Map<Enchantment, Integer> enchants = new HashMap<Enchantment, Integer>();
             if (plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Enchants") != null) {
                 for (String enchant : plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Enchants").getKeys(false)) {
-                    enchants.put(EnchantmentUtils.getEnchantment(enchant), plugin.getConfig().getInt("Armor.Types." + type + ".Enchants." + enchant));
+                    try {
+                        enchants.put(EnchantmentUtils.getEnchantment(enchant), plugin.getConfig().getInt("Armor.Types." + type + ".Enchants." + enchant));
+                    } catch (NullPointerException exception) {
+                        plugin.getLogger().warning("The enchantment: " + enchant + " failed to load for the armor type: " + type + ".");
+                        plugin.getLogger().warning("This is a known issue, it may be a result of your server version.");
+                    }
                 }
             }
 

@@ -3,7 +3,9 @@ package me.ilucah.advancedarmor.armor.listeners;
 import me.aglerr.krakenmobcoins.MobCoins;
 import me.aglerr.krakenmobcoins.api.events.MobCoinsReceiveEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.CoinPlayer;
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.CoinUtils;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
@@ -32,6 +34,8 @@ public class KrakenMobCoinsListener implements Listener {
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
             int amountToGive = (int) ((amount * coinMulti) - amount);
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.COIN);
+            plugin.getServer().getPluginManager().callEvent(boostEvent);
             MobCoins.getAPI().getSalaryManager().setPlayerSalary(player.getUniqueId(), MobCoins.getAPI()
                     .getSalaryManager().getPlayerSalary(player.getUniqueId()) + amountToGive);
 

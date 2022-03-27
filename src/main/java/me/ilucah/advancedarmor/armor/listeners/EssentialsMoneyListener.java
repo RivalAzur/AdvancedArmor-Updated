@@ -3,7 +3,9 @@ package me.ilucah.advancedarmor.armor.listeners;
 import com.earth2me.essentials.api.NoLoanPermittedException;
 import com.earth2me.essentials.api.UserDoesNotExistException;
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.MoneyUtils;
@@ -32,7 +34,7 @@ public class EssentialsMoneyListener implements Listener {
     }
 
     @EventHandler
-    public void onBalanceChangeEvent(UserBalanceUpdateEvent event) throws MaxMoneyException, UserDoesNotExistException, NoLoanPermittedException {
+    public void onBalanceChangeEvent(UserBalanceUpdateEvent event) {
         final Player player = event.getPlayer();
         if (event.getCause() != UserBalanceUpdateEvent.Cause.COMMAND_PAY && event.getCause() != UserBalanceUpdateEvent.Cause.COMMAND_ECO) {
             if (event.getNewBalance().compareTo(event.getOldBalance()) > 0) {
@@ -41,6 +43,8 @@ public class EssentialsMoneyListener implements Listener {
                 double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                         player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                         player.getInventory().getBoots());
+                ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue(), BoostType.MONEY);
+                plugin.getServer().getPluginManager().callEvent(boostEvent);
 
                 event.setNewBalance(event.getOldBalance().add(BigDecimal.valueOf((amountReceived.doubleValue() * moneyMulti))));
                 if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {

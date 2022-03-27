@@ -1,6 +1,8 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.armor.BoostType;
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.MoneyUtils;
@@ -35,6 +37,8 @@ public class ShopGUIPlusListener implements Listener {
             double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (amountReceived * moneyMulti) - amountReceived, BoostType.MONEY);
+            plugin.getServer().getPluginManager().callEvent(boostEvent);
 
             event.setPrice(amountReceived * moneyMulti);
 

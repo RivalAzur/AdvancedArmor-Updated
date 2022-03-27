@@ -1,7 +1,9 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.CoinPlayer;
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.CoinUtils;
 import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.entity.Player;
@@ -33,8 +35,10 @@ public class QuadrexMobCoinsListener implements Listener {
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
         int amountToGive = (int) ((amount * coinMulti) - amount);
+        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.COIN);
+        plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-        addCoins(player, (long) amountToGive);
+        addCoins(player, amountToGive);
 
         if (plugin.getHandler().getMessageManager().isCoinIsEnabled()) {
             if ((amountToGive) > 0) {

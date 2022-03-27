@@ -3,6 +3,8 @@ package me.ilucah.advancedarmor.armor.listeners;
 import me.clip.autosell.events.AutoSellEvent;
 import me.clip.autosell.events.SellAllEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.armor.BoostType;
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.MoneyUtils;
 import me.ilucah.advancedarmor.utilities.RGBParser;
@@ -44,6 +46,8 @@ public class ClipAutoSellListener implements Listener {
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
         double amountToGive = (amountReceived * moneyMulti) - amountReceived;
+        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.MONEY);
+        plugin.getServer().getPluginManager().callEvent(boostEvent);
 
         economy.depositPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()), amountToGive);
 

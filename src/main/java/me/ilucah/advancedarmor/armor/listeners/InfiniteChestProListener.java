@@ -1,6 +1,8 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.armor.BoostType;
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import me.ilucah.advancedarmor.utilities.MoneyUtils;
@@ -38,6 +40,8 @@ public class InfiniteChestProListener implements Listener {
             double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (sellAmount * moneyMulti) - sellAmount, BoostType.MONEY);
+            plugin.getServer().getPluginManager().callEvent(boostEvent);
 
             hookManager.getEconomyHook().deposit(offlinePlayer, ((sellAmount * moneyMulti) - sellAmount));
 
