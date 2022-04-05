@@ -43,6 +43,8 @@ public class AdvancedArmor extends JavaPlugin {
         registerQuadrexMobCoins();
         registerClipAutoSell();
         registerUltraBackpacks();
+        registerDeluxeSellWandsMoney();
+        registerDeluxeSellWandsTokens();
     }
 
     private void registerCommands() {
@@ -187,6 +189,28 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into UltraBackpacks");
             } else {
                 getLogger().warning("Failed to hook into UltraBackpacks. Money component disabled.");
+            }
+        }
+    }
+
+    private void registerDeluxeSellWandsMoney() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.DeluxeSellWands-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("DeluxeSellwands") != null) {
+                getServer().getPluginManager().registerEvents(new DeluxSellWandsMoneyListener(this), this);
+                getLogger().info("Successfully hooked into DeluxeSellwands Money");
+            } else {
+                getLogger().warning("Failed to hook into DeluxeSellwands Money. Money component disabled.");
+            }
+        }
+    }
+
+    private void registerDeluxeSellWandsTokens() {
+        if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.DeluxeSellWands-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("DeluxeSellwands") != null) {
+                getServer().getPluginManager().registerEvents(new DeluxSellWandsTokenListener(this), this);
+                getLogger().info("Successfully hooked into DeluxeSellwands Tokens");
+            } else {
+                getLogger().warning("Failed to hook into DeluxeSellwands Tokens. Money component disabled.");
             }
         }
     }

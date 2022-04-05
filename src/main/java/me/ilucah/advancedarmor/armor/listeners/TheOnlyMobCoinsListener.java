@@ -36,15 +36,15 @@ public class TheOnlyMobCoinsListener implements Listener {
                         player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                         player.getInventory().getBoots());
                 int amountToGive = (int) ((amount * coinMulti) - amount);
-                ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.COIN);
+                ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, coinMulti, amount, BoostType.COIN);
                 plugin.getServer().getPluginManager().callEvent(boostEvent);
-                playerData.addCoins(playerData.getCoins() + amountToGive);
+                playerData.addCoins(boostEvent.getNewEarnings() + amountToGive);
 
                 if (plugin.getHandler().getMessageManager().isCoinIsEnabled()) {
                     if (amountToGive != 0) {
                         plugin.getHandler().getMessageManager().getCoinMessage().iterator().forEachRemaining(s -> {
                             if (s.contains("%amount%")) {
-                                int string = (int) ((amount * coinMulti) - amount);
+                                int string = (int) ((amount * coinMulti) - amount) + (int) boostEvent.getNewEarnings();
                                 s = s.replace("%amount%", Integer.toString(string));
                             }
                             player.sendMessage(RGBParser.parse(s));

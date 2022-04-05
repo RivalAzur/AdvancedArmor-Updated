@@ -35,16 +35,16 @@ public class QuadrexMobCoinsListener implements Listener {
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
         int amountToGive = (int) ((amount * coinMulti) - amount);
-        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.COIN);
+        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, coinMulti, amount, BoostType.COIN);
         plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-        addCoins(player, amountToGive);
+        addCoins(player, amountToGive + (int) boostEvent.getNewEarnings());
 
         if (plugin.getHandler().getMessageManager().isCoinIsEnabled()) {
             if ((amountToGive) > 0) {
                 plugin.getHandler().getMessageManager().getCoinMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%")) {
-                        int string = (int) (amountToGive);
+                        int string = amountToGive + (int) boostEvent.getNewEarnings();
                         if (string < 1)
                             string = 1;
                         s = s.replace("%amount%", Integer.toString(string));

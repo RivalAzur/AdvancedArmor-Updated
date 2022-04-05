@@ -33,9 +33,9 @@ public class KrakenMobCoinsListener implements Listener {
             double coinMulti = coinUtils.calculatePercentage(player.getInventory().getHelmet(),
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
-            int amountToGive = (int) ((amount * coinMulti) - amount);
-            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.COIN);
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, coinMulti, event.getAmountBeforeMultiplier(), BoostType.COIN);
             plugin.getServer().getPluginManager().callEvent(boostEvent);
+            int amountToGive = (int) ((amount * coinMulti) - amount) + (int) boostEvent.getNewEarnings();
             MobCoins.getAPI().getSalaryManager().setPlayerSalary(player.getUniqueId(), MobCoins.getAPI()
                     .getSalaryManager().getPlayerSalary(player.getUniqueId()) + amountToGive);
 
@@ -43,7 +43,7 @@ public class KrakenMobCoinsListener implements Listener {
                 if (((amount * coinMulti) - amount) != 0) {
                     plugin.getHandler().getMessageManager().getCoinMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%")) {
-                            int string = (int) ((amount * coinMulti) - amount);
+                            int string = (int) ((amount * coinMulti) - amount) + (int) boostEvent.getNewEarnings();
                             s = s.replace("%amount%", Integer.toString(string));
                         }
                         player.sendMessage(RGBParser.parse(s));

@@ -37,16 +37,16 @@ public class ShopGUIPlusListener implements Listener {
             double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
-            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (amountReceived * moneyMulti) - amountReceived, BoostType.MONEY);
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, moneyMulti, amountReceived, BoostType.MONEY);
             plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-            event.setPrice(amountReceived * moneyMulti);
+            event.setPrice((amountReceived * moneyMulti) + boostEvent.getNewEarnings());
 
             if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
                 if (((amountReceived * moneyMulti) - amountReceived) != 0) {
                     plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%"))
-                            s = s.replace("%amount%", String.valueOf((decimalFormat.format((amountReceived * moneyMulti) - amountReceived))));
+                            s = s.replace("%amount%", String.valueOf((decimalFormat.format((amountReceived * moneyMulti) - amountReceived + boostEvent.getNewEarnings()))));
                         player.sendMessage(RGBParser.parse(s));
                     });
                 }

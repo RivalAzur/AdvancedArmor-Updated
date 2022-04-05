@@ -40,16 +40,16 @@ public class InfiniteChestProListener implements Listener {
             double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
-            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (sellAmount * moneyMulti) - sellAmount, BoostType.MONEY);
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, moneyMulti, sellAmount, BoostType.MONEY);
             plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-            hookManager.getEconomyHook().deposit(offlinePlayer, ((sellAmount * moneyMulti) - sellAmount));
+            hookManager.getEconomyHook().deposit(offlinePlayer, ((sellAmount * moneyMulti) - sellAmount) + boostEvent.getNewEarnings());
 
             if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
                 if (((sellAmount * moneyMulti) - sellAmount) != 0) {
                     plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%"))
-                            s = s.replace("%amount%", String.valueOf(decimalFormat.format(((sellAmount * moneyMulti) - sellAmount))));
+                            s = s.replace("%amount%", String.valueOf(decimalFormat.format(((sellAmount * moneyMulti) - sellAmount) + boostEvent.getNewEarnings())));
                         player.sendMessage(RGBParser.parse(s));
                     });
                 }

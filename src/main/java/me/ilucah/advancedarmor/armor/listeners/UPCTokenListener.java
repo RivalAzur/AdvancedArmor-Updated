@@ -38,16 +38,16 @@ public class UPCTokenListener implements Listener {
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
             long amountToGive = (long) ((amount * coinMulti) - amount);
-            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.TOKEN);
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, coinMulti, amount, BoostType.TOKEN);
             plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-            UltraPrisonCore.getInstance().getTokens().getApi().addTokens(event.getPlayer(), amountToGive, ReceiveCause.GIVE);
+            UltraPrisonCore.getInstance().getTokens().getApi().addTokens(event.getPlayer(), amountToGive + (long) boostEvent.getNewEarnings(), ReceiveCause.GIVE);
 
             if (plugin.getHandler().getMessageManager().isTokenIsEnabled()) {
                 if (((amount * coinMulti) - amount) != 0) {
                    plugin.getHandler().getMessageManager().getTokenMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%")) {
-                            int string = (int) ((amount * coinMulti) - amount);
+                            int string = (int) ((amount * coinMulti) - amount) + (int) boostEvent.getNewEarnings();
                             s = s.replace("%amount%", Integer.toString(string));
                         }
                         player.sendMessage(RGBParser.parse(s));

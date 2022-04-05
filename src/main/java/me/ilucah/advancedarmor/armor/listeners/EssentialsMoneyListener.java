@@ -43,15 +43,15 @@ public class EssentialsMoneyListener implements Listener {
                 double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                         player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                         player.getInventory().getBoots());
-                ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue(), BoostType.MONEY);
+                ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, moneyMulti, amountReceived.doubleValue(), BoostType.MONEY);
                 plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-                event.setNewBalance(event.getOldBalance().add(BigDecimal.valueOf((amountReceived.doubleValue() * moneyMulti))));
+                event.setNewBalance(event.getOldBalance().add(BigDecimal.valueOf((amountReceived.doubleValue() * moneyMulti) + boostEvent.getNewEarnings())));
                 if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
                     if (((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue()) != 0) {
                         plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                             if (s.contains("%amount%"))
-                                s = s.replace("%amount%", String.valueOf(decimalFormat.format((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue())));
+                                s = s.replace("%amount%", String.valueOf(decimalFormat.format((amountReceived.doubleValue() * moneyMulti) - amountReceived.doubleValue() + boostEvent.getNewEarnings())));
                             player.sendMessage(RGBParser.parse(s));
                         });
                     }

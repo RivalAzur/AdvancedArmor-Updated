@@ -1,5 +1,6 @@
 package me.ilucah.advancedarmor.commands;
 
+import me.ilucah.advancedarmor.handler.apimanager.event.ArmorGiveItemEvent;
 import me.ilucah.advancedarmor.utilities.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -119,7 +120,9 @@ public class ArmorCommand implements CommandExecutor {
                             @SuppressWarnings("deprecation")
                             OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
                             if (player.isOnline()) {
-                                player.getPlayer().getInventory().addItem(armor.getItemStackFromType(type));
+                                ArmorGiveItemEvent event = new ArmorGiveItemEvent(player.getPlayer(), armor, armor.getItemStackFromType(type));
+                                plugin.getServer().getPluginManager().callEvent(event);
+                                player.getPlayer().getInventory().addItem(event.getItem());
 
                                 Armor finalArmor = armor;
                                 messageUtils.getConfigMessage("Sent-Player-Armor-Message").iterator().forEachRemaining(s -> {

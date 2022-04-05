@@ -46,16 +46,16 @@ public class ClipAutoSellListener implements Listener {
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
         double amountToGive = (amountReceived * moneyMulti) - amountReceived;
-        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.MONEY);
+        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, moneyMulti, event.getPrice(), BoostType.MONEY);
         plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-        economy.depositPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()), amountToGive);
+        economy.depositPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()), amountToGive + boostEvent.getNewEarnings());
 
         if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
             if (amountToGive > 0) {
                 plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%"))
-                        s = s.replace("%amount%", String.valueOf((decimalFormat.format(amountToGive))));
+                        s = s.replace("%amount%", String.valueOf((decimalFormat.format(boostEvent.getNewEarnings() + amountToGive))));
                     player.sendMessage(RGBParser.parse(s));
                 });
             }

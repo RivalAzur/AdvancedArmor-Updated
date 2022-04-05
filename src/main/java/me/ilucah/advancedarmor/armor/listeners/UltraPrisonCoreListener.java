@@ -33,16 +33,16 @@ public class UltraPrisonCoreListener implements Listener {
         double moneyMulti = moneyUtils.calculatePercentage(player.getInventory().getHelmet(),
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
-        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (amount * moneyMulti) - amount, BoostType.MONEY);
+        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, moneyMulti, amount, BoostType.MONEY);
         plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-        event.setSellPrice(amount * moneyMulti);
+        event.setSellPrice(amount * moneyMulti + boostEvent.getNewEarnings());
 
         if (plugin.getHandler().getMessageManager().isMoneyIsEnabled()) {
             if (((amount * moneyMulti) - amount) != 0) {
                 plugin.getHandler().getMessageManager().getMoneyMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%"))
-                        s = s.replace("%amount%",(String.valueOf(decimalFormat.format((amount * moneyMulti) - amount))));
+                        s = s.replace("%amount%",(String.valueOf(decimalFormat.format((amount * moneyMulti) - amount + boostEvent.getNewEarnings()))));
                     player.sendMessage(RGBParser.parse(s));
                 });
             }

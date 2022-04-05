@@ -41,16 +41,16 @@ public class UPCGemListener implements Listener {
                     player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                     player.getInventory().getBoots());
             long amountToGive = (long) ((amount * gemMulti) - amount);
-            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, amountToGive, BoostType.GEM);
+            ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, gemMulti, amount, BoostType.GEM);
             plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-            UltraPrisonCore.getInstance().getGems().getApi().addGems(event.getPlayer(), amountToGive, ReceiveCause.GIVE);
+            UltraPrisonCore.getInstance().getGems().getApi().addGems(event.getPlayer(), amountToGive + (long) boostEvent.getNewEarnings(), ReceiveCause.GIVE);
 
             if (plugin.getHandler().getMessageManager().isGemIsEnabled()) {
                 if (amountToGive != 0) {
                     plugin.getHandler().getMessageManager().getGemMessage().iterator().forEachRemaining(s -> {
                         if (s.contains("%amount%")) {
-                            int string = (int) (amountToGive);
+                            int string = (int) (amountToGive) + (int) boostEvent.getNewEarnings();
                             s = s.replace("%amount%", Integer.toString(string));
                         }
                         player.sendMessage(RGBParser.parse(s));

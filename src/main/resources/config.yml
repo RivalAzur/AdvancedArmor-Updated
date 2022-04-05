@@ -11,6 +11,7 @@ Money-Armor:
     UltraPrisonCore-Enabled: false
     UltraBackpacks-Enabled: false
     ClipAutoSell-Enabled: false
+    DeluxeSellWands-Enabled: false
     InfiniteChestPro:
       Enabled: false
       HookType: 'Essentials'
@@ -23,6 +24,7 @@ Coin-Armor:
 Token-Armor:
   Economy-Dependencies:
     UltraPrisonCore-Enabled: false
+    DeluxeSellWands-Enabled: false
 Gem-Armor:
   Economy-Dependencies:
     UltraPrisonCore-Enabled: false

@@ -37,15 +37,15 @@ public class ExperienceHandling implements Listener {
         double expMulti = expUtils.calculatePercentage(player.getInventory().getHelmet(),
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
-        player.giveExp((int) ((event.getAmount() * expMulti) - event.getAmount()));
-        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, (event.getAmount() * expMulti) - event.getAmount(), BoostType.EXP);
+        ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, expMulti, event.getAmount(), BoostType.EXP);
         Bukkit.getPluginManager().callEvent(boostEvent);
+        player.giveExp((int) ((event.getAmount() * expMulti) - event.getAmount() + boostEvent.getNewEarnings()));
 
         if (main.getHandler().getMessageManager().isExpIsEnabled()) {
             if (((int) ((event.getAmount() * expMulti) - event.getAmount())) != 0) {
                 main.getHandler().getMessageManager().getExpMessage().iterator().forEachRemaining(s -> {
                     if (s.contains("%amount%"))
-                        s = s.replace("%amount%", String.valueOf(decimalFormat.format((int) ((event.getAmount() * expMulti) - event.getAmount()))));
+                        s = s.replace("%amount%", decimalFormat.format((int) ((event.getAmount() * expMulti) - event.getAmount() + boostEvent.getNewEarnings())));
                     player.sendMessage(RGBParser.parse(s));
                 });
             }
