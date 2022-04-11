@@ -123,11 +123,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.iridium</groupId>
-            <artifactId>IridiumColorAPI</artifactId>
-            <version>1.0.6</version>
-        </dependency>
-        <dependency>
             <groupId>net.essentialsx</groupId>
             <artifactId>EssentialsX</artifactId>
             <version>2.19.0</version>
@@ -199,6 +194,22 @@
             <version>1.0</version>
             <optional>true</optional>
             <systemPath>${project.basedir}/libs/UltraBackpacks.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>TMMobcoins</groupId>
+            <artifactId>TMMobcoins</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/TMMobcoins (3).jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>AquaCoins</groupId>
+            <artifactId>AquaCoins</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/AquaCoins.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.clip.autosell</groupId>

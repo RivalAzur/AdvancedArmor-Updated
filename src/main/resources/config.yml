@@ -21,6 +21,8 @@ Coin-Armor:
     KrakenMobCoins-Enabled: false
     TheOnlyMobCoins-Enabled: false
     QuadrexMobCoins-Enabled: false
+    TMMobcoins-Enabled: false
+    AquaCoins-Enabled: false
 Token-Armor:
   Economy-Dependencies:
     UltraPrisonCore-Enabled: false

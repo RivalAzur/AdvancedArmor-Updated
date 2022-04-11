@@ -45,6 +45,8 @@ public class AdvancedArmor extends JavaPlugin {
         registerUltraBackpacks();
         registerDeluxeSellWandsMoney();
         registerDeluxeSellWandsTokens();
+        registerTMMobcoins();
+        registerAquaCoins();
     }
 
     private void registerCommands() {
@@ -210,7 +212,29 @@ public class AdvancedArmor extends JavaPlugin {
                 getServer().getPluginManager().registerEvents(new DeluxSellWandsTokenListener(this), this);
                 getLogger().info("Successfully hooked into DeluxeSellwands Tokens");
             } else {
-                getLogger().warning("Failed to hook into DeluxeSellwands Tokens. Money component disabled.");
+                getLogger().warning("Failed to hook into DeluxeSellwands Tokens. Token component disabled.");
+            }
+        }
+    }
+
+    private void registerTMMobcoins() {
+        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.TMMobcoins-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("TMMobCoins") != null) {
+                getServer().getPluginManager().registerEvents(new TMMobcoinsListener(this), this);
+                getLogger().info("Successfully hooked into TMMobCoins");
+            } else {
+                getLogger().warning("Failed to hook into TMMobCoins. Coin component disabled.");
+            }
+        }
+    }
+
+    private void registerAquaCoins() {
+        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.AquaCoins-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("AquaCoins") != null) {
+                getServer().getPluginManager().registerEvents(new AquaCoinsListener(this), this);
+                getLogger().info("Successfully hooked into AquaCoins");
+            } else {
+                getLogger().warning("Failed to hook into AquaCoins. Coin component disabled.");
             }
         }
     }
