@@ -37,7 +37,7 @@ public class SuperMobCoinListener implements Listener {
             ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, coinMulti, amount, BoostType.COIN);
             plugin.getServer().getPluginManager().callEvent(boostEvent);
 
-            profile.setMobCoins(profile.getMobCoins() + amountToGive + (long) boostEvent.getNewEarnings());
+            profile.setMobCoins(profile.getMobCoins() + amountToGive + (int) boostEvent.getNewEarnings());
 
             if (plugin.getHandler().getMessageManager().isCoinIsEnabled()) {
                 if (amountToGive != 0) {

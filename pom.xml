@@ -6,7 +6,7 @@
 
     <groupId>me.ilucah</groupId>
     <artifactId>AdvancedArmor</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.3</version>
     <packaging>jar</packaging>
 
     <name>AdvancedArmor</name>
@@ -150,11 +150,11 @@
             <systemPath>${project.basedir}/libs/UltraPrisonCore.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>mobcoins-api</groupId>
-            <artifactId>mobcoins-api</artifactId>
+            <groupId>SuperMobCoins</groupId>
+            <artifactId>SuperMobCoins</artifactId>
             <scope>system</scope>
             <version>1.0</version>
-            <systemPath>${project.basedir}/libs/mobcoins-api.jar</systemPath>
+            <systemPath>${project.basedir}/libs/SuperMobCoins.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>KrakenMobcoins</groupId>

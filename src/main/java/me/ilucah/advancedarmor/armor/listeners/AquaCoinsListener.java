@@ -1,6 +1,6 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
-import me.aqua.aquacoins.listener.CoinReceiveEvent;
+import me.aqua.aquacoins.api.CoinReceiveEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.CoinPlayer;
@@ -28,7 +28,6 @@ public class AquaCoinsListener implements Listener {
         if (!coinPlayer.hasCustomArmorEquipped())
             return;
         long amount = event.getCoins();
-
         double coinMulti = coinUtils.calculatePercentage(player.getInventory().getHelmet(),
                 player.getInventory().getChestplate(), player.getInventory().getLeggings(),
                 player.getInventory().getBoots());
@@ -55,4 +54,5 @@ public class AquaCoinsListener implements Listener {
             player.sendMessage("AmountToGive" + amountToGive);
         }
     }
+
 }
