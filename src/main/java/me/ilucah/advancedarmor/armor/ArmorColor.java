@@ -1,5 +1,6 @@
 package me.ilucah.advancedarmor.armor;
 
+import me.ilucah.advancedarmor.AdvancedArmor;
 import org.bukkit.Color;
 import org.bukkit.plugin.Plugin;
 
@@ -10,10 +11,10 @@ public class ArmorColor {
     private int g;
     private int b;
 
-    public static ArmorColor valueOf(Plugin plugin, String path) {
-        int r = plugin.getConfig().getInt("ArmorColor." + path + ".R");
-        int g = plugin.getConfig().getInt("ArmorColor." + path + ".G");
-        int b = plugin.getConfig().getInt("ArmorColor." + path + ".B");
+    public static ArmorColor valueOf(AdvancedArmor plugin, String path) {
+        int r = plugin.getArmor().getInt("ArmorColor." + path + ".R");
+        int g = plugin.getArmor().getInt("ArmorColor." + path + ".G");
+        int b = plugin.getArmor().getInt("ArmorColor." + path + ".B");
         return new ArmorColor(path, r, g, b);
     }
 

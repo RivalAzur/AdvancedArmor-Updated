@@ -97,12 +97,8 @@ public class Handler {
             else {
                 String mName = plugin.getArmor().getString("Armor.Types." + type + ".Items.Helmet.Material").toUpperCase();
                 baseItemsMaterials[0] = XMaterial.valueOf(mName).parseItem();
-                System.out.println("Armor.Types." + type + ".Items.Helmet.Texture");
-                if (mName == "PLAYER_HEAD") {
+                if (mName.equalsIgnoreCase("PLAYER_HEAD") || mName.equalsIgnoreCase("SKULL"))
                     baseItemsMaterials[0] = SkullCreator.createSkullFromString(plugin.getArmor().getString("Armor.Types." + type + ".Items.Helmet.Texture"));
-                    System.out.println("Armor.Types." + type + ".Items.Helmet.Texture");
-                    System.out.println(plugin.getArmor().getString("Armor.Types." + type + ".Items.Helmet.Texture"));
-                }
             }
             if (plugin.getArmor().getString("Armor.Types." + type + ".Items.Chestplate.Material") == null)
                 baseItemsMaterials[1] = XMaterial.LEATHER_CHESTPLATE.parseItem();
