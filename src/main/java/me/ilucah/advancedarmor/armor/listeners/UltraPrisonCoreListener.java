@@ -5,7 +5,7 @@ import dev.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonSellAllEven
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
-import me.ilucah.advancedarmor.utilities.MoneyUtils;
+import me.ilucah.advancedarmor.utilities.boost.MoneyUtils;
 import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

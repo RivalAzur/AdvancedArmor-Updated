@@ -2,7 +2,7 @@ package me.ilucah.advancedarmor.handler.apimanager;
 
 import me.ilucah.advancedarmor.armor.ArmorType;
 import me.ilucah.advancedarmor.handler.Handler;
-import me.ilucah.advancedarmor.utilities.ExpUtils;
+import me.ilucah.advancedarmor.utilities.boost.ExpUtils;
 import me.ilucah.advancedarmor.utilities.NBTUtils;
 import me.ilucah.advancedarmor.utilities.Placeholders;
 import org.bukkit.Bukkit;

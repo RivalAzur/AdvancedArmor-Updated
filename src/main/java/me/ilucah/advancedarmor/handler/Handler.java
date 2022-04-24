@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import me.ilucah.advancedarmor.armor.Flag;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageManager;
+import me.ilucah.advancedarmor.utilities.xutils.SkullCreator;
+import me.ilucah.advancedarmor.utilities.xutils.XMaterial;
 import org.bukkit.enchantments.Enchantment;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
@@ -16,6 +19,7 @@ import me.ilucah.advancedarmor.armor.ArmorColor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.utilities.EnchantmentUtils;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 
 public class Handler {
 
@@ -23,7 +27,7 @@ public class Handler {
 
     private List<ArmorColor> armorColors;
     private List<Armor> armor;
-    private Map<String, Armor> armorMapped;
+    private ConcurrentHashMap<String, Armor> armorMapped;
     private String[] translations;
 
     private final DebugManager debugManager;
@@ -34,7 +38,7 @@ public class Handler {
 
         this.armorColors = new ArrayList<ArmorColor>();
         this.armor = new ArrayList<Armor>();
-        this.armorMapped = new HashMap<String, Armor>();
+        this.armorMapped = new ConcurrentHashMap<String, Armor>();
         this.translations = new String[4];
 
         this.debugManager = new DebugManager(plugin);
@@ -42,33 +46,33 @@ public class Handler {
     }
 
     public void initialiseColors() {
-        for (String color : plugin.getConfig().getConfigurationSection("ArmorColor").getKeys(false)) {
-            int r = plugin.getConfig().getInt("ArmorColor." + color + ".R");
-            int g = plugin.getConfig().getInt("ArmorColor." + color + ".G");
-            int b = plugin.getConfig().getInt("ArmorColor." + color + ".B");
+        for (String color : plugin.getArmor().getConfigurationSection("ArmorColor").getKeys(false)) {
+            int r = plugin.getArmor().getInt("ArmorColor." + color + ".R");
+            int g = plugin.getArmor().getInt("ArmorColor." + color + ".G");
+            int b = plugin.getArmor().getInt("ArmorColor." + color + ".B");
             armorColors.add(new ArmorColor(color, r, g, b));
         }
     }
 
     public void initialiseArmor() {
-        for (String type : plugin.getConfig().getConfigurationSection("Armor.Types").getKeys(false)) {
-            String name = plugin.getConfig().getString("Armor.Types." + type + ".Name");
+        for (String type : plugin.getArmor().getConfigurationSection("Armor.Types").getKeys(false)) {
+            String name = plugin.getArmor().getString("Armor.Types." + type + ".Name");
 
             BoostType boostType = BoostType
-                    .valueOf(plugin.getConfig().getString("Armor.Types." + type + ".Boost.Type"));
-            int bootsBoost = plugin.getConfig().getInt("Armor.Types." + type + ".Boost.Boots-Percentage");
-            int leggingsBoost = plugin.getConfig().getInt("Armor.Types." + type + ".Boost.Leggings-Percentage");
-            int chestplateBoost = plugin.getConfig().getInt("Armor.Types." + type + ".Boost.Chestplate-Percentage");
-            int helmetBoost = plugin.getConfig().getInt("Armor.Types." + type + ".Boost.Helmet-Percentage");
+                    .valueOf(plugin.getArmor().getString("Armor.Types." + type + ".Boost.Type"));
+            int bootsBoost = plugin.getArmor().getInt("Armor.Types." + type + ".Boost.Boots-Percentage");
+            int leggingsBoost = plugin.getArmor().getInt("Armor.Types." + type + ".Boost.Leggings-Percentage");
+            int chestplateBoost = plugin.getArmor().getInt("Armor.Types." + type + ".Boost.Chestplate-Percentage");
+            int helmetBoost = plugin.getArmor().getInt("Armor.Types." + type + ".Boost.Helmet-Percentage");
 
-            List<String> armorLore = plugin.getConfig().getStringList("Armor.Types." + type + ".Lore");
-            ArmorColor color = ArmorColor.valueOf(plugin, plugin.getConfig().getString("Armor.Types." + type + ".ArmorColor"));
+            List<String> armorLore = plugin.getArmor().getStringList("Armor.Types." + type + ".Lore");
+            ArmorColor color = ArmorColor.valueOf(plugin, plugin.getArmor().getString("Armor.Types." + type + ".ArmorColor"));
 
             Map<Enchantment, Integer> enchants = new HashMap<Enchantment, Integer>();
-            if (plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Enchants") != null) {
-                for (String enchant : plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Enchants").getKeys(false)) {
+            if (plugin.getArmor().getConfigurationSection("Armor.Types." + type + ".Enchants") != null) {
+                for (String enchant : plugin.getArmor().getConfigurationSection("Armor.Types." + type + ".Enchants").getKeys(false)) {
                     try {
-                        enchants.put(EnchantmentUtils.getEnchantment(enchant), plugin.getConfig().getInt("Armor.Types." + type + ".Enchants." + enchant));
+                        enchants.put(EnchantmentUtils.getEnchantment(enchant), plugin.getArmor().getInt("Armor.Types." + type + ".Enchants." + enchant));
                     } catch (NullPointerException exception) {
                         plugin.getLogger().warning("The enchantment: " + enchant + " failed to load for the armor type: " + type + ".");
                         plugin.getLogger().warning("This is a known issue, it may be a result of your server version.");
@@ -77,9 +81,9 @@ public class Handler {
             }
 
             List<Flag> itemFlags = new ArrayList<Flag>();
-            if (plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Flags") != null) {
-                for (String itemFlag : plugin.getConfig().getConfigurationSection("Armor.Types." + type + ".Flags").getKeys(false)) {
-                    if (plugin.getConfig().getBoolean("Armor.Types." + type + ".Flags." + itemFlag)) {
+            if (plugin.getArmor().getConfigurationSection("Armor.Types." + type + ".Flags") != null) {
+                for (String itemFlag : plugin.getArmor().getConfigurationSection("Armor.Types." + type + ".Flags").getKeys(false)) {
+                    if (plugin.getArmor().getBoolean("Armor.Types." + type + ".Flags." + itemFlag)) {
                         if (itemFlag.contains("Unbreakable"))
                             itemFlags.add(new Flag(null, true));
                         else
@@ -87,10 +91,42 @@ public class Handler {
                     }
                 }
             }
+            ItemStack[] baseItemsMaterials = new ItemStack[4];
+            if (plugin.getArmor().getString("Armor.Types." + type + ".Items.Helmet.Material") == null)
+                baseItemsMaterials[0] = XMaterial.LEATHER_HELMET.parseItem();
+            else {
+                String mName = plugin.getArmor().getString("Armor.Types." + type + ".Items.Helmet.Material").toUpperCase();
+                baseItemsMaterials[0] = XMaterial.valueOf(mName).parseItem();
+                System.out.println("Armor.Types." + type + ".Items.Helmet.Texture");
+                if (mName == "PLAYER_HEAD") {
+                    baseItemsMaterials[0] = SkullCreator.createSkullFromString(plugin.getArmor().getString("Armor.Types." + type + ".Items.Helmet.Texture"));
+                    System.out.println("Armor.Types." + type + ".Items.Helmet.Texture");
+                    System.out.println(plugin.getArmor().getString("Armor.Types." + type + ".Items.Helmet.Texture"));
+                }
+            }
+            if (plugin.getArmor().getString("Armor.Types." + type + ".Items.Chestplate.Material") == null)
+                baseItemsMaterials[1] = XMaterial.LEATHER_CHESTPLATE.parseItem();
+            else {
+                String mName = plugin.getArmor().getString("Armor.Types." + type + ".Items.Chestplate.Material").toUpperCase();
+                baseItemsMaterials[1] = XMaterial.valueOf(mName).parseItem();
+            }
+            if (plugin.getArmor().getString("Armor.Types." + type + ".Items.Leggings.Material") == null)
+                baseItemsMaterials[2] = XMaterial.LEATHER_LEGGINGS.parseItem();
+            else {
+                String mName = plugin.getArmor().getString("Armor.Types." + type + ".Items.Leggings.Material").toUpperCase();
+                baseItemsMaterials[2] = XMaterial.valueOf(mName).parseItem();
+            }
+            if (plugin.getArmor().getString("Armor.Types." + type + ".Items.Boots.Material") == null)
+                baseItemsMaterials[3] = XMaterial.LEATHER_BOOTS.parseItem();
+            else {
+                String mName = plugin.getArmor().getString("Armor.Types." + type + ".Items.Boots.Material").toUpperCase();
+                baseItemsMaterials[3] = XMaterial.valueOf(mName).parseItem();
+            }
             Armor a = new Armor(type, name, boostType, helmetBoost, chestplateBoost, leggingsBoost, bootsBoost, armorLore,
-                    color, enchants, itemFlags, translations);
+                    color, enchants, itemFlags, translations, baseItemsMaterials);
             armor.add(a);
             armorMapped.put(type, a);
+            plugin.getLogger().info("Loaded armor set: " + a.getName());
         }
     }
 
@@ -112,7 +148,7 @@ public class Handler {
     public void reloadCaches() {
         this.armorColors = new ArrayList<ArmorColor>();
         this.armor = new ArrayList<Armor>();
-        this.armorMapped = new HashMap<String, Armor>();
+        this.armorMapped = new ConcurrentHashMap<String, Armor>();
 
         initialiseColors();
         initialiseArmor();

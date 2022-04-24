@@ -3,7 +3,7 @@ package me.ilucah.advancedarmor.handler.apimanager;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.utilities.NBTUtils;
-import me.ilucah.advancedarmor.utilities.TokenUtils;
+import me.ilucah.advancedarmor.utilities.boost.TokenUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

@@ -2,7 +2,7 @@ package me.ilucah.advancedarmor.handler.apimanager;
 
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
-import me.ilucah.advancedarmor.utilities.CoinUtils;
+import me.ilucah.advancedarmor.utilities.boost.CoinUtils;
 import me.ilucah.advancedarmor.utilities.NBTUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

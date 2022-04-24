@@ -1,13 +1,12 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
-import dev.norska.dsw.api.DeluxeSellwandSellEvent;
 import dev.norska.dsw.api.DeluxeSellwandTokenReceiveEvent;
 import dev.norska.dsw.api.DeluxeSellwandsAPI;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.RGBParser;
-import me.ilucah.advancedarmor.utilities.TokenUtils;
+import me.ilucah.advancedarmor.utilities.boost.TokenUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -35,8 +34,6 @@ public class DeluxSellWandsTokenListener implements Listener {
                 player.getInventory().getBoots());
         ArmorBoostGiveEvent boostEvent = new ArmorBoostGiveEvent(player, moneyMulti, amountReceived, BoostType.TOKEN);
         plugin.getServer().getPluginManager().callEvent(boostEvent);
-
-        event.setTokens((int) (amountReceived * moneyMulti + boostEvent.getNewEarnings()));
         DeluxeSellwandsAPI.addPlayerTokens(player.getUniqueId(), (int) (((amountReceived * moneyMulti) - amountReceived) + boostEvent.getNewEarnings()));
 
         if (plugin.getHandler().getMessageManager().isTokenIsEnabled()) {

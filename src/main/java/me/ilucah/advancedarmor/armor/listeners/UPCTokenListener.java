@@ -8,7 +8,7 @@ import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.TokenPlayer;
 import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.RGBParser;
-import me.ilucah.advancedarmor.utilities.TokenUtils;
+import me.ilucah.advancedarmor.utilities.boost.TokenUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

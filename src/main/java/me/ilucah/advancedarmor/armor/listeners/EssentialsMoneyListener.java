@@ -1,16 +1,11 @@
 package me.ilucah.advancedarmor.armor.listeners;
 
-import com.earth2me.essentials.api.NoLoanPermittedException;
-import com.earth2me.essentials.api.UserDoesNotExistException;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
-import me.ilucah.advancedarmor.utilities.DebugManager;
-import me.ilucah.advancedarmor.utilities.MessageUtils;
-import me.ilucah.advancedarmor.utilities.MoneyUtils;
+import me.ilucah.advancedarmor.utilities.boost.MoneyUtils;
 import me.ilucah.advancedarmor.utilities.RGBParser;
-import net.ess3.api.MaxMoneyException;
 import net.ess3.api.events.UserBalanceUpdateEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

@@ -6,9 +6,11 @@ import java.util.Map;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.ilucah.advancedarmor.utilities.RGBParser;
+import me.ilucah.advancedarmor.utilities.xutils.XMaterial;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 public class Armor {
@@ -28,6 +30,7 @@ public class Armor {
     private ItemStack leggings;
     private ItemStack boots;
     private ArmorColor color;
+    private ItemStack[] armorBaseMaterialItems;
 
     private String[] translations;
 
@@ -35,7 +38,7 @@ public class Armor {
     private List<Flag> itemFlags;
 
     public Armor(String name, String displayName, BoostType boostType, int helmetBoost, int chestBoost, int legsBoost,
-                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants, List<Flag> itemFlags, String[] translations) {
+                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants, List<Flag> itemFlags, String[] translations, ItemStack[] baseArmorItems) {
         this.name = name;
         this.displayName = displayName;
         this.boostType = boostType;
@@ -51,6 +54,7 @@ public class Armor {
             this.armorLore.add(RGBParser.parse(string));
         }
 
+        this.armorBaseMaterialItems = baseArmorItems;
         this.translations = translations == null ? createTranslations() : translations;
         this.enchants = enchants;
         this.itemFlags = itemFlags;
@@ -62,19 +66,13 @@ public class Armor {
         initialiseBoots();
     }
 
-    @Deprecated
-    public Armor(String name, String displayName, BoostType boostType, int helmetBoost, int chestBoost, int legsBoost,
-                 int bootsBoost, List<String> armorLore, ArmorColor color, Map<Enchantment, Integer> enchants, List<Flag> itemFlags) {
-        this(name, displayName, boostType, helmetBoost, chestBoost, legsBoost, bootsBoost, armorLore, color, enchants, itemFlags, null);
-    }
-
     public void initialiseHelmet() {
-        ItemStack helmet = new ItemStack(Material.LEATHER_HELMET);
-        LeatherArmorMeta meta = (LeatherArmorMeta) helmet.getItemMeta();
-        this.displayName.replace("%armor_type%", translations[0]);
+        ItemStack helmet = armorBaseMaterialItems[0].clone();
+        ItemMeta meta = helmet.getItemMeta();
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[0])));
         meta.setLore(this.armorLore);
-        meta.setColor(color.getColor());
+        if (helmet.getItemMeta() instanceof LeatherArmorMeta)
+            ((LeatherArmorMeta) meta).setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
         helmet.setItemMeta(meta);
         helmet.addUnsafeEnchantments(enchants);
@@ -84,12 +82,12 @@ public class Armor {
     }
 
     public void initialiseChestplate() {
-        ItemStack chestplate = new ItemStack(Material.LEATHER_CHESTPLATE);
-        LeatherArmorMeta meta = (LeatherArmorMeta) chestplate.getItemMeta();
-        this.displayName.replace("%armor_type%", translations[1]);
+        ItemStack chestplate = armorBaseMaterialItems[1].clone();
+        ItemMeta meta = chestplate.getItemMeta();
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[1])));
         meta.setLore(this.armorLore);
-        meta.setColor(color.getColor());
+        if (chestplate.getItemMeta() instanceof LeatherArmorMeta)
+            ((LeatherArmorMeta) meta).setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
         chestplate.setItemMeta(meta);
         chestplate.addUnsafeEnchantments(enchants);
@@ -99,12 +97,13 @@ public class Armor {
     }
 
     public void initialiseLeggings() {
-        ItemStack leggings = new ItemStack(Material.LEATHER_LEGGINGS);
-        LeatherArmorMeta meta = (LeatherArmorMeta) leggings.getItemMeta();
+        ItemStack leggings = armorBaseMaterialItems[2].clone();
+        ItemMeta meta = leggings.getItemMeta();
         this.displayName.replace("%armor_type%", translations[2]);
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[2])));
         meta.setLore(this.armorLore);
-        meta.setColor(color.getColor());
+        if (leggings.getItemMeta() instanceof LeatherArmorMeta)
+            ((LeatherArmorMeta) meta).setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
         leggings.setItemMeta(meta);
         leggings.addUnsafeEnchantments(enchants);
@@ -114,12 +113,12 @@ public class Armor {
     }
 
     public void initialiseBoots() {
-        ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
-        LeatherArmorMeta meta = (LeatherArmorMeta) boots.getItemMeta();
-        this.displayName.replace("%armor_type%",  translations[3]);
+        ItemStack boots = armorBaseMaterialItems[3].clone();
+        ItemMeta meta = boots.getItemMeta();
         meta.setDisplayName(RGBParser.parse(this.displayName.replace("%armor_type%", translations[3])));
         meta.setLore(this.armorLore);
-        meta.setColor(color.getColor());
+        if (boots.getItemMeta() instanceof LeatherArmorMeta)
+            ((LeatherArmorMeta) meta).setColor(color.getColor());
         Flag.addItemFlags(itemFlags, meta);
         boots.setItemMeta(meta);
         boots.addUnsafeEnchantments(enchants);

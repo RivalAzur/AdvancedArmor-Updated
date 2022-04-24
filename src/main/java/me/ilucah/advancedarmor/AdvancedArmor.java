@@ -2,10 +2,11 @@ package me.ilucah.advancedarmor;
 
 import me.ilucah.advancedarmor.armor.listeners.*;
 import me.ilucah.advancedarmor.utilities.Placeholders;
-import me.ilucah.advancedarmor.utilities.config.ConfigManager;
+import me.ilucah.advancedarmor.config.ConfigManager;
 import me.ilucah.advancedarmor.utilities.ichest.HookType;
 import me.ilucah.advancedarmor.utilities.ichest.IChestHookManager;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.ilucah.advancedarmor.commands.ArmorCommand;
@@ -14,10 +15,12 @@ import me.ilucah.advancedarmor.handler.Handler;
 public class AdvancedArmor extends JavaPlugin {
 
     private Handler handler;
+    private ConfigManager configManager;
 
     @Override
     public void onEnable() {
-        new ConfigManager(this).load();
+        this.configManager = new ConfigManager(this);
+        configManager.load();
         this.handler = new Handler(this);
 
         registerEvents();
@@ -237,6 +240,19 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().warning("Failed to hook into AquaCoins. Coin component disabled.");
             }
         }
+    }
+
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    @Override
+    public FileConfiguration getConfig() {
+        return configManager.getConfig();
+    }
+
+    public FileConfiguration getArmor() {
+        return configManager.getArmor();
     }
 
     public Handler getHandler() {

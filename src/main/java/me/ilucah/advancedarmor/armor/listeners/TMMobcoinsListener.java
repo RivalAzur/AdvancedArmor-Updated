@@ -4,7 +4,7 @@ import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.apimanager.CoinPlayer;
 import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
-import me.ilucah.advancedarmor.utilities.CoinUtils;
+import me.ilucah.advancedarmor.utilities.boost.CoinUtils;
 import me.ilucah.advancedarmor.utilities.RGBParser;
 import net.devtm.tmmobcoins.API.MobCoinReceiveEvent;
 import org.bukkit.entity.Player;

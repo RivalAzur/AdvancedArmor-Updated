@@ -57,7 +57,7 @@ public class ArmorCommand implements CommandExecutor {
                                 p.sendMessage(s);
                             });
                             try {
-                                plugin.reloadConfig();
+                                plugin.getConfigManager().load();
                                 plugin.getHandler().reloadCaches();
                             } catch (Exception e) {
                                 messageUtils.getConfigMessage("Reload-Failed").iterator().forEachRemaining(s -> {
@@ -183,7 +183,7 @@ public class ArmorCommand implements CommandExecutor {
                         p.sendMessage(s);
                     });
                     try {
-                        plugin.reloadConfig();
+                        plugin.getConfigManager().load();
                         plugin.getHandler().initialiseArmor();
                         plugin.getHandler().initialiseColors();
                     } catch (Exception e) {
