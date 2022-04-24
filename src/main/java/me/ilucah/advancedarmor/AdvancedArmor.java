@@ -50,6 +50,7 @@ public class AdvancedArmor extends JavaPlugin {
         registerDeluxeSellWandsTokens();
         registerTMMobcoins();
         registerAquaCoins();
+        registerScyther();
     }
 
     private void registerCommands() {
