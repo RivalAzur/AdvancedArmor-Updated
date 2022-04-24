@@ -220,6 +220,17 @@ public class AdvancedArmor extends JavaPlugin {
         }
     }
 
+    private void registerScyther() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.Scyther-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("Scyther") != null) {
+                getServer().getPluginManager().registerEvents(new ScytherSellListener(this), this);
+                getLogger().info("Successfully hooked into Scyther Tokens");
+            } else {
+                getLogger().warning("Failed to hook into Scyther Tokens. Money component disabled.");
+            }
+        }
+    }
+
     private void registerTMMobcoins() {
         if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.TMMobcoins-Enabled")) {
             if (getServer().getPluginManager().getPlugin("TMMobCoins") != null) {

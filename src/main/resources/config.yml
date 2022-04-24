@@ -12,6 +12,7 @@ Money-Armor:
     UltraBackpacks-Enabled: false
     ClipAutoSell-Enabled: false
     DeluxeSellWands-Enabled: false
+    Scyther-Enabled: false
     InfiniteChestPro:
       Enabled: false
       HookType: 'Essentials'

@@ -239,5 +239,11 @@
             <version>1.5.25</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.N0RSKA</groupId>
+            <artifactId>ScytherAPI</artifactId>
+            <version>55a</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>
