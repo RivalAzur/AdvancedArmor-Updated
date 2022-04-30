@@ -1,6 +1,7 @@
 package me.ilucah.advancedarmor;
 
 import me.ilucah.advancedarmor.armor.listeners.*;
+import me.ilucah.advancedarmor.listener.SkullPlaceListener;
 import me.ilucah.advancedarmor.utilities.Placeholders;
 import me.ilucah.advancedarmor.config.ConfigManager;
 import me.ilucah.advancedarmor.utilities.ichest.HookType;
@@ -36,6 +37,7 @@ public class AdvancedArmor extends JavaPlugin {
 
     private void registerEvents() {
         getServer().getPluginManager().registerEvents(new ExperienceHandling(handler, this), this);
+        getServer().getPluginManager().registerEvents(new SkullPlaceListener(), this);
         registerEssentials();
         registerShopGUIPlus();
         registerInfiniteChestPro();
