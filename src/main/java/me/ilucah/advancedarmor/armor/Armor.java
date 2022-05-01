@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
+import me.ilucah.advancedarmor.armor.listeners.FlagObjective;
 import me.ilucah.advancedarmor.utilities.RGBParser;
 import me.ilucah.advancedarmor.utilities.xutils.XMaterial;
 import org.bukkit.Material;
@@ -73,11 +74,14 @@ public class Armor {
         meta.setLore(this.armorLore);
         if (helmet.getItemMeta() instanceof LeatherArmorMeta)
             ((LeatherArmorMeta) meta).setColor(color.getColor());
-        Flag.addItemFlags(itemFlags, meta);
+        FlagObjective flagObjective = new FlagObjective(itemFlags);
+        flagObjective.applyFlags(meta);
         helmet.setItemMeta(meta);
         helmet.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(helmet);
         nbtItem.setString("CustomArmor", this.name);
+        if (flagObjective.isApplyUnbreaking())
+            nbtItem.setInteger("Unbreakable", 1);
         this.helmet = nbtItem.getItem();
     }
 
@@ -88,11 +92,14 @@ public class Armor {
         meta.setLore(this.armorLore);
         if (chestplate.getItemMeta() instanceof LeatherArmorMeta)
             ((LeatherArmorMeta) meta).setColor(color.getColor());
-        Flag.addItemFlags(itemFlags, meta);
+        FlagObjective flagObjective = new FlagObjective(itemFlags);
+        flagObjective.applyFlags(meta);
         chestplate.setItemMeta(meta);
         chestplate.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(chestplate);
         nbtItem.setString("CustomArmor", this.name);
+        if (flagObjective.isApplyUnbreaking())
+            nbtItem.setInteger("Unbreakable", 1);
         this.chestplate = nbtItem.getItem();
     }
 
@@ -104,11 +111,14 @@ public class Armor {
         meta.setLore(this.armorLore);
         if (leggings.getItemMeta() instanceof LeatherArmorMeta)
             ((LeatherArmorMeta) meta).setColor(color.getColor());
-        Flag.addItemFlags(itemFlags, meta);
+        FlagObjective flagObjective = new FlagObjective(itemFlags);
+        flagObjective.applyFlags(meta);
         leggings.setItemMeta(meta);
         leggings.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(leggings);
         nbtItem.setString("CustomArmor", this.name);
+        if (flagObjective.isApplyUnbreaking())
+            nbtItem.setInteger("Unbreakable", 1);
         this.leggings = nbtItem.getItem();
     }
 
@@ -119,11 +129,14 @@ public class Armor {
         meta.setLore(this.armorLore);
         if (boots.getItemMeta() instanceof LeatherArmorMeta)
             ((LeatherArmorMeta) meta).setColor(color.getColor());
-        Flag.addItemFlags(itemFlags, meta);
+        FlagObjective flagObjective = new FlagObjective(itemFlags);
+        flagObjective.applyFlags(meta);
         boots.setItemMeta(meta);
         boots.addUnsafeEnchantments(enchants);
         NBTItem nbtItem = new NBTItem(boots);
         nbtItem.setString("CustomArmor", this.name);
+        if (flagObjective.isApplyUnbreaking())
+            nbtItem.setInteger("Unbreakable", 1);
         this.boots = nbtItem.getItem();
     }
 

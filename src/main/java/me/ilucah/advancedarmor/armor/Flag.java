@@ -1,24 +1,29 @@
 package me.ilucah.advancedarmor.armor;
 
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
 public class Flag {
 
-    public static void addItemFlags(List<Flag> itemFlags, ItemMeta meta) {
-        itemFlags.iterator().forEachRemaining(itemFlag -> {
+    public static boolean addItemFlags(List<Flag> itemFlags, ItemMeta meta) {
+        boolean applyUnbreaking = false;
+        for (Flag itemFlag : itemFlags) {
             if (itemFlag.isUnbreakable()) {
-                try {
-                    meta.setUnbreakable(true);
-                } catch (NoSuchMethodError exc) {
-
-                }
+                applyUnbreaking = true;
             } else {
                 meta.addItemFlags(itemFlag.getItemFlag());
             }
-        });
+        }
+        return applyUnbreaking;
+    }
+
+    public static void setUnbreakable(ItemStack item) {
+        NBTItem nbtItem = new NBTItem(item, true);
+        nbtItem.setInteger("Unbreakable", 1);
     }
 
     private boolean isUnbreakable;
