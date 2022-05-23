@@ -14,6 +14,7 @@ public class ArmorBoostGiveEvent extends Event {
     private final BoostType boostType;
 
     public ArmorBoostGiveEvent(Player player, double boost, double amountGiven, BoostType boostType) {
+        super(true);
         this.player = player;
         this.amountGiven = amountGiven;
         this.boostType = boostType;

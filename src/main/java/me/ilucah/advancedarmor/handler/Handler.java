@@ -36,9 +36,9 @@ public class Handler {
     public Handler(AdvancedArmor plugin) {
         this.plugin = plugin;
 
-        this.armorColors = new ArrayList<ArmorColor>();
-        this.armor = new ArrayList<Armor>();
-        this.armorMapped = new ConcurrentHashMap<String, Armor>();
+        this.armorColors = new ArrayList<>();
+        this.armor = new ArrayList<>();
+        this.armorMapped = new ConcurrentHashMap<>();
         this.translations = new String[4];
 
         this.debugManager = new DebugManager(plugin);
@@ -58,8 +58,24 @@ public class Handler {
         for (String type : plugin.getArmor().getConfigurationSection("Armor.Types").getKeys(false)) {
             String name = plugin.getArmor().getString("Armor.Types." + type + ".Name");
 
-            BoostType boostType = BoostType
-                    .valueOf(plugin.getArmor().getString("Armor.Types." + type + ".Boost.Type"));
+            String boostHandle = plugin.getArmor().getString("Armor.Types." + type + ".Boost.Type");
+            BoostType boostType;
+            if (boostHandle.equalsIgnoreCase("coins") || boostHandle.equalsIgnoreCase("mobcoins") || boostHandle.equalsIgnoreCase("mobcoin") || boostHandle.equalsIgnoreCase("coin"))
+                boostType = BoostType.COIN;
+            else if (boostHandle.equalsIgnoreCase("token") || boostHandle.equalsIgnoreCase("tokens"))
+                boostType = BoostType.TOKEN;
+            else if (boostHandle.equalsIgnoreCase("gem") || boostHandle.equalsIgnoreCase("gems"))
+                boostType = BoostType.GEM;
+            else if (boostHandle.equalsIgnoreCase("money"))
+                boostType = BoostType.MONEY;
+            else if (boostHandle.equalsIgnoreCase("exp") || boostHandle.equalsIgnoreCase("experience") || boostHandle.equalsIgnoreCase("xp"))
+                boostType = BoostType.EXP;
+            else {
+                plugin.getLogger().warning("Failed to load armor set: " + type + ", because " + boostHandle + " is not a known boost type!");
+                continue;
+            }
+            //BoostType boostType = BoostType
+            //        .valueOf(plugin.getArmor().getString("Armor.Types." + type + ".Boost.Type"));
             int bootsBoost = plugin.getArmor().getInt("Armor.Types." + type + ".Boost.Boots-Percentage");
             int leggingsBoost = plugin.getArmor().getInt("Armor.Types." + type + ".Boost.Leggings-Percentage");
             int chestplateBoost = plugin.getArmor().getInt("Armor.Types." + type + ".Boost.Chestplate-Percentage");

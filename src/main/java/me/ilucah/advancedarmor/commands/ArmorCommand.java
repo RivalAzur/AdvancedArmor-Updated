@@ -31,16 +31,12 @@ public class ArmorCommand implements CommandExecutor {
             Player p = (Player) sender;
             if (p.hasPermission("advancedarmor.command")) {
                 if (args.length < 1) {
-                    messageUtils.getConfigMessage("Command-Info").iterator().forEachRemaining(s -> {
-                        p.sendMessage(s);
-                    });
+                    messageUtils.getConfigMessage("Command-Info").iterator().forEachRemaining(s -> p.sendMessage(s));
                     return true;
                 } else if (args.length == 1) {
                     if (args[0].equalsIgnoreCase("types")) {
                         if (p.hasPermission("advancedarmor.command.types")) {
-                            messageUtils.getConfigMessage("Armor-Types-Message").iterator().forEachRemaining(s -> {
-                                p.sendMessage(s);
-                            });
+                            messageUtils.getConfigMessage("Armor-Types-Message").iterator().forEachRemaining(s -> p.sendMessage(s));
                             for (Armor armorSet : plugin.getHandler().getArmor()) {
                                 p.sendMessage(ChatColor.AQUA + armorSet.getName());
                             }
@@ -61,9 +57,9 @@ public class ArmorCommand implements CommandExecutor {
                                 plugin.getHandler().reloadCaches();
                             } catch (Exception e) {
                                 messageUtils.getConfigMessage("Reload-Failed").iterator().forEachRemaining(s -> {
-                                    s.replace("%issue-printout%", e.getMessage());
-                                    p.sendMessage(s);
+                                    p.sendMessage(s.replace("%issue-printout%", e.getMessage()));
                                 });
+                                e.printStackTrace();
                             }
                             return true;
                         } else {
@@ -85,7 +81,7 @@ public class ArmorCommand implements CommandExecutor {
                     return true;
                 } else if (args.length == 4) {
                     if (p.hasPermission("advancedarmor.command.give")) {
-                        ArmorType type = ArmorType.HELMET;
+                        ArmorType type;
                         if (args[3].equalsIgnoreCase("chestplate")) {
                             type = ArmorType.CHESTPLATE;
                         } else if (args[3].equalsIgnoreCase("leggings")) {
