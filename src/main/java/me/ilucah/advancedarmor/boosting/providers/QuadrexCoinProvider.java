@@ -3,7 +3,7 @@ package me.ilucah.advancedarmor.boosting.providers;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.boosting.BoostProvider;
-import me.ilucah.advancedarmor.handler.apimanager.event.ArmorBoostGiveEvent;
+import me.ilucah.advancedarmor.api.events.ArmorBoostGiveEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

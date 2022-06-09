@@ -1,4 +1,4 @@
-package me.ilucah.advancedarmor.handler.apimanager.event;
+package me.ilucah.advancedarmor.api.events;
 
 import me.ilucah.advancedarmor.armor.Armor;
 import org.bukkit.entity.Player;

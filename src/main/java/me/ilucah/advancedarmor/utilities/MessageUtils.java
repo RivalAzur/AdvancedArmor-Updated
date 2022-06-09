@@ -1,7 +1,6 @@
 package me.ilucah.advancedarmor.utilities;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
-import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +15,7 @@ public class MessageUtils {
 
     public List<String> getConfigMessage(String path) {
         List<String> message = new ArrayList<>();
-        main.getConfigManager().getMessages().getStringList("Messages." + path).iterator().forEachRemaining(str -> {
-            message.add(ChatColor.translateAlternateColorCodes('&', str));
-        });
+        main.getConfigManager().getMessages().getStringList("Messages." + path).forEach(str -> message.add(RGBParser.parse(str)));
         return message;
     }
 
