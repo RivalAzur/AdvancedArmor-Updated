@@ -1,0 +1,60 @@
+boost-messages:
+  exp:
+    enabled: false
+    message:
+      - '&a&l+ %amount% Experience &7(EXP Armor)'
+  money:
+    enabled: true
+    message:
+      - '&a&l+ $%amount% &7(Money Armor)'
+  coins:
+    enabled: true
+    message:
+      - '&a&l+ %amount% &7(Coin Armor)'
+  tokens:
+    enabled: true
+    message:
+      - '&e&l+ %amount% &7(Tokens Armor)'
+  gems:
+    enabled: true
+    message:
+      - '&d&l+ %amount% &7(Gem Armor)'
+  essence:
+    enabled: true
+    Mmessage:
+      - '&9&l+ %amount% &7(Essence Armor)'
+
+Messages:
+  Console-Name: 'Server'
+  No-Permission:
+    - '&cYou do not have permission to execute this command.'
+  Armor-Correct-Usage:
+    - '&cCorrect Usage:'
+    - '&c* &7/armor give <name> <armor_type> <piece> - Give someone an armor piece.'
+    - '&c* &7/armor types - List the armor types.'
+    - '&c* &7/armor reload - Reloads the config.'
+  Command-Info:
+    - '&b&l -= &7&l&nAdvanced Armor Commands: &b&l=-'
+    - '&b&l* &7/armor give <name> <armor_type> <piece> - Give someone an armor piece.'
+    - '&b&l* &7/armor types - List the armor types.'
+    - '&b&l* &7/armor reload - Reloads the config.'
+  Armor-Types-Message:
+    - '&b&lHere are the armor types:'
+  Incorrect-Type-Of-Piece:
+    - '&cPlease enter a correct piece:'
+    - '&7&oHELMET, CHESTPLATE, LEGGINGS, BOOTS'
+  Incorrect-Armor-Type:
+    - '&cPlease enter a correct armor type:'
+  Player-Not-Online:
+    - '&c{username} is not online.'
+  Player-Does-Not-Exist:
+    - '&c{username} does not exist.'
+  Sent-Player-Armor-Message:
+    - '&bYou sent {username} an {armor_type} {armor_piece}.'
+  Received-Armor-Message:
+    - '&bYou received an {armor_type} {armor_piece} from {username}'
+  Reload-Failed:
+    - '&cThere was an issue when reloading the config'
+    - '%issue-printout%'
+  Reload-Config:
+    - '&aYou Reloaded The Config'

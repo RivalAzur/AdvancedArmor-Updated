@@ -7,7 +7,7 @@ public class ConfigManager {
 
     private final AdvancedArmor plugin;
 
-    private FileConfiguration config, armor;
+    private FileConfiguration config, armor, messages;
 
     public ConfigManager(AdvancedArmor plugin) {
         this.plugin = plugin;
@@ -16,6 +16,7 @@ public class ConfigManager {
     public void load() {
         config = new YamlLoader("config", plugin).load(true);
         armor = new YamlLoader("armor", plugin).load(true);
+        messages = new YamlLoader("messages", plugin).load(true);
     }
 
     public FileConfiguration getArmor() {
@@ -24,5 +25,9 @@ public class ConfigManager {
 
     public FileConfiguration getConfig() {
         return config;
+    }
+
+    public FileConfiguration getMessages() {
+        return messages;
     }
 }

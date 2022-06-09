@@ -1,11 +1,24 @@
 package me.ilucah.advancedarmor.handler.apimanager.event;
 
 import me.ilucah.advancedarmor.armor.BoostType;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.plugin.Plugin;
 
+/**
+ * Explicit NOT-ASYNC
+ */
 public class ArmorBoostGiveEvent extends Event {
+
+    public static void callSync(Plugin plugin, Player player, double boost, double amountGiven, BoostType boostType) {
+        Bukkit.getScheduler().runTask(plugin, () -> Bukkit.getPluginManager().callEvent(new ArmorBoostGiveEvent(player, boost, amountGiven, boostType)));
+    }
+
+    public static void callSync(Plugin plugin, ArmorBoostGiveEvent event) {
+        Bukkit.getScheduler().runTask(plugin, () -> Bukkit.getPluginManager().callEvent(event));
+    }
 
     private static HandlerList HANDLERS = new HandlerList();
 
@@ -14,7 +27,7 @@ public class ArmorBoostGiveEvent extends Event {
     private final BoostType boostType;
 
     public ArmorBoostGiveEvent(Player player, double boost, double amountGiven, BoostType boostType) {
-        super(true);
+        super(false);
         this.player = player;
         this.amountGiven = amountGiven;
         this.boostType = boostType;

@@ -5,10 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import me.ilucah.advancedarmor.armor.listeners.FlagObjective;
 import me.ilucah.advancedarmor.utilities.RGBParser;
-import me.ilucah.advancedarmor.utilities.xutils.XMaterial;
-import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;

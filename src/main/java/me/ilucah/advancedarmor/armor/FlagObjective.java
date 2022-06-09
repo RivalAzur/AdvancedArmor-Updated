@@ -1,6 +1,5 @@
-package me.ilucah.advancedarmor.armor.listeners;
+package me.ilucah.advancedarmor.armor;
 
-import me.ilucah.advancedarmor.armor.Flag;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;

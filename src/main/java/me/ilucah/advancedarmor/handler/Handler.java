@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import me.ilucah.advancedarmor.armor.Flag;
+import me.ilucah.advancedarmor.boosting.BoostService;
+import me.ilucah.advancedarmor.boosting.TypeProvider;
 import me.ilucah.advancedarmor.utilities.DebugManager;
 import me.ilucah.advancedarmor.utilities.MessageManager;
 import me.ilucah.advancedarmor.utilities.xutils.SkullCreator;
@@ -18,6 +20,7 @@ import me.ilucah.advancedarmor.armor.Armor;
 import me.ilucah.advancedarmor.armor.ArmorColor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.utilities.EnchantmentUtils;
+import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
@@ -28,10 +31,13 @@ public class Handler {
     private List<ArmorColor> armorColors;
     private List<Armor> armor;
     private ConcurrentHashMap<String, Armor> armorMapped;
+    private ConcurrentHashMap<Class<? extends Event>, TypeProvider> providers = new ConcurrentHashMap<>();
     private String[] translations;
 
     private final DebugManager debugManager;
     private final MessageManager messageManager;
+
+    private final BoostService boostService;
 
     public Handler(AdvancedArmor plugin) {
         this.plugin = plugin;
@@ -43,6 +49,7 @@ public class Handler {
 
         this.debugManager = new DebugManager(plugin);
         this.messageManager = new MessageManager(plugin);
+        this.boostService = new BoostService(this);
     }
 
     public void initialiseColors() {
@@ -71,8 +78,12 @@ public class Handler {
             else if (boostHandle.equalsIgnoreCase("exp") || boostHandle.equalsIgnoreCase("experience") || boostHandle.equalsIgnoreCase("xp"))
                 boostType = BoostType.EXP;
             else {
-                plugin.getLogger().warning("Failed to load armor set: " + type + ", because " + boostHandle + " is not a known boost type!");
-                continue;
+                try {
+                    boostType = BoostType.valueOf(boostHandle.toUpperCase());
+                } catch (Exception e) {
+                    plugin.getLogger().warning("Failed to load armor set: " + type + ", because " + boostHandle + " is not a known boost type!");
+                    continue;
+                }
             }
             //BoostType boostType = BoostType
             //        .valueOf(plugin.getArmor().getString("Armor.Types." + type + ".Boost.Type"));
@@ -170,6 +181,11 @@ public class Handler {
         return this.armorColors;
     }
 
+    public void addArmor(Armor armor) {
+        this.armor.add(armor);
+        this.armorMapped.put(armor.getName(), armor);
+    }
+
     public List<Armor> getArmor() {
         return this.armor;
     }
@@ -188,5 +204,13 @@ public class Handler {
 
     public MessageManager getMessageManager() {
         return messageManager;
+    }
+
+    public BoostService getBoostService() {
+        return boostService;
+    }
+
+    public ConcurrentHashMap<Class<? extends Event>, TypeProvider> getProviders() {
+        return providers;
     }
 }

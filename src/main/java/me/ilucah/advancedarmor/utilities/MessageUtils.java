@@ -16,7 +16,7 @@ public class MessageUtils {
 
     public List<String> getConfigMessage(String path) {
         List<String> message = new ArrayList<>();
-        main.getConfig().getStringList("Messages." + path).iterator().forEachRemaining(str -> {
+        main.getConfigManager().getMessages().getStringList("Messages." + path).iterator().forEachRemaining(str -> {
             message.add(ChatColor.translateAlternateColorCodes('&', str));
         });
         return message;

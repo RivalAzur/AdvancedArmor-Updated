@@ -12,7 +12,7 @@ public class NBTUtils {
         this.handler = handler;
     }
 
-    public boolean hasArmorNBTTag(ItemStack item) {
+    public static boolean hasArmorNBTTag(ItemStack item) {
         if (item == null)
             return false;
         NBTItem nbtItem = new NBTItem(item);
@@ -21,7 +21,7 @@ public class NBTUtils {
         return false;
     }
 
-    public String getArmorName(ItemStack item) {
+    public static String getArmorName(ItemStack item) {
         return new NBTItem(item).getString("CustomArmor");
     }
 }

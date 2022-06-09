@@ -6,7 +6,7 @@
 
     <groupId>me.ilucah</groupId>
     <artifactId>AdvancedArmor</artifactId>
-    <version>1.5.2</version>
+    <version>1.5.1</version>
     <packaging>jar</packaging>
 
     <name>AdvancedArmor</name>
@@ -50,7 +50,7 @@
                             <exclude>io.lumine.xikage.mythicmobs.mobs.MythicMob</exclude>
                         </excludes>
                     </artifactSet>
-                    <outputFile>C:\Users\17hautrivel\Desktop\PluginOutput\server\plugins\AdvancedArmor.jar</outputFile>
+                    <outputFile>C:\Users\17hautrivel\Desktop\PluginOutput\1.8.8\plugins\AdvancedArmor.jar</outputFile>
                     <relocations>
                         <relocation>
                             <pattern>de.tr7zw.changeme.nbtapi</pattern>
@@ -214,6 +214,30 @@
             <version>1.0</version>
             <optional>true</optional>
             <systemPath>${project.basedir}/libs/AquaCoins.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>RivalHarvesterHoesAPI</groupId>
+            <artifactId>RivalHarvesterHoesAPI</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/RivalHarvesterHoesAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>RivalFishingRodsAPI</groupId>
+            <artifactId>RivalFishingRodsAPI</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/RivalFishingRodsAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>RivalMobSwordsAPI</groupId>
+            <artifactId>RivalMobSwordsAPI</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/RivalMobSwordsAPI.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>me.clip.autosell</groupId>
