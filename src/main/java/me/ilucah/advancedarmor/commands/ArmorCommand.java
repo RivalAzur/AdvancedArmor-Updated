@@ -1,7 +1,7 @@
 package me.ilucah.advancedarmor.commands;
 
 import me.ilucah.advancedarmor.api.events.ArmorGiveItemEvent;
-import me.ilucah.advancedarmor.utilities.MessageUtils;
+import me.ilucah.advancedarmor.utilities.msg.MessageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;

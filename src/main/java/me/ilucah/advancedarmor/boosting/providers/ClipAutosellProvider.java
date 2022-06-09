@@ -4,7 +4,7 @@ import me.clip.autosell.events.AutoSellEvent;
 import me.clip.autosell.events.SellAllEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.boosting.BiBoostProvider;
+import me.ilucah.advancedarmor.boosting.model.BiBoostProvider;
 import me.ilucah.advancedarmor.api.events.ArmorBoostGiveEvent;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.entity.Player;

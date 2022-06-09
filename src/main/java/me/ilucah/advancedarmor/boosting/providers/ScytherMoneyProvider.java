@@ -3,7 +3,7 @@ package me.ilucah.advancedarmor.boosting.providers;
 import dev.norska.scyther.api.ScytherAutosellEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.boosting.BiBoostProvider;
+import me.ilucah.advancedarmor.boosting.model.BiBoostProvider;
 import me.ilucah.advancedarmor.api.events.ArmorBoostGiveEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

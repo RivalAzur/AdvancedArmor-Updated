@@ -4,7 +4,7 @@ import dev.drawethree.ultraprisoncore.api.enums.ReceiveCause;
 import dev.drawethree.ultraprisoncore.tokens.api.events.PlayerTokensReceiveEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.boosting.BoostProvider;
+import me.ilucah.advancedarmor.boosting.model.BoostProvider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 

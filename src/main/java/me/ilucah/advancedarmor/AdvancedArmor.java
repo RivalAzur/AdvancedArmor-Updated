@@ -4,7 +4,7 @@ import me.ilucah.advancedarmor.api.AdvancedArmorAPI;
 import me.ilucah.advancedarmor.armor.listeners.*;
 import me.ilucah.advancedarmor.boosting.providers.*;
 import me.ilucah.advancedarmor.listener.SkullPlaceListener;
-import me.ilucah.advancedarmor.utilities.Placeholders;
+import me.ilucah.advancedarmor.placeholders.Placeholders;
 import me.ilucah.advancedarmor.config.ConfigManager;
 import me.ilucah.advancedarmor.utilities.ichest.HookType;
 import me.ilucah.advancedarmor.utilities.ichest.IChestHookManager;

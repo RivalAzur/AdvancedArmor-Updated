@@ -1,4 +1,4 @@
-package me.ilucah.advancedarmor.utilities;
+package me.ilucah.advancedarmor.utilities.nbt;
 
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import me.ilucah.advancedarmor.handler.Handler;

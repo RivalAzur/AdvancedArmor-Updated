@@ -2,7 +2,7 @@ package me.ilucah.advancedarmor.boosting.providers;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.boosting.BoostProvider;
+import me.ilucah.advancedarmor.boosting.model.BoostProvider;
 import me.swanis.mobcoins.events.MobCoinsReceiveEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

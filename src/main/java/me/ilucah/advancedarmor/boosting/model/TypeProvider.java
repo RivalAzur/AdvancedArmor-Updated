@@ -1,4 +1,4 @@
-package me.ilucah.advancedarmor.boosting;
+package me.ilucah.advancedarmor.boosting.model;
 
 import org.bukkit.event.Event;
 

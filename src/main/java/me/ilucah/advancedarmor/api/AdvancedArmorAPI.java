@@ -2,8 +2,8 @@ package me.ilucah.advancedarmor.api;
 
 import me.ilucah.advancedarmor.armor.Armor;
 import me.ilucah.advancedarmor.armor.ArmorColor;
-import me.ilucah.advancedarmor.boosting.BoostProvider;
-import me.ilucah.advancedarmor.boosting.TypeProvider;
+import me.ilucah.advancedarmor.boosting.model.BoostProvider;
+import me.ilucah.advancedarmor.boosting.model.TypeProvider;
 import me.ilucah.advancedarmor.handler.Handler;
 import org.bukkit.event.Event;
 

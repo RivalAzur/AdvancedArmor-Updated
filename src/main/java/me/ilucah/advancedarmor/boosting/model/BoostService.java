@@ -1,9 +1,9 @@
-package me.ilucah.advancedarmor.boosting;
+package me.ilucah.advancedarmor.boosting.model;
 
 import me.ilucah.advancedarmor.armor.Armor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
-import me.ilucah.advancedarmor.utilities.NBTUtils;
+import me.ilucah.advancedarmor.utilities.nbt.NBTUtils;
 import org.bukkit.entity.Player;
 
 public class BoostService {

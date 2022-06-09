@@ -1,8 +1,9 @@
-package me.ilucah.advancedarmor.utilities;
+package me.ilucah.advancedarmor.utilities.msg;
 
 import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 

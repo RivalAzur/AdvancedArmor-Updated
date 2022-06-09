@@ -1,4 +1,4 @@
-package me.ilucah.advancedarmor.boosting;
+package me.ilucah.advancedarmor.boosting.model;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
@@ -8,18 +8,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 
-public abstract class BiBoostProvider<T extends Event, V extends Event> implements Listener, TypeProvider<T> {
+public abstract class TriBoostProvider<T extends Event, V extends Event, K extends Event> implements Listener, TypeProvider<T> {
 
     protected final BoostType type;
     protected final AdvancedArmor instance;
     private boolean async;
 
-    public BiBoostProvider(AdvancedArmor instance, BoostType type) {
+    public TriBoostProvider(AdvancedArmor instance, BoostType type) {
         this.instance = instance;
         this.type = type;
     }
 
-    public BiBoostProvider(AdvancedArmor instance, BoostType type, boolean async) {
+    public TriBoostProvider(AdvancedArmor instance, BoostType type, boolean async) {
         this(instance, type);
         this.async = async;
     }
@@ -82,5 +82,12 @@ public abstract class BiBoostProvider<T extends Event, V extends Event> implemen
      * This method must include the EventHandler annotation.
      */
     public abstract void onSellV(V event);
+
+    /**
+     * @implNote <code>@EventHandler(priority = EventPriority.LOWEST)</code>
+     * @apiNote
+     * This method must include the EventHandler annotation.
+     */
+    public abstract void onSellK(K event);
 
 }

@@ -1,8 +1,9 @@
-package me.ilucah.advancedarmor.utilities;
+package me.ilucah.advancedarmor.placeholders;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 

@@ -4,7 +4,7 @@ import dev.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonAutoSellEve
 import dev.drawethree.ultraprisoncore.autosell.api.events.UltraPrisonSellAllEvent;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.boosting.BiBoostProvider;
+import me.ilucah.advancedarmor.boosting.model.BiBoostProvider;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 

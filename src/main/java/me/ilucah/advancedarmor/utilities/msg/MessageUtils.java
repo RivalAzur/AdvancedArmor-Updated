@@ -1,6 +1,7 @@
-package me.ilucah.advancedarmor.utilities;
+package me.ilucah.advancedarmor.utilities.msg;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
+import me.ilucah.advancedarmor.utilities.RGBParser;
 
 import java.util.ArrayList;
 import java.util.List;

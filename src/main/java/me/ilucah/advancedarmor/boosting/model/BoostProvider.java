@@ -1,4 +1,4 @@
-package me.ilucah.advancedarmor.boosting;
+package me.ilucah.advancedarmor.boosting.model;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
@@ -8,18 +8,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.Listener;
 
-public abstract class TriBoostProvider<T extends Event, V extends Event, K extends Event> implements Listener, TypeProvider<T> {
+public abstract class BoostProvider<T extends Event> implements Listener, TypeProvider<T> {
 
     protected final BoostType type;
     protected final AdvancedArmor instance;
     private boolean async;
 
-    public TriBoostProvider(AdvancedArmor instance, BoostType type) {
+    public BoostProvider(AdvancedArmor instance, BoostType type) {
         this.instance = instance;
         this.type = type;
     }
 
-    public TriBoostProvider(AdvancedArmor instance, BoostType type, boolean async) {
+    public BoostProvider(AdvancedArmor instance, BoostType type, boolean async) {
         this(instance, type);
         this.async = async;
     }
@@ -31,9 +31,7 @@ public abstract class TriBoostProvider<T extends Event, V extends Event, K exten
         if (!async)
             instance.getServer().getPluginManager().callEvent(boostEvent);
         double newSellPrice = currentSellPrice + amountToGive + boostEvent.getNewEarnings();
-        // run debug
         instance.getHandler().getDebugManager().runDebug(player, currentSellPrice, newSellPrice);
-        // run messages
         instance.getHandler().getMessageManager().runMessages(player, type, amountToGive + boostEvent.getNewEarnings());
         return currentSellPrice + amountToGive + boostEvent.getNewEarnings();
     }
@@ -74,20 +72,6 @@ public abstract class TriBoostProvider<T extends Event, V extends Event, K exten
      * @apiNote
      * This method must include the EventHandler annotation.
      */
-    public abstract void onSellT(T event);
-
-    /**
-     * @implNote <code>@EventHandler(priority = EventPriority.LOWEST)</code>
-     * @apiNote
-     * This method must include the EventHandler annotation.
-     */
-    public abstract void onSellV(V event);
-
-    /**
-     * @implNote <code>@EventHandler(priority = EventPriority.LOWEST)</code>
-     * @apiNote
-     * This method must include the EventHandler annotation.
-     */
-    public abstract void onSellK(K event);
+    public abstract void onSell(T event);
 
 }

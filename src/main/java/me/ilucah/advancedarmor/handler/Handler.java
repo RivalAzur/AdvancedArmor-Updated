@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import me.ilucah.advancedarmor.armor.Flag;
-import me.ilucah.advancedarmor.boosting.BoostService;
-import me.ilucah.advancedarmor.boosting.TypeProvider;
+import me.ilucah.advancedarmor.boosting.model.BoostService;
+import me.ilucah.advancedarmor.boosting.model.TypeProvider;
 import me.ilucah.advancedarmor.utilities.DebugManager;
-import me.ilucah.advancedarmor.utilities.MessageManager;
+import me.ilucah.advancedarmor.utilities.msg.MessageManager;
 import me.ilucah.advancedarmor.utilities.xutils.SkullCreator;
 import me.ilucah.advancedarmor.utilities.xutils.XMaterial;
 import org.bukkit.enchantments.Enchantment;

@@ -2,7 +2,7 @@ package me.ilucah.advancedarmor.boosting.providers;
 
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
-import me.ilucah.advancedarmor.boosting.BoostProvider;
+import me.ilucah.advancedarmor.boosting.model.BoostProvider;
 import me.ilucah.advancedarmor.api.events.ArmorBoostGiveEvent;
 import me.ilucah.advancedarmor.utilities.ichest.IChestHookManager;
 import net.luckyfeed.events.InfiniteChestSellEvent;
