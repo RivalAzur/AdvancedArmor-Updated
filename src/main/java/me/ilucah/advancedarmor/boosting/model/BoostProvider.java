@@ -68,7 +68,7 @@ public abstract class BoostProvider<T extends Event> implements Listener, TypePr
     }
 
     /**
-     * @implNote <code>@EventHandler(priority = EventPriority.LOWEST)</code>
+     * @implNote <b>@EventHandler(priority = EventPriority.LOWEST)</b>
      * @apiNote
      * This method must include the EventHandler annotation.
      */

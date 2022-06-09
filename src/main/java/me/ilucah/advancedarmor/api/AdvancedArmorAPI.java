@@ -30,7 +30,7 @@ public class AdvancedArmorAPI {
         provider.register();
     }
 
-    public <T extends Event, V extends Event> void registerProviders(TypeProvider provider, Class<? extends Event>... typeListeners) {
+    public void registerProviders(TypeProvider provider, Class<? extends Event>... typeListeners) {
         for (Class<? extends Event> clazz : typeListeners) {
             handler.getProviders().putIfAbsent(clazz, provider);
         }

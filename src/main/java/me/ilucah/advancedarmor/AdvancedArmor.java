@@ -1,7 +1,6 @@
 package me.ilucah.advancedarmor;
 
 import me.ilucah.advancedarmor.api.AdvancedArmorAPI;
-import me.ilucah.advancedarmor.armor.listeners.*;
 import me.ilucah.advancedarmor.boosting.providers.*;
 import me.ilucah.advancedarmor.listener.SkullPlaceListener;
 import me.ilucah.advancedarmor.placeholders.Placeholders;
@@ -117,7 +116,7 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into UltraPrisonCore MoneyAPI");
             }
             if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
-                new UPCTokenListener(this);
+                new UPCTokenProvider(this);
                 getLogger().info("Successfully hooked into UltraPrisonCore TokenAPI");
             }
             if (getConfig().getBoolean("Gem-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {

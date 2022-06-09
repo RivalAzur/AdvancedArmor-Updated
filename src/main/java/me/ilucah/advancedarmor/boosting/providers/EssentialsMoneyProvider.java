@@ -12,20 +12,17 @@ import java.math.BigDecimal;
 public class EssentialsMoneyProvider extends BoostProvider<UserBalanceUpdateEvent> {
 
     public EssentialsMoneyProvider(AdvancedArmor instance) {
-        super(instance, BoostType.MONEY);
+        super(instance, BoostType.MONEY, true);
         instance.getAPI().registerBoostProvider(UserBalanceUpdateEvent.class, this);
     }
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
     public void onSell(UserBalanceUpdateEvent event) {
-        System.out.println("a");
         if (event.getCause() == UserBalanceUpdateEvent.Cause.COMMAND_PAY && event.getCause() == UserBalanceUpdateEvent.Cause.COMMAND_ECO)
             return;
-        System.out.println("b");
         if (event.getNewBalance().compareTo(event.getOldBalance()) < 0)
             return;
-        System.out.println("c");
         event.setNewBalance(BigDecimal.valueOf(resolveNewAmount(event.getPlayer(), event.getNewBalance().doubleValue() - event.getOldBalance().doubleValue())));
     }
 }
