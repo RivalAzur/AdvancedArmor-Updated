@@ -19,9 +19,7 @@ Money-Armor:
     ClipAutoSell-Enabled: false
     DeluxeSellWands-Enabled: false
     Scyther-Enabled: false
-    InfiniteChestPro:
-      Enabled: false
-      HookType: 'Essentials'
+    InfiniteChestPro-Enabled: false
 Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false

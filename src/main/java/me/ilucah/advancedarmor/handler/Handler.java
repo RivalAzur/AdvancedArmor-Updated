@@ -186,6 +186,11 @@ public class Handler {
         this.armorMapped.put(armor.getName(), armor);
     }
 
+    public void removeArmor(Armor armor) {
+        this.armor.remove(armor);
+        this.armorMapped.remove(armor.getName());
+    }
+
     public List<Armor> getArmor() {
         return this.armor;
     }
@@ -208,6 +213,10 @@ public class Handler {
 
     public BoostService getBoostService() {
         return boostService;
+    }
+
+    public AdvancedArmor getPlugin() {
+        return plugin;
     }
 
     public ConcurrentHashMap<Class<? extends Event>, TypeProvider> getProviders() {

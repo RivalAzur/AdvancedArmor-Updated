@@ -17,6 +17,6 @@ public class SuperMobCoinProvider extends BoostProvider<MobCoinsReceiveEvent> {
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
     public void onSell(MobCoinsReceiveEvent event) {
-        event.setAmount((int) resolveNewAmount(event.getProfile().getPlayer(), event.getAmount()));
+        event.setAmount((long) resolveNewAmount(event.getProfile().getPlayer(), event.getAmount()));
     }
 }

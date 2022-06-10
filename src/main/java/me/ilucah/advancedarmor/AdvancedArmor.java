@@ -5,8 +5,6 @@ import me.ilucah.advancedarmor.boosting.providers.*;
 import me.ilucah.advancedarmor.listener.SkullPlaceListener;
 import me.ilucah.advancedarmor.placeholders.Placeholders;
 import me.ilucah.advancedarmor.config.ConfigManager;
-import me.ilucah.advancedarmor.utilities.ichest.HookType;
-import me.ilucah.advancedarmor.utilities.ichest.IChestHookManager;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -89,20 +87,9 @@ public class AdvancedArmor extends JavaPlugin {
     }
 
     private void registerInfiniteChestPro() {
-        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.InfiniteChestPro.Enabled")) {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.InfiniteChestPro-Enabled")) {
             if (getServer().getPluginManager().getPlugin("InfiniteChest-Pro") != null) {
-                HookType hookType;
-                if (getConfig().getString("Money-Armor.Economy-Dependencies.InfiniteChestPro.HookType").equalsIgnoreCase("Essentials")) {
-                    hookType = HookType.ESSENTIALS;
-                } else if (getConfig().getString("Money-Armor.Economy-Dependencies.InfiniteChestPro.HookType").equalsIgnoreCase("Shopguiplus") ||
-                        getConfig().getString("Money-Armor.Economy-Dependencies.InfiniteChestPro.HookType").equalsIgnoreCase("shopgui+")) {
-                    hookType = HookType.SHOPGUIPLUS;
-                } else {
-                    getLogger().warning("Failed to register InfiniteChestsPro hook. Please use 'Essentials' or 'ShopGUIPlus' as a HookType.");
-                    return;
-                }
-                IChestHookManager hookManager = new IChestHookManager(this, hookType);
-                new InfiniteChestProProvider(this, hookManager);
+                new InfiniteChestProProvider(this);
                 getLogger().info("Successfully hooked into InfiniteChest-Pro");
             } else
                 getLogger().warning("Failed to hook into InfiniteChest-Pro. Money component disabled.");

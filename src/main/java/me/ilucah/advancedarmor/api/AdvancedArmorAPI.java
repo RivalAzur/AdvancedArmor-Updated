@@ -3,6 +3,7 @@ package me.ilucah.advancedarmor.api;
 import me.ilucah.advancedarmor.armor.Armor;
 import me.ilucah.advancedarmor.armor.ArmorColor;
 import me.ilucah.advancedarmor.boosting.model.BoostProvider;
+import me.ilucah.advancedarmor.boosting.model.BoostService;
 import me.ilucah.advancedarmor.boosting.model.TypeProvider;
 import me.ilucah.advancedarmor.handler.Handler;
 import org.bukkit.event.Event;
@@ -46,6 +47,14 @@ public class AdvancedArmorAPI {
         handler.getProviders().remove(clazz);
     }
 
+    public void registerNewArmorSet(Armor armor) {
+        handler.addArmor(armor);
+    }
+
+    public void removeArmorSet(Armor armor) {
+        handler.removeArmor(armor);
+    }
+
     public Handler getHandler() {
         return handler;
     }
@@ -54,16 +63,16 @@ public class AdvancedArmorAPI {
         return handler.getArmorFromString(name);
     }
 
+    public BoostService getBoostService() {
+        return handler.getBoostService();
+    }
+
     public List<Armor> getArmors() {
         return handler.getArmor();
     }
 
     public List<ArmorColor> getArmorColors() {
         return handler.getArmorColors();
-    }
-
-    public void registerNewArmorSet(Armor armor) {
-        handler.addArmor(armor);
     }
 
 }

@@ -94,6 +94,7 @@ public enum BoostType {
     CRISTAUX("crystals"),
     BLOSSOMS("blossoms"),
     TULIPS("tulips"),
+    SHARDS("shards"),
     ORCHARDS("orchards"),
     TICKETS("tickets"),
     ROSES("roses"),
@@ -119,7 +120,8 @@ public enum BoostType {
     URANIUM("uranium"),
     ANGELS("angels"),
     ROCKS("rocks"),
-    ICE("ice");
+    ICE("ice"),
+    PARTS("parts");
 
     private String s;
 

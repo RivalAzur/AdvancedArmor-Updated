@@ -48,11 +48,34 @@ public class Placeholders extends PlaceholderExpansion {
 
     @Override
     public String onRequest(OfflinePlayer offlinePlayer, String params) {
+        if (params.equalsIgnoreCase("helmet_boost"))
+            return String.valueOf(plugin.getHandler().getBoostService().getArmorBoost(offlinePlayer.getPlayer().getInventory().getHelmet()));
+        if (params.equalsIgnoreCase("chestplate_boost"))
+            return String.valueOf(plugin.getHandler().getBoostService().getArmorBoost(offlinePlayer.getPlayer().getInventory().getChestplate()));
+        if (params.equalsIgnoreCase("leggings_boost"))
+            return String.valueOf(plugin.getHandler().getBoostService().getArmorBoost(offlinePlayer.getPlayer().getInventory().getLeggings()));
+        if (params.equalsIgnoreCase("boots_boost"))
+            return String.valueOf(plugin.getHandler().getBoostService().getArmorBoost(offlinePlayer.getPlayer().getInventory().getBoots()));
+        if (params.equalsIgnoreCase("helmet_type")) {
+            String name = plugin.getHandler().getBoostService().getArmorName(offlinePlayer.getPlayer().getInventory().getHelmet());
+            return name == null ? noArmorEquipped : name;
+        }
+        if (params.equalsIgnoreCase("chestplate_type")) {
+            String name = plugin.getHandler().getBoostService().getArmorName(offlinePlayer.getPlayer().getInventory().getChestplate());
+            return name == null ? noArmorEquipped : name;
+        }
+        if (params.equalsIgnoreCase("leggings_type")) {
+            String name = plugin.getHandler().getBoostService().getArmorName(offlinePlayer.getPlayer().getInventory().getChestplate());
+            return name == null ? noArmorEquipped : name;
+        }
+        if (params.equalsIgnoreCase("boots_type")) {
+            String name = plugin.getHandler().getBoostService().getArmorName(offlinePlayer.getPlayer().getInventory().getBoots());
+            return name == null ? noArmorEquipped : name;
+        }
         if (params.contains("boost_")) {
-            BoostType type = BoostType.valueOf(params.split("boost_")[0]);
+            BoostType type = BoostType.valueOf(params.split("boost_")[0].toUpperCase());
             return String.valueOf(plugin.getHandler().getBoostService().calculatePercentage(type, offlinePlayer.getPlayer()));
         }
         return "This placeholder no longer exists."; // Placeholder is unknown by the expansion
     }
-
 }

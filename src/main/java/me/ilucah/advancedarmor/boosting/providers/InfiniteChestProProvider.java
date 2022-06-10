@@ -4,7 +4,7 @@ import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.boosting.model.BoostProvider;
 import me.ilucah.advancedarmor.api.events.ArmorBoostGiveEvent;
-import me.ilucah.advancedarmor.utilities.ichest.IChestHookManager;
+import net.luckyfeed.InfiniteChests;
 import net.luckyfeed.events.InfiniteChestSellEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,11 +12,8 @@ import org.bukkit.event.EventPriority;
 
 public class InfiniteChestProProvider extends BoostProvider<InfiniteChestSellEvent> {
 
-    private final IChestHookManager manager;
-
-    public InfiniteChestProProvider(AdvancedArmor instance, IChestHookManager manager) {
+    public InfiniteChestProProvider(AdvancedArmor instance) {
         super(instance, BoostType.MONEY);
-        this.manager = manager;
         instance.getAPI().registerBoostProvider(InfiniteChestSellEvent.class, this);
     }
 
@@ -37,6 +34,6 @@ public class InfiniteChestProProvider extends BoostProvider<InfiniteChestSellEve
         instance.getHandler().getDebugManager().runDebug(player, currentSellPrice, newSellPrice);
         // run messages
         instance.getHandler().getMessageManager().runMessages(player, type, amountToGive + boostEvent.getNewEarnings());
-        manager.getEconomyHook().deposit(event.getRecipient(),amountToGive + boostEvent.getNewEarnings());
+        InfiniteChests.getInstance().getEconomy().depositPlayer(event.getRecipient(), amountToGive + boostEvent.getNewEarnings());
     }
 }

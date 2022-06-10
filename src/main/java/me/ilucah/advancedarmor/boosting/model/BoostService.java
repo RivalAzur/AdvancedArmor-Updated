@@ -5,6 +5,9 @@ import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.utilities.nbt.NBTUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nullable;
 
 public class BoostService {
 
@@ -50,6 +53,30 @@ public class BoostService {
                     if (armor.getBoostType() == type)
                         percentage += armor.getBootsBoost();
                 }
+            }
+        }
+        double total = (double) percentage / 100;
+        total++;
+        return total;
+    }
+
+    @Nullable
+    public String getArmorName(ItemStack item) {
+        if (item == null)
+            return null;
+        if (!NBTUtils.hasArmorNBTTag(item))
+            return null;
+        Armor armor = handler.getArmorFromString(NBTUtils.getArmorName(item));
+        return armor != null ? armor.getName() : null;
+    }
+
+    public double getArmorBoost(ItemStack item) {
+        int percentage = 0;
+        if (item != null) {
+            if (NBTUtils.hasArmorNBTTag(item)) {
+                Armor armor = handler.getArmorFromString(NBTUtils.getArmorName(item));
+                if (armor != null)
+                    percentage += armor.getHelmetBoost();
             }
         }
         double total = (double) percentage / 100;
