@@ -16,7 +16,7 @@ public class AquaCoinProvider extends BoostProvider<CoinReceiveEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(CoinReceiveEvent event) {
+    public void onBoost(CoinReceiveEvent event) {
         event.setCoins((long) resolveNewAmount(event.getPlayer(), event.getCoins()));
     }
 }

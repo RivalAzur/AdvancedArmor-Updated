@@ -74,13 +74,13 @@ public abstract class BiBoostProvider<T extends Event, V extends Event> implemen
      * @apiNote
      * This method must include the EventHandler annotation.
      */
-    public abstract void onSellT(T event);
+    public abstract void onBoostT(T event);
 
     /**
      * @implNote <code>@EventHandler(priority = EventPriority.LOWEST)</code>
      * @apiNote
      * This method must include the EventHandler annotation.
      */
-    public abstract void onSellV(V event);
+    public abstract void onBoostV(V event);
 
 }

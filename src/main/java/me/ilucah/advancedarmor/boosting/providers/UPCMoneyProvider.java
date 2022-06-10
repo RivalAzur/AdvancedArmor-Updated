@@ -20,13 +20,13 @@ public class UPCMoneyProvider extends BiBoostProvider<UltraPrisonAutoSellEvent, 
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSellT(UltraPrisonAutoSellEvent event) {
+    public void onBoostT(UltraPrisonAutoSellEvent event) {
         event.setMoneyToDeposit(resolveNewAmount(event.getPlayer(), event.getMoneyToDeposit()));
     }
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSellV(UltraPrisonSellAllEvent event) {
+    public void onBoostV(UltraPrisonSellAllEvent event) {
         event.setSellPrice(resolveNewAmount(event.getPlayer(), event.getSellPrice()));
     }
 }

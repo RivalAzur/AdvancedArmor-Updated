@@ -19,7 +19,7 @@ public class QuadrexCoinProvider extends BoostProvider<MobCoinEarnEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(MobCoinEarnEvent event) {
+    public void onBoost(MobCoinEarnEvent event) {
         double currentSellPrice = event.getAmount();
         Player player = event.getPlayer();
         double multi = instance.getHandler().getBoostService().calculatePercentage(type, player);

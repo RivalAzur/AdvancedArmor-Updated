@@ -17,7 +17,7 @@ public class UPCTokenProvider extends BoostProvider<PlayerTokensReceiveEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(PlayerTokensReceiveEvent event) {
+    public void onBoost(PlayerTokensReceiveEvent event) {
         if (!event.getPlayer().isOnline())
             return;
         if (event.getCause() != ReceiveCause.MINING || event.getCause() != ReceiveCause.LUCKY_BLOCK ||

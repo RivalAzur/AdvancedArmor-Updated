@@ -16,7 +16,7 @@ public class RivalHoesProvider extends BoostProvider<HoeEssenceReceivePreEnchant
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(HoeEssenceReceivePreEnchantEvent event) {
+    public void onBoost(HoeEssenceReceivePreEnchantEvent event) {
         event.setEssence(resolveNewAmount(event.getPlayer(), event.getEssence()));
     }
 }

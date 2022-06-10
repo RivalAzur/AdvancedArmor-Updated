@@ -16,7 +16,7 @@ public class DSWTokenProvider extends BoostProvider<DeluxeSellwandTokenReceiveEv
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(DeluxeSellwandTokenReceiveEvent event) {
+    public void onBoost(DeluxeSellwandTokenReceiveEvent event) {
         event.setTokens((int) resolveNewAmount(event.getPlayer(), event.getTokens()));
     }
 }

@@ -16,7 +16,7 @@ public class RivalSwordsProvider extends BoostProvider<SwordEssenceReceivePreEnc
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(SwordEssenceReceivePreEnchantEvent event) {
+    public void onBoost(SwordEssenceReceivePreEnchantEvent event) {
         event.setEssence(resolveNewAmount(event.getPlayer(), event.getEssence()));
     }
 }

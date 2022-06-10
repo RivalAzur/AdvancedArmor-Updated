@@ -74,20 +74,20 @@ public abstract class TriBoostProvider<T extends Event, V extends Event, K exten
      * @apiNote
      * This method must include the EventHandler annotation.
      */
-    public abstract void onSellT(T event);
+    public abstract void onBoostT(T event);
 
     /**
      * @implNote <code>@EventHandler(priority = EventPriority.LOWEST)</code>
      * @apiNote
      * This method must include the EventHandler annotation.
      */
-    public abstract void onSellV(V event);
+    public abstract void onBoostV(V event);
 
     /**
      * @implNote <code>@EventHandler(priority = EventPriority.LOWEST)</code>
      * @apiNote
      * This method must include the EventHandler annotation.
      */
-    public abstract void onSellK(K event);
+    public abstract void onBoostK(K event);
 
 }

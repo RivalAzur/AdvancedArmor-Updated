@@ -72,6 +72,6 @@ public abstract class BoostProvider<T extends Event> implements Listener, TypePr
      * @apiNote
      * This method must include the EventHandler annotation.
      */
-    public abstract void onSell(T event);
+    public abstract void onBoost(T event);
 
 }

@@ -17,13 +17,13 @@ public class ScytherMoneyProvider extends BiBoostProvider<ScytherAutosellEvent, 
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSellT(ScytherAutosellEvent event) {
+    public void onBoostT(ScytherAutosellEvent event) {
         event.setMoney(resolveNewAmount(event.getPlayer(), event.getMoney()));
     }
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSellV(ScytherAutosellEvent event) {
+    public void onBoostV(ScytherAutosellEvent event) {
         double currentSellPrice = event.getAwardedXP();
         double multi = instance.getHandler().getBoostService().calculatePercentage(BoostType.EXP, event.getPlayer());
         double amountToGive = ((currentSellPrice * multi) - currentSellPrice);

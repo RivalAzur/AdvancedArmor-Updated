@@ -16,7 +16,7 @@ public class DSWMoneyProvider extends BoostProvider<DeluxeSellwandSellEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(DeluxeSellwandSellEvent event) {
+    public void onBoost(DeluxeSellwandSellEvent event) {
         event.setMoney(resolveNewAmount(event.getPlayer(), event.getMoney()));
     }
 }

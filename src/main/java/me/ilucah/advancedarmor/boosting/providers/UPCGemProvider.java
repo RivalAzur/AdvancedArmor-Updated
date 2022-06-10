@@ -17,7 +17,7 @@ public class UPCGemProvider extends BoostProvider<PlayerGemsReceiveEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(PlayerGemsReceiveEvent event) {
+    public void onBoost(PlayerGemsReceiveEvent event) {
         if (!event.getPlayer().isOnline())
             return;
         if (event.getCause() != ReceiveCause.MINING || event.getCause() != ReceiveCause.LUCKY_BLOCK ||

@@ -16,7 +16,7 @@ public class ExperienceProvider extends BoostProvider<PlayerExpChangeEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(PlayerExpChangeEvent event) {
+    public void onBoost(PlayerExpChangeEvent event) {
         event.setAmount((int) resolveNewAmount(event.getPlayer(), event.getAmount()));
     }
 }

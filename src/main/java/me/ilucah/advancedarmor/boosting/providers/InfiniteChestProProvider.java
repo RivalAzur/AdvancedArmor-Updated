@@ -19,7 +19,7 @@ public class InfiniteChestProProvider extends BoostProvider<InfiniteChestSellEve
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(InfiniteChestSellEvent event) {
+    public void onBoost(InfiniteChestSellEvent event) {
         if (!event.getRecipient().isOnline())
             return;
         Player player = event.getRecipient().getPlayer();

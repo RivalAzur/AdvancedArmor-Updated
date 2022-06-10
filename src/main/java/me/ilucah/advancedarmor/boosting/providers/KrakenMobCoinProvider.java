@@ -16,7 +16,7 @@ public class KrakenMobCoinProvider extends BoostProvider<MobCoinsReceiveEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(MobCoinsReceiveEvent event) {
+    public void onBoost(MobCoinsReceiveEvent event) {
         event.setAmountAfterMultiplier(resolveNewAmount(event.getPlayer(), event.getAmountAfterMultiplier()));
     }
 }

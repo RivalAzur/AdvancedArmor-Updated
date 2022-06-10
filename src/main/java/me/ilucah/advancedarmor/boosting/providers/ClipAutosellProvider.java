@@ -35,13 +35,13 @@ public class ClipAutosellProvider extends BiBoostProvider<SellAllEvent, AutoSell
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSellT(SellAllEvent event) {
+    public void onBoostT(SellAllEvent event) {
         event.setTotalCost(resolveNewAmount(event.getPlayer(), event.getTotalCost()));
     }
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSellV(AutoSellEvent event) {
+    public void onBoostV(AutoSellEvent event) {
         Player player = event.getPlayer();
         double currentSellPrice = event.getPrice();
         double multi = instance.getHandler().getBoostService().calculatePercentage(type, player);

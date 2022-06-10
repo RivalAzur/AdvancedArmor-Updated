@@ -16,7 +16,7 @@ public class UltraBackpacksProvider extends BoostProvider<BackpackSellEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(BackpackSellEvent event) {
+    public void onBoost(BackpackSellEvent event) {
         event.setMoneyToDeposit(resolveNewAmount(event.getPlayer(), event.getMoneyToDeposit()));
     }
 }

@@ -16,7 +16,7 @@ public class TMCoinProvider extends BoostProvider<MobCoinReceiveEvent> {
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(MobCoinReceiveEvent event) {
+    public void onBoost(MobCoinReceiveEvent event) {
         event.setDropAmount(resolveNewAmount(event.getPlayer(), event.getObtainedAmount()));
     }
 }

@@ -16,7 +16,7 @@ public class RivalFishingProvider extends BoostProvider<RodEssenceReceiveEvent> 
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(RodEssenceReceiveEvent event) {
+    public void onBoost(RodEssenceReceiveEvent event) {
         event.setEssence(resolveNewAmount(event.getPlayer(), event.getEssence()));
     }
 }

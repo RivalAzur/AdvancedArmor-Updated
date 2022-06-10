@@ -16,7 +16,7 @@ public class ShopGUIPlusProvider extends BoostProvider<ShopPreTransactionEvent> 
 
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSell(ShopPreTransactionEvent event) {
+    public void onBoost(ShopPreTransactionEvent event) {
         event.setPrice(resolveNewAmount(event.getPlayer(), event.getPrice()));
     }
 }
