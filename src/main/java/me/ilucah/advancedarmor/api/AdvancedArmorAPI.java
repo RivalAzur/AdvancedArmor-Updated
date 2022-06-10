@@ -1,5 +1,6 @@
 package me.ilucah.advancedarmor.api;
 
+import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.Armor;
 import me.ilucah.advancedarmor.armor.ArmorColor;
 import me.ilucah.advancedarmor.boosting.model.BoostProvider;
@@ -73,6 +74,10 @@ public class AdvancedArmorAPI {
 
     public List<ArmorColor> getArmorColors() {
         return handler.getArmorColors();
+    }
+
+    public AdvancedArmor getPlugin() {
+        return handler.getPlugin();
     }
 
 }
