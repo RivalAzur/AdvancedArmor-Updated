@@ -56,7 +56,7 @@ public enum BoostType {
     METAL("metal"),
     COPPER("copper"),
     REDSTONE("redstone"),
-    LAPIS_LAZULI("lapis_lazuli"),
+    LAPIS_LAZULI("lapis-lazuli"),
     EMERALDS("emeralds"),
     RUBY("ruby"),
     OPALS("opals"),
@@ -121,7 +121,10 @@ public enum BoostType {
     ANGELS("angels"),
     ROCKS("rocks"),
     ICE("ice"),
-    PARTS("parts");
+    PARTS("parts"),
+    PRESTIGES("prestiges"),
+    RANKS("ranks"),
+    REBIRTHS("rebirths");
 
     private String s;
 
