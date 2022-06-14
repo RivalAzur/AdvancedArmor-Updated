@@ -1,6 +1,5 @@
 package me.ilucah.advancedarmor.utilities.msg;
 
-import com.iridium.iridiumcolorapi.IridiumColorAPI;
 import me.ilucah.advancedarmor.AdvancedArmor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.utilities.RGBParser;

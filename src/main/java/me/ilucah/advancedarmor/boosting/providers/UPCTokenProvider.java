@@ -20,7 +20,7 @@ public class UPCTokenProvider extends BoostProvider<PlayerTokensReceiveEvent> {
     public void onBoost(PlayerTokensReceiveEvent event) {
         if (!event.getPlayer().isOnline())
             return;
-        if (event.getCause() != ReceiveCause.MINING || event.getCause() != ReceiveCause.LUCKY_BLOCK ||
+        if (event.getCause() != ReceiveCause.MINING && event.getCause() != ReceiveCause.LUCKY_BLOCK &&
                 event.getCause() != ReceiveCause.MINING_OTHERS)
             return;
         event.setAmount((long) resolveNewAmount(event.getPlayer().getPlayer(), event.getAmount()));
