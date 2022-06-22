@@ -20,6 +20,7 @@ Money-Armor:
     DeluxeSellWands-Enabled: false
     Scyther-Enabled: false
     InfiniteChestPro-Enabled: false
+    EconomyShopGUI-Enabled: false
 Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false
@@ -32,9 +33,12 @@ Token-Armor:
   Economy-Dependencies:
     UltraPrisonCore-Enabled: false
     DeluxeSellWands-Enabled: false
+    Tokens-GC-Enabled: false
+    RevEnchants-Enabled: false
 Gem-Armor:
   Economy-Dependencies:
     UltraPrisonCore-Enabled: false
+    RevEnchants-Enabled: false
 Essence-Armor:
   Economy-Dependencies:
     RivalHarvesterHoes-Enabled: false

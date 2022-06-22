@@ -57,6 +57,9 @@ public class AdvancedArmor extends JavaPlugin {
         registerRivalHoes();
         registerRivalRods();
         registerRivalSwords();
+        registerEconShopGUI();
+        registerTokensGC();
+        registerRevEnchants();
         new ExperienceProvider(this);
     }
 
@@ -109,6 +112,19 @@ public class AdvancedArmor extends JavaPlugin {
             if (getConfig().getBoolean("Gem-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
                 new UPCGemProvider(this);
                 getLogger().info("Successfully hooked into UltraPrisonCore GemAPI");
+            }
+        }
+    }
+
+    private void registerRevEnchants() {
+        if (getServer().getPluginManager().getPlugin("RevEnchants") != null) {
+            if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.RevEnchants-Enabled")) {
+                new RevEnchantsTokenProvider(this);
+                getLogger().info("Successfully hooked into RevEnchants TokenAPI");
+            }
+            if (getConfig().getBoolean("Gem-Armor.Economy-Dependencies.RevEnchants-Enabled")) {
+                new RevEnchantsGemProvider(this);
+                getLogger().info("Successfully hooked into RevEnchants GemAPI");
             }
         }
     }
@@ -255,6 +271,26 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into RivalMobSwords");
             } else
                 getLogger().warning("Failed to hook into RivalMobSwords. Essence component disabled.");
+        }
+    }
+
+    private void registerEconShopGUI() {
+        if (getConfig().getBoolean("Essence-Armor.Economy-Dependencies.EconomyShopGUI-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("EconomyShopGUI") != null) {
+                new EconomyShopProvider(this);
+                getLogger().info("Successfully hooked into EconomyShopGUI");
+            } else
+                getLogger().warning("Failed to hook into EconomyShopGUI. Money component disabled.");
+        }
+    }
+
+    private void registerTokensGC() {
+        if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.Tokens-GC-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("Tokens") != null) {
+                new GCTokensProvider(this);
+                getLogger().info("Successfully hooked into Tokens");
+            } else
+                getLogger().warning("Failed to hook into Tokens. Token component disabled.");
         }
     }
 

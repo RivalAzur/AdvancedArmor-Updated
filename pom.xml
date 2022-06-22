@@ -240,6 +240,30 @@
             <systemPath>${project.basedir}/libs/RivalMobSwordsAPI.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>EconomyShopGUI</groupId>
+            <artifactId>EconomyShopGUI</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/EconomyShopGUI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>RevEnchantsAPI</groupId>
+            <artifactId>RevEnchantsAPI</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/RevEnchantsAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>Tokens-3.0.0</groupId>
+            <artifactId>Tokens-3.0.0</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <optional>true</optional>
+            <systemPath>${project.basedir}/libs/Tokens-3.0.0.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>me.clip.autosell</groupId>
             <artifactId>AutoSellAPI</artifactId>
             <version>1.9.3</version>
