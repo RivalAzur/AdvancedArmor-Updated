@@ -275,7 +275,7 @@ public class AdvancedArmor extends JavaPlugin {
     }
 
     private void registerEconShopGUI() {
-        if (getConfig().getBoolean("Essence-Armor.Economy-Dependencies.EconomyShopGUI-Enabled")) {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.EconomyShopGUI-Enabled")) {
             if (getServer().getPluginManager().getPlugin("EconomyShopGUI") != null) {
                 new EconomyShopProvider(this);
                 getLogger().info("Successfully hooked into EconomyShopGUI");

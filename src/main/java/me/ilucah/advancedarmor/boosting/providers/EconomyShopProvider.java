@@ -17,6 +17,7 @@ public class EconomyShopProvider extends BoostProvider<PreTransactionEvent> {
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBoost(PreTransactionEvent event) {
-        event.setPrice(resolveNewAmount(event.getPlayer(), event.getPrice()));
+        if (event.getTransactionMode().toLowerCase().contains("sell"))
+            event.setPrice(resolveNewAmount(event.getPlayer(), event.getPrice()));
     }
 }
