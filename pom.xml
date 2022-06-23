@@ -140,6 +140,13 @@
             <systemPath>${project.basedir}/libs/shopgui-api.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>WildTools.jar</groupId>
+            <artifactId>WildTools.jar</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/WildTools.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>infinitechest-pro</groupId>
             <artifactId>infinitechest-pro</artifactId>
             <scope>system</scope>

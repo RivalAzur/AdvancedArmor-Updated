@@ -21,6 +21,7 @@ Money-Armor:
     Scyther-Enabled: false
     InfiniteChestPro-Enabled: false
     EconomyShopGUI-Enabled: false
+    WildTools-Enabled: false
 Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false

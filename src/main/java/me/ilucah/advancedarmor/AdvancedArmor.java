@@ -60,6 +60,7 @@ public class AdvancedArmor extends JavaPlugin {
         registerEconShopGUI();
         registerTokensGC();
         registerRevEnchants();
+        registerWildTools();
         new ExperienceProvider(this);
     }
 
@@ -281,6 +282,16 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into EconomyShopGUI");
             } else
                 getLogger().warning("Failed to hook into EconomyShopGUI. Money component disabled.");
+        }
+    }
+
+    private void registerWildTools() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.WildTools-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("WildTools") != null) {
+                new WildToolsProvider(this);
+                getLogger().info("Successfully hooked into WildTools");
+            } else
+                getLogger().warning("Failed to hook into WildTools. Money component disabled.");
         }
     }
 
