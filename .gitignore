@@ -111,3 +111,22 @@ buildNumber.properties
 
 # Common working directory
 run/
+/libs/
+/libs/AquaCoins.jar
+/libs/EconomyShopGUI.jar
+/libs/helper.jar
+/libs/infinitechest-pro.jar
+/libs/KrakenMobcoins.jar
+/libs/QuadrexMobCoins.jar
+/libs/RevEnchantsApi.jar
+/libs/RivalFishingRodsAPI.jar
+/libs/RivalHarvesterHoesAPI.jar
+/libs/RivalMobSwordsAPI.jar
+/libs/shopgui-api.jar
+/libs/SuperMobCoins.jar
+/libs/TheOnlyMobCoins.jar
+/libs/TMMobcoins (3).jar
+/libs/Tokens-3.0.0.jar
+/libs/UltraBackpacks.jar
+/libs/UltraPrisonCore.jar
+/libs/WildTools.jar
