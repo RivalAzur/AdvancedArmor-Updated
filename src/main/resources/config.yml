@@ -22,6 +22,7 @@ Money-Armor:
     InfiniteChestPro-Enabled: false
     EconomyShopGUI-Enabled: false
     WildTools-Enabled: false
+    RivalHarvesterHoes-Enabled: false
 Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false

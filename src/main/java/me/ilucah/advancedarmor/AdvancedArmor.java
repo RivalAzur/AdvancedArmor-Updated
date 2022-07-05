@@ -61,6 +61,7 @@ public class AdvancedArmor extends JavaPlugin {
         registerTokensGC();
         registerRevEnchants();
         registerWildTools();
+        registerRivalHoesMoney();
         new ExperienceProvider(this);
     }
 
@@ -252,6 +253,16 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into RivalHarvesterHoes");
             } else
                 getLogger().warning("Failed to hook into RivalHarvesterHoes. Essence component disabled.");
+        }
+    }
+
+    private void registerRivalHoesMoney() {
+        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.RivalHarvesterHoes-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("RivalHarvesterHoes") != null) {
+                new RivalHoesMoneyProvider(this);
+                getLogger().info("Successfully hooked into RivalHarvesterHoes");
+            } else
+                getLogger().warning("Failed to hook into RivalHarvesterHoes. Money component disabled.");
         }
     }
 
