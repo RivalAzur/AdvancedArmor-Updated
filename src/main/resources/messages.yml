@@ -21,7 +21,7 @@ boost-messages:
       - '&d&l+ %amount% &7(Gem Armor)'
   essence:
     enabled: true
-    Mmessage:
+    message:
       - '&9&l+ %amount% &7(Essence Armor)'
 
 Messages:
