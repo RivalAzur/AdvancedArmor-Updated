@@ -19,10 +19,10 @@ public class EssentialsMoneyProvider extends BoostProvider<UserBalanceUpdateEven
     @Override
     @EventHandler(priority = EventPriority.LOWEST)
     public void onBoost(UserBalanceUpdateEvent event) {
-        if (event.getCause() == UserBalanceUpdateEvent.Cause.COMMAND_PAY && event.getCause() == UserBalanceUpdateEvent.Cause.COMMAND_ECO)
+        if (event.getCause() == UserBalanceUpdateEvent.Cause.COMMAND_PAY || event.getCause() == UserBalanceUpdateEvent.Cause.COMMAND_ECO)
             return;
         if (event.getNewBalance().compareTo(event.getOldBalance()) < 0)
             return;
-        event.setNewBalance(BigDecimal.valueOf(resolveNewAmount(event.getPlayer(), event.getNewBalance().doubleValue() - event.getOldBalance().doubleValue())));
+        event.setNewBalance(event.getOldBalance().add(BigDecimal.valueOf(resolveNewAmount(event.getPlayer(), event.getNewBalance().doubleValue() - event.getOldBalance().doubleValue()))));
     }
 }
