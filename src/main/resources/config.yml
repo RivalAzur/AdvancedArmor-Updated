@@ -14,38 +14,26 @@ Money-Armor:
   Economy-Dependencies:
     Essentials-Enabled: false
     ShopGUIPlus-Enabled: false
-    UltraPrisonCore-Enabled: false
     UltraBackpacks-Enabled: false
     ClipAutoSell-Enabled: false
     DeluxeSellWands-Enabled: false
     Scyther-Enabled: false
-    InfiniteChestPro-Enabled: false
     EconomyShopGUI-Enabled: false
     WildTools-Enabled: false
-    RivalHarvesterHoes-Enabled: false
+    EdPrison-Enabled: false
 Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false
-    KrakenMobCoins-Enabled: false
-    TheOnlyMobCoins-Enabled: false
-    QuadrexMobCoins-Enabled: false
     TMMobcoins-Enabled: false
-    AquaCoins-Enabled: false
 Token-Armor:
   Economy-Dependencies:
-    UltraPrisonCore-Enabled: false
     DeluxeSellWands-Enabled: false
-    Tokens-GC-Enabled: false
     RevEnchants-Enabled: false
+    EdPrison-Enabled: false
 Gem-Armor:
   Economy-Dependencies:
-    UltraPrisonCore-Enabled: false
     RevEnchants-Enabled: false
-Essence-Armor:
-  Economy-Dependencies:
-    RivalHarvesterHoes-Enabled: false
-    RivalFishingRods-Enabled: false
-    RivalMobSwords-Enabled: false
+    EdPrison-Enabled: false
 
 Translations:
   Helmet: 'Helmet'
@@ -58,5 +46,5 @@ Translations:
 # For developers. Remember to enable 'Enabled' AND 'Console' or 'Player'.
 Debug:
   Enabled: false
-  Cosole: false
+  Console: false
   Player: false

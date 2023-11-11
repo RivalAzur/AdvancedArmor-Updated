@@ -1,7 +1,8 @@
 package me.ilucah.advancedarmor.utilities.nbt;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.*;
 import me.ilucah.advancedarmor.handler.Handler;
+import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 
 public class NBTUtils {
@@ -14,6 +15,8 @@ public class NBTUtils {
 
     public static boolean hasArmorNBTTag(ItemStack item) {
         if (item == null)
+            return false;
+        if (item.getType() == Material.AIR)
             return false;
         NBTItem nbtItem = new NBTItem(item);
         if (nbtItem.hasKey("CustomArmor"))

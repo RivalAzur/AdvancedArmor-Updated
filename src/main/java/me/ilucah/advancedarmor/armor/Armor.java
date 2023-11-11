@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import de.tr7zw.nbtapi.*;
 import me.ilucah.advancedarmor.utilities.RGBParser;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

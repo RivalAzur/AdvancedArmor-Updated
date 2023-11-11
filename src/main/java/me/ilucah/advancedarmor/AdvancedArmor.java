@@ -41,27 +41,15 @@ public class AdvancedArmor extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SkullPlaceListener(), this);
         registerEssentials();
         registerShopGUIPlus();
-        registerInfiniteChestPro();
-        registerUltraPrisonCore();
         registerSuperMobCoins();
-        registerKrakenMobCoins();
-        registerTheOnlyMobCoins();
-        registerQuadrexMobCoins();
         registerClipAutoSell();
-        registerUltraBackpacks();
         registerDeluxeSellWandsMoney();
         registerDeluxeSellWandsTokens();
         registerTMMobcoins();
-        registerAquaCoins();
         registerScyther();
-        registerRivalHoes();
-        registerRivalRods();
-        registerRivalSwords();
         registerEconShopGUI();
-        registerTokensGC();
         registerRevEnchants();
         registerWildTools();
-        registerRivalHoesMoney();
         new ExperienceProvider(this);
     }
 
@@ -91,33 +79,6 @@ public class AdvancedArmor extends JavaPlugin {
         }
     }
 
-    private void registerInfiniteChestPro() {
-        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.InfiniteChestPro-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("InfiniteChest-Pro") != null) {
-                new InfiniteChestProProvider(this);
-                getLogger().info("Successfully hooked into InfiniteChest-Pro");
-            } else
-                getLogger().warning("Failed to hook into InfiniteChest-Pro. Money component disabled.");
-        }
-    }
-
-    private void registerUltraPrisonCore() {
-        if (getServer().getPluginManager().getPlugin("UltraPrisonCore") != null) {
-            if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
-                new UPCMoneyProvider(this);
-                getLogger().info("Successfully hooked into UltraPrisonCore MoneyAPI");
-            }
-            if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
-                new UPCTokenProvider(this);
-                getLogger().info("Successfully hooked into UltraPrisonCore TokenAPI");
-            }
-            if (getConfig().getBoolean("Gem-Armor.Economy-Dependencies.UltraPrisonCore-Enabled")) {
-                new UPCGemProvider(this);
-                getLogger().info("Successfully hooked into UltraPrisonCore GemAPI");
-            }
-        }
-    }
-
     private void registerRevEnchants() {
         if (getServer().getPluginManager().getPlugin("RevEnchants") != null) {
             if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.RevEnchants-Enabled")) {
@@ -141,40 +102,8 @@ public class AdvancedArmor extends JavaPlugin {
         }
     }
 
-    private void registerKrakenMobCoins() {
-        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.KrakenMobCoins-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("KrakenMobcoins") != null) {
-                new KrakenMobCoinProvider(this);
-                getLogger().info("Successfully hooked into KrakenMobCoins");
-            } else
-                getLogger().warning("Failed to hook into KrakenMobCoins. Coin component disabled.");
-        }
-    }
 
-    private void registerTheOnlyMobCoins() {
-        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.TheOnlyMobCoins-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("TheOnly-MobCoins") != null) {
-                try {
-                    new OnlyMobCoinProvider(this);
-                } catch (NoClassDefFoundError e) {
-                    getLogger().warning("Failed to hook into TheOnlyMobCoins, MythicMobs Required. Coin component disabled.");
-                    return;
-                }
-                getLogger().info("Successfully hooked into TheOnlyMobCoins");
-            } else
-                getLogger().warning("Failed to hook into TheOnlyMobCoins. Coin component disabled.");
-        }
-    }
 
-    private void registerQuadrexMobCoins() {
-        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.QuadrexMobCoins-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("QuadrexMobCoins") != null) {
-                new QuadrexCoinProvider(this);
-                getLogger().info("Successfully hooked into QuadrexMobCoins");
-            } else
-                getLogger().warning("Failed to hook into KrakenMobCoins. Coin component disabled.");
-        }
-    }
 
     private void registerClipAutoSell() {
         if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.ClipAutoSell-Enabled")) {
@@ -183,16 +112,6 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into AutoSell");
             } else
                 getLogger().warning("Failed to hook into AutoSell. Money component disabled.");
-        }
-    }
-
-    private void registerUltraBackpacks() {
-        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.UltraBackpacks-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("UltraBackpacks") != null && getServer().getPluginManager().getPlugin("UltraBackpacks") != null) {
-                new UltraBackpacksProvider(this);
-                getLogger().info("Successfully hooked into UltraBackpacks");
-            } else
-                getLogger().warning("Failed to hook into UltraBackpacks. Money component disabled.");
         }
     }
 
@@ -236,59 +155,9 @@ public class AdvancedArmor extends JavaPlugin {
         }
     }
 
-    private void registerAquaCoins() {
-        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.AquaCoins-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("AquaCoins") != null) {
-                new AquaCoinProvider(this);
-                getLogger().info("Successfully hooked into AquaCoins");
-            } else
-                getLogger().warning("Failed to hook into AquaCoins. Coin component disabled.");
-        }
-    }
-
-    private void registerRivalHoes() {
-        if (getConfig().getBoolean("Essence-Armor.Economy-Dependencies.RivalHarvesterHoes-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("RivalHarvesterHoes") != null) {
-                new RivalHoesProvider(this);
-                getLogger().info("Successfully hooked into RivalHarvesterHoes");
-            } else
-                getLogger().warning("Failed to hook into RivalHarvesterHoes. Essence component disabled.");
-        }
-    }
-
-    private void registerRivalHoesMoney() {
-        if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.RivalHarvesterHoes-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("RivalHarvesterHoes") != null) {
-                new RivalHoesMoneyProvider(this);
-                getLogger().info("Successfully hooked into RivalHarvesterHoes");
-            } else
-                getLogger().warning("Failed to hook into RivalHarvesterHoes. Money component disabled.");
-        }
-    }
-
-    private void registerRivalRods() {
-        if (getConfig().getBoolean("Essence-Armor.Economy-Dependencies.RivalFishingRods-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("RivalFishingRods") != null) {
-                new RivalFishingProvider(this);
-                getLogger().info("Successfully hooked into RivalFishingRods");
-            } else
-                getLogger().warning("Failed to hook into RivalFishingRods. Essence component disabled.");
-        }
-    }
-
-    private void registerRivalSwords() {
-        if (getConfig().getBoolean("Essence-Armor.Economy-Dependencies.RivalMobSwords-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("RivalMobSwords") != null) {
-                new RivalSwordsProvider(this);
-                getLogger().info("Successfully hooked into RivalMobSwords");
-            } else
-                getLogger().warning("Failed to hook into RivalMobSwords. Essence component disabled.");
-        }
-    }
-
     private void registerEconShopGUI() {
         if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.EconomyShopGUI-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("EconomyShopGUI") != null) {
+            if (getServer().getPluginManager().getPlugin("EconomyShopGUI") != null || getServer().getPluginManager().getPlugin("EconomyShopGUI-Premium") != null) {
                 new EconomyShopProvider(this);
                 getLogger().info("Successfully hooked into EconomyShopGUI");
             } else
@@ -303,16 +172,6 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().info("Successfully hooked into WildTools");
             } else
                 getLogger().warning("Failed to hook into WildTools. Money component disabled.");
-        }
-    }
-
-    private void registerTokensGC() {
-        if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.Tokens-GC-Enabled")) {
-            if (getServer().getPluginManager().getPlugin("Tokens") != null) {
-                new GCTokensProvider(this);
-                getLogger().info("Successfully hooked into Tokens");
-            } else
-                getLogger().warning("Failed to hook into Tokens. Token component disabled.");
         }
     }
 
