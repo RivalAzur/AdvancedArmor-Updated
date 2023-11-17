@@ -1,4 +1,4 @@
-# AdvancedArmor - An Updated & Better Version
+# AdvancedArmor - An Updated & Better Version 1.16+
 An Custom Armors plugin
  
 Buy my other plugins here: https://builtbybit.com/creators/rivaldevelopment.139343/ <3
