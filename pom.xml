@@ -6,7 +6,7 @@
 
     <groupId>me.ilucah</groupId>
     <artifactId>AdvancedArmor</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
     <packaging>jar</packaging>
 
     <name>AdvancedArmor</name>
@@ -193,7 +193,7 @@
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
-            <version>1.5.25</version>
+            <version>3.16.29</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -201,6 +201,49 @@
             <artifactId>ScytherAPI</artifactId>
             <version>55a</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>me.rivaldev.harvesterhoes</groupId>
+            <artifactId>RivalHarvesterHoes</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/RivalHarvesterHoesAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.rivaldev.rivalpickaxes</groupId>
+            <artifactId>RivalPickaxes</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/RivalPickaxesAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>dev.drawthree</groupId>
+            <artifactId>X-Prison</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/Prison.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>dev.edprison</groupId>
+            <artifactId>EDPrison</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/EdPrison-5.3.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>dev.manifest</groupId>
+            <artifactId>ManifestCollectors</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/manifestcollector-1.0.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>me.lucko</groupId>
+            <artifactId>helper</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${project.basedir}/libs/helper (1).jar</systemPath>
         </dependency>
     </dependencies>
 </project>

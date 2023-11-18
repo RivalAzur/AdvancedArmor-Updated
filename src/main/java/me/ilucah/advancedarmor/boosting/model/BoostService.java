@@ -1,23 +1,46 @@
 package me.ilucah.advancedarmor.boosting.model;
 
+import me.ilucah.advancedarmor.*;
 import me.ilucah.advancedarmor.armor.Armor;
 import me.ilucah.advancedarmor.armor.BoostType;
 import me.ilucah.advancedarmor.handler.Handler;
 import me.ilucah.advancedarmor.utilities.nbt.NBTUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.*;
 
 import javax.annotation.Nullable;
+import java.util.*;
+import java.util.concurrent.*;
 
 public class BoostService {
 
     private final Handler handler;
-
+    private Map<UUID, Map<BoostType, Double>> cachedValues = new ConcurrentHashMap<>();
     public BoostService(Handler handler) {
         this.handler = handler;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+            clearCache();
+            }
+        }.runTaskTimer(AdvancedArmor.instance,10L, 100L);
+
     }
 
+
+    public void clearCache() {
+        cachedValues.clear();
+    }
+
+
     public double calculatePercentage(BoostType type, Player player) {
+
+
+        if (cachedValues.containsKey(player.getUniqueId()) && cachedValues.get(player.getUniqueId()).containsKey(type)) {
+            return cachedValues.get(player.getUniqueId()).get(type);
+        }
+
         int percentage = 0;
         if (player.getInventory().getHelmet() != null) {
             if (NBTUtils.hasArmorNBTTag(player.getInventory().getHelmet())) {
@@ -57,8 +80,11 @@ public class BoostService {
         }
         double total = (double) percentage / 100;
         total++;
+        cachedValues.computeIfAbsent(player.getUniqueId(), k -> new ConcurrentHashMap<>()).put(type, total);
         return total;
     }
+
+
 
     @Nullable
     public String getArmorName(ItemStack item) {

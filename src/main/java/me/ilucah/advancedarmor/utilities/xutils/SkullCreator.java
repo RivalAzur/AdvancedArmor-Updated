@@ -236,7 +236,7 @@ public class SkullCreator {
         }
     }
 
-    private static void mutateItemMeta(SkullMeta meta, String b64) {
+    public static void mutateItemMeta(SkullMeta meta, String b64) {
         try {
             if (metaSetProfileMethod == null) {
                 metaSetProfileMethod = meta.getClass().getDeclaredMethod("setProfile", GameProfile.class);

@@ -1,8 +1,9 @@
 package me.ilucah.advancedarmor;
 
 import me.ilucah.advancedarmor.api.AdvancedArmorAPI;
+import me.ilucah.advancedarmor.armor.lib.*;
 import me.ilucah.advancedarmor.boosting.providers.*;
-import me.ilucah.advancedarmor.listener.SkullPlaceListener;
+import me.ilucah.advancedarmor.listener.*;
 import me.ilucah.advancedarmor.placeholders.Placeholders;
 import me.ilucah.advancedarmor.config.ConfigManager;
 import org.bukkit.Bukkit;
@@ -18,22 +19,25 @@ public class AdvancedArmor extends JavaPlugin {
     private ConfigManager configManager;
 
     private AdvancedArmorAPI api;
-
+    public static AdvancedArmor instance;
     @Override
     public void onEnable() {
         this.configManager = new ConfigManager(this);
         configManager.load();
+        instance = this;
         this.handler = new Handler(this);
 
         this.api = new AdvancedArmorAPI(handler);
         registerEvents();
         getCommand("armor").setExecutor(new ArmorCommand(this));
+        getCommand("armor").setTabCompleter(new ArmorCommand(this));
         registerPlaceholderAPI();
 
         handler.initialiseTranslations();
         handler.initialiseColors();
         handler.initialiseArmor();
-
+        getServer().getPluginManager().registerEvents(new ShardListener(), this);
+        ArmorEquipEvent.registerListener(this);
         getLogger().info("Please note that in order to change economy providers in the config, you need to reload the server.");
     }
 
@@ -50,6 +54,9 @@ public class AdvancedArmor extends JavaPlugin {
         registerEconShopGUI();
         registerRevEnchants();
         registerWildTools();
+        registerXPrisonCore();
+        registerEDPrisonCore();
+        registerManifestCollector();
         new ExperienceProvider(this);
     }
 
@@ -78,6 +85,49 @@ public class AdvancedArmor extends JavaPlugin {
                 getLogger().warning("Failed to hook into EssentialsX. Money component disabled.");
         }
     }
+    private void registerXPrisonCore() {
+        if (getServer().getPluginManager().getPlugin("X-Prison") != null) {
+            if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.X-Prison-Enabled")) {
+                new XPCMoneyProvider(this);
+                getLogger().info("Successfully hooked into X-Prison MoneyAPI");
+            }
+            if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.X-Prison-Enabled")) {
+              new XPCTokenProvider(this);
+                getLogger().info("Successfully hooked into X-Prison TokenAPI");
+            }
+            if (getConfig().getBoolean("Gem-Armor.Economy-Dependencies.X-Prison-Enabled")) {
+               new XPCGemProvider(this);
+                getLogger().info("Successfully hooked into X-Prison GemAPI");
+            }
+        }
+    }
+    private void registerManifestCollector() {
+        if (getServer().getPluginManager().getPlugin("ManifestCollector") != null) {
+            if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.ManifestCollector-Enabled")) {
+                    new ManifestCollectorProvider(this);
+                getLogger().info("Successfully hooked into ManifestCollector MoneyAPI");
+            }
+        }
+
+    }
+    private void registerEDPrisonCore() {
+        if (getServer().getPluginManager().getPlugin("EdPrison") != null) {
+            if (getConfig().getBoolean("Money-Armor.Economy-Dependencies.EdPrison-Enabled")) {
+new EDPrisonMoneyProvider(this);
+                getLogger().info("Successfully hooked into EdPrison MoneyAPI");
+            }
+            if (getConfig().getBoolean("Token-Armor.Economy-Dependencies.EdPrison-Enabled")) {
+                new EDPrisonTokenProvider(this);
+                getLogger().info("Successfully hooked into EdPrison TokenAPI");
+            }
+            if (getConfig().getBoolean("Gem-Armor.Economy-Dependencies.EdPrison-Enabled")) {
+                new EDPrisonGemsProvider(this);
+                getLogger().info("Successfully hooked into EdPrison GemAPI");
+            }
+        }
+    }
+
+
 
     private void registerRevEnchants() {
         if (getServer().getPluginManager().getPlugin("RevEnchants") != null) {

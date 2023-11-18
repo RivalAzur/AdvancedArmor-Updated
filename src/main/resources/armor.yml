@@ -16,10 +16,12 @@ Armor:
         Protection: 10
         Fireprotection: 10
       Flags:
-        Unbreakable: false
-        HIDE_UNBREAKABLE: false
-        HIDE_ATTRIBUTES: false
-        HIDE_ENCHANTS: false
+        Unbreakable: true
+        HIDE_UNBREAKABLE: true
+        HIDE_ATTRIBUTES: true
+        HIDE_ENCHANTS: true
+        HIDE_ARMOR_TRIM: true
+        HIDE_DYE: true
       Boost:
         Type: 'EXP'
         Helmet-Percentage: 15
@@ -40,7 +42,7 @@ Armor:
         Boots:
           Material: 'LEATHER_BOOTS'
     PiggyBank:
-      Name: '<GRADIENT:00F9FF>&lPiggyBank %armor_type%</GRADIENT:2D8789>'
+      Name: '<GRADIENT:00F9FF>&lPiggy Bank %armor_type%</GRADIENT:2D8789>'
       ArmorColor: 'AQUABLUE'
       Lore:
         - '&b&l * <SOLID:00F9FF>Money Boost Armor'
@@ -53,10 +55,12 @@ Armor:
         Unbreaking: 10
         Protection: 10
       Flags:
-        Unbreakable: false
-        HIDE_UNBREAKABLE: false
-        HIDE_ATTRIBUTES: false
-        HIDE_ENCHANTS: false
+        Unbreakable: true
+        HIDE_UNBREAKABLE: true
+        HIDE_ATTRIBUTES: true
+        HIDE_ENCHANTS: true
+        HIDE_ARMOR_TRIM: true
+        HIDE_DYE: true
       Boost:
         Type: 'MONEY'
         Helmet-Percentage: 15
@@ -72,96 +76,32 @@ Armor:
           Material: 'LEATHER_LEGGINGS'
         Boots:
           Material: 'LEATHER_BOOTS'
-    Coin:
-      Name: '&6&lCoin &e&l%armor_type%'
-      ArmorColor: 'GOLD'
-      Lore:
-        - '&6&l * &eMobCoin Boost Armor'
-        - '&r'
-        - '&6&l * &eHelmet Piece: &f&n10% Mobcoin Boost'
-        - '&6&l * &eChestplate Piece: &f&n20% Mobcoin Boost'
-        - '&6&l * &eLeggings Piece: &f&n30% Mobcoin Boost'
-        - '&6&l * &eBoots Piece: &f&n40% Mobcoin Boost'
-      Enchants:
-        Unbreaking: 10
-        Protection: 10
-      Flags:
-        Unbreakable: false
-        HIDE_UNBREAKABLE: false
-        HIDE_ATTRIBUTES: false
-        HIDE_ENCHANTS: false
-      Boost:
-        Type: 'COIN'
-        Helmet-Percentage: 10
-        Chestplate-Percentage: 20
-        Leggings-Percentage: 30
-        Boots-Percentage: 40
-      Items:
-        Helmet:
-          Material: 'LEATHER_HELMET'
-        Chestplate:
-          Material: 'LEATHER_CHESTPLATE'
-        Leggings:
-          Material: 'LEATHER_LEGGINGS'
-        Boots:
-          Material: 'LEATHER_BOOTS'
     Sunkist:
-      Name: '<GRADIENT:F4FF00>&lSunkist %armor_type%</GRADIENT:FF7400>'
-      ArmorColor: 'ORANGE'
+      Name: '<GRADIENT:9B00FF>&lSunkist %armor_type%</GRADIENT:F1DAFF>'
+      ArmorColor: 'PURPLE'
       Lore:
-        - '<GRADIENT:F4FF00> * Token Boost Armor</GRADIENT:FF7400>'
+        - '<GRADIENT:9B00FF> * Token Boost Armor</GRADIENT:F1DAFF>'
         - '&r'
-        - '<GRADIENT:F4FF00> * 1 Piece: 30% Money Boost</GRADIENT:FF7400>'
-        - '<GRADIENT:F4FF00> * 2 Piece: 60% Money Boost</GRADIENT:FF7400>'
-        - '<GRADIENT:F4FF00> * 3 Piece: 90% Money Boost</GRADIENT:FF7400>'
-        - '<GRADIENT:F4FF00> * 4 Piece: 120% Money Boost</GRADIENT:FF7400>'
+        - '<GRADIENT:9B00FF> * 1 Piece: 30% Essence Boost</GRADIENT:F1DAFF>'
+        - '<GRADIENT:9B00FF> * 2 Piece: 60% Essence Boost</GRADIENT:F1DAFF>'
+        - '<GRADIENT:9B00FF> * 3 Piece: 90% Essence Boost</GRADIENT:F1DAFF>'
+        - '<GRADIENT:9B00FF> * 4 Piece: 120% Essence Boost</GRADIENT:F1DAFF>'
       Enchants:
         Unbreaking: 10
         Protection: 10
       Flags:
         Unbreakable: true
-        HIDE_UNBREAKABLE: false
-        HIDE_ATTRIBUTES: false
-        HIDE_ENCHANTS: false
+        HIDE_UNBREAKABLE: true
+        HIDE_ATTRIBUTES: true
+        HIDE_ENCHANTS: true
+        HIDE_ARMOR_TRIM: true
+        HIDE_DYE: true
       Boost:
-        Type: 'TOKEN'
+        Type: 'ESSENCE'
         Helmet-Percentage: 30
         Chestplate-Percentage: 30
         Leggings-Percentage: 30
         Boots-Percentage: 30
-      Items:
-        Helmet:
-          Material: 'LEATHER_HELMET'
-        Chestplate:
-          Material: 'LEATHER_CHESTPLATE'
-        Leggings:
-          Material: 'LEATHER_LEGGINGS'
-        Boots:
-          Material: 'LEATHER_BOOTS'
-    Crystal:
-      Name: '<GRADIENT:9B00FF>&lSunkist %armor_type%</GRADIENT:F1DAFF>'
-      ArmorColor: 'HOTPINK'
-      Lore:
-        - '<GRADIENT:9B00FF> * Token Boost Armor</GRADIENT:F1DAFF>'
-        - '&r'
-        - '<GRADIENT:9B00FF> * 1 Piece: 50% Money Boost</GRADIENT:F1DAFF>'
-        - '<GRADIENT:9B00FF> * 2 Piece: 100% Money Boost</GRADIENT:F1DAFF>'
-        - '<GRADIENT:9B00FF> * 3 Piece: 150% Money Boost</GRADIENT:F1DAFF>'
-        - '<GRADIENT:9B00FF> * 4 Piece: 200% Money Boost</GRADIENT:F1DAFF>'
-      Enchants:
-        Unbreaking: 10
-        Protection: 10
-      Flags:
-        Unbreakable: true
-        HIDE_UNBREAKABLE: false
-        HIDE_ATTRIBUTES: false
-        HIDE_ENCHANTS: false
-      Boost:
-        Type: 'GEM'
-        Helmet-Percentage: 50
-        Chestplate-Percentage: 50
-        Leggings-Percentage: 50
-        Boots-Percentage: 50
       Items:
         Helmet:
           Material: 'LEATHER_HELMET'

@@ -20,6 +20,9 @@ Money-Armor:
     Scyther-Enabled: false
     EconomyShopGUI-Enabled: false
     WildTools-Enabled: false
+    X-Prison-Enabled: false
+    EdPrison-Enabled: false
+    ManifestCollector-Enabled: false
 Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false
@@ -28,9 +31,13 @@ Token-Armor:
   Economy-Dependencies:
     DeluxeSellWands-Enabled: false
     RevEnchants-Enabled: false
+    X-Prison-Enabled: false
+    EdPrison-Enabled: false
 Gem-Armor:
   Economy-Dependencies:
     RevEnchants-Enabled: false
+    X-Prison-Enabled: false
+    EdPrison-Enabled: false
 Translations:
   Helmet: 'Helmet'
   Chestplate: 'Chestplate'

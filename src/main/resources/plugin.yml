@@ -2,13 +2,13 @@ name: AdvancedArmor
 version: '${project.version}'
 main: me.ilucah.advancedarmor.AdvancedArmor
 api-version: 1.13
-authors: [ iLucaH ]
+authors: [ iLucaH & Rival ]
 description: An advanced armor plugin for adding extra depth to your minecraft server
 depend:
   - NBTAPI
-softdepend: [ PlaceholderAPI, Essentials, ShopGUIPlus, SuperMobCoins, AutoSell, TMMobcoins, RevEnchants, WildTools ]
+softdepend: [ RivalHarvesterHoes, RivalPickaxes, PlaceholderAPI, Essentials, ShopGUIPlus, SuperMobCoins, AutoSell, TMMobcoins, RevEnchants, WildTools, X-Prison, EdPrison ]
 commands:
   armor:
-    description: Main hub command to manage Cusom Armor
+    description: Main command to manage Custom Armors
     usage: /<command>
     aliases: [ carmour, carmor, customarmour, customarmor, armour, advancedarmor, advancedarmour, aarmor, aarmour ]

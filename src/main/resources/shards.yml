@@ -1,0 +1,126 @@
+Shop:
+  command-names:
+    - 'armor'
+    - 'armor shop'
+    - 'suits'
+    - 'suitshop'
+    - 'armorshop'
+  armor-types:
+    - 'Fire'
+    - 'Sunkist'
+    - 'PiggyBank'
+Menu:
+  size: 54
+  name: '&8&nArmor Shop'
+  filler:
+    enabled: true
+    material: 'BLACK_STAINED_GLASS_PANE'
+  helmet-slot: 38
+  chestplate-slot: 39
+  leggings-slot: 41
+  boots-slot: 42
+  not-selected-item:
+    material: BARRIER
+    name: '<SOLID:F57A7A>No Armor Selected!'
+    lore:
+      - '&7&oPlease select an armor type'
+  not-enough-item:
+    material: BARRIER
+    name: '<SOLID:F57A7A>Not enough shards!'
+    lore:
+      - '&7&oYou need more shards to purchase this.'
+Shards:
+  PiggyBank:
+    Armor-Type: 'PiggyBank'
+    Mobs:
+      - 'ZOMBIE:1'
+    Blocks:
+      - 'COAL_ORE:1'
+    shard-item:
+      material: 'PLAYER_HEAD'
+      base64: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvM2QyNGRjNTgwNjljMTIxMmI1MjlhNGFlNWQ0ZTczYmUwOTkwZDQ2ZmU5MzcxYjFmNzllODE2NGI0Mjg1OWFjOCJ9fX0='
+      name: '<GRADIENT:00F9FF>&lPiggy Bank Shard</GRADIENT:2D8789>'
+      lore:
+        - '&7Purchase custom armor pieces using this armor'
+        - ' '
+        - '<GRADIENT:f5f3f0>&o(( /armor to purchase armor ))</GRADIENT:aba7a1>'
+    helmet-price: 128
+    chestplate-price: 128
+    leggings-price: 128
+    boots-price: 128
+    piece-addon-lore:
+      - '<SOLID:059e0c>&lCOST: <SOLID:07f212>%cost%x Shards'
+      - '<GRADIENT:07e612> * Click to purchase!</GRADIENT:059e0c>'
+    click-to-select:
+      slot: 15
+      name: '<GRADIENT:00F9FF>&lPiggy Bank Armor</GRADIENT:2D8789>'
+      lore:
+        - ' '
+        - '&7Fire armor is purchasable through piggy bank Shards.'
+        - '&7Obtain piggy bank Shards by killing Zombies & Mining Coal Ore!'
+        - ' '
+        - '<GRADIENT:f5f3f0>&o(( Click to select! ))</GRADIENT:aba7a1>'
+  Sunkist:
+    Armor-Type: 'Sunkist'
+    Mobs:
+      - 'ZOMBIE:1'
+    Blocks:
+      - 'WHEAT:0.2'
+    shard-item:
+      material: 'PLAYER_HEAD'
+      base64: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOGM0NjU3OGFkNThlOTc2ZmEwNTQ3ODUxMDg4OWE1ODczNWE2N2M0ZGQwMjJkMzk4YzA0ZDU2Njc2ZjBkYzE3MSJ9fX0='
+      name: '<GRADIENT:9B00FF>&lSunkist Shard</GRADIENT:F1DAFF>'
+      lore:
+        - '&7Purchase custom armor pieces using this armor'
+        - ' '
+        - '<GRADIENT:f5f3f0>&o(( /armor to purchase armor ))</GRADIENT:aba7a1>'
+    helmet-price: 128
+    chestplate-price: 128
+    leggings-price: 128
+    boots-price: 128
+    piece-addon-lore:
+      - '<SOLID:059e0c>&lCOST: <SOLID:07f212>%cost%x Shards'
+      - '<GRADIENT:07e612> * Click to purchase!</GRADIENT:059e0c>'
+    click-to-select:
+      slot: 13
+      name: '<GRADIENT:9B00FF>&lSunkist Armor</GRADIENT:F1DAFF>'
+      lore:
+        - ' '
+        - '&7Sunkist armor is purchasable through sunkist shards.'
+        - '&7Obtain sunkist shards by killing Zombies & Farming Wheat!'
+        - ' '
+        - '<GRADIENT:f5f3f0>&o(( Click to select! ))</GRADIENT:aba7a1>'
+  Fire:
+    Armor-Type: 'Fire'
+    Mobs:
+      - 'SKELETON:1'
+    shard-item:
+      material: 'PLAYER_HEAD'
+      base64: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODg5NTQ1YTJkY2U0ZTY2MGM0NGI1NTFmOTM5NmE3ZDcyZTJiZDNmZGUwNTE2M2QzMGM0MDNkOWE2NjhmNTZiNSJ9fX0='
+      name: '<SOLID:FFFB00>&LFire Shard'
+      lore:
+        - '&7Purchase custom armor pieces using this armor'
+        - ' '
+        - '<GRADIENT:f5f3f0>&o(( /armor to purchase armor ))</GRADIENT:aba7a1>'
+    helmet-price: 128
+    chestplate-price: 128
+    leggings-price: 128
+    boots-price: 128
+    piece-addon-lore:
+      - '<SOLID:059e0c>&lCOST: <SOLID:07f212>%cost%x Shards'
+      - '<GRADIENT:07e612> * Click to purchase!</GRADIENT:059e0c>'
+    click-to-select:
+      slot: 11
+      name: '<GRADIENT:FF4200>&lFire Armor</GRADIENT:FFC800>'
+      lore:
+        - ' '
+        - '&7Fire armor is purchasable through fire shards.'
+        - '&7Obtain fire shards by killing Skeletons!'
+        - ' '
+        - '<GRADIENT:f5f3f0>&o(( Click to select! ))</GRADIENT:aba7a1>'
+Messages:
+  purchased: '<SOLID:00FF00>[!] You have purchased a %armor_type% %armor_type_piece% for %amount% shards!'
+  not-enough: '<SOLID:FF0000>[!] You do not have enough shards!'
+Extra:
+  equipped: '&2&l[!] &aYou have equiped a %armor_type_display%'
+  unequipped: '&4&l[!] &cYou have unequiped a %armor_type_display%'
