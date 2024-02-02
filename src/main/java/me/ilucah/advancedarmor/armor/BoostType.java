@@ -123,6 +123,9 @@ public enum BoostType {
     ICE("ice"),
     PARTS("parts"),
     PRESTIGES("prestiges"),
+    PRESENTS("presents"),
+    PUMPKINS("pumpkins"),
+    EGGS("eggs"),
     RANKS("ranks"),
     REBIRTHS("rebirths");
 

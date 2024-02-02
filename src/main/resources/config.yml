@@ -1,12 +1,11 @@
 # Advanced Armor by iLucaH
 # Please if you encounter any issues, report it
-# Discord: https://discord.gg/GquPc7h
 # Wiki: https://github.com/iLucaH/AdvancedArmor/wiki
 # Config Info: https://github.com/iLucaH/AdvancedArmor/wiki/Documented-config
 ####################################################################################
 #                                                                                  #
-# IMPORTANT: Please refrain from reloading the plugin. Reload the server instead.  #
-# Boost Plugins are only reloaded when the server is reloaded!                     #
+# IMPORTANT: Please refrain from reloading the plugin. Restart the server instead. #
+# Boost Plugins are only reloaded when the server is restarted!                    #
 #                                                                                  #
 ####################################################################################
 
@@ -27,6 +26,7 @@ Coin-Armor:
   Economy-Dependencies:
     SuperMobCoins-Enabled: false
     TMMobcoins-Enabled: false
+    WarriorMobCoins-Enabled: false
 Token-Armor:
   Economy-Dependencies:
     DeluxeSellWands-Enabled: false

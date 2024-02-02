@@ -223,7 +223,7 @@ public class ShardListener implements Listener {
                 }
                 if (event.getSlot() == shopUI.bootsSlot) {
                     if (checkInventory(player,nbtItem.getItem(),shard.getBootsPrice())) {
-                        event.getWhoClicked().getInventory().addItem(new ItemStack[] { armor.getHelmet() });
+                        event.getWhoClicked().getInventory().addItem(new ItemStack[] { armor.getBoots() });
                         player.playSound(player.getLocation(), XSound.BLOCK_NOTE_BLOCK_HARP.parseSound(), 1.0F, 1.0F);
                         player.sendMessage(IridiumColorAPI.process(AdvancedArmor.instance.getConfigManager().getShards().getString("Messages.purchased").replace("%amount%", shard.getBootsPrice()+ "").replace("%armor_type_display%", armor.getDisplayName()).replace("%armor_type%", armor.getName()).replace("%armor_type_piece%", "Boots")));
                         return;

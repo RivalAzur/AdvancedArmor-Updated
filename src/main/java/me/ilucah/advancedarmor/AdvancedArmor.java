@@ -3,6 +3,7 @@ package me.ilucah.advancedarmor;
 import me.ilucah.advancedarmor.api.AdvancedArmorAPI;
 import me.ilucah.advancedarmor.armor.lib.*;
 import me.ilucah.advancedarmor.boosting.providers.*;
+import me.ilucah.advancedarmor.boosting.providers.edprison.*;
 import me.ilucah.advancedarmor.listener.*;
 import me.ilucah.advancedarmor.placeholders.Placeholders;
 import me.ilucah.advancedarmor.config.ConfigManager;
@@ -46,6 +47,7 @@ public class AdvancedArmor extends JavaPlugin {
         registerEssentials();
         registerShopGUIPlus();
         registerSuperMobCoins();
+        registerWarriorMobCoins();
         registerClipAutoSell();
         registerDeluxeSellWandsMoney();
         registerDeluxeSellWandsTokens();
@@ -124,6 +126,11 @@ new EDPrisonMoneyProvider(this);
                 new EDPrisonGemsProvider(this);
                 getLogger().info("Successfully hooked into EdPrison GemAPI");
             }
+            new EDPrisonShardsProvider(this);
+            new EDPrisonPresentsProvider(this);
+            new EDPrisonPumpkinsProvider(this);
+            new EDPrisonEggsProvider(this);
+
         }
     }
 
@@ -142,6 +149,15 @@ new EDPrisonMoneyProvider(this);
         }
     }
 
+    private void registerWarriorMobCoins() {
+        if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.WarriorMobCoins-Enabled")) {
+            if (getServer().getPluginManager().getPlugin("WarriorMobCoins") != null) {
+                new WarriorMobCoinsProvider(this);
+                getLogger().info("Successfully hooked into WarriorMobCoins");
+            } else
+                getLogger().warning("Failed to hook into WarriorMobCoins. Coin component disabled.");
+        }
+    }
     private void registerSuperMobCoins() {
         if (getConfig().getBoolean("Coin-Armor.Economy-Dependencies.SuperMobCoins-Enabled")) {
             if (getServer().getPluginManager().getPlugin("SuperMobCoins") != null) {

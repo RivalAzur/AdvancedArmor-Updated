@@ -6,7 +6,7 @@ authors: [ iLucaH & Rival ]
 description: An advanced armor plugin for adding extra depth to your minecraft server
 depend:
   - NBTAPI
-softdepend: [ RivalHarvesterHoes, RivalPickaxes, PlaceholderAPI, Essentials, ShopGUIPlus, SuperMobCoins, AutoSell, TMMobcoins, RevEnchants, WildTools, X-Prison, EdPrison ]
+softdepend: [WarriorMobCoins, RivalHarvesterHoes, RivalPickaxes, PlaceholderAPI, Essentials, ShopGUIPlus, SuperMobCoins, AutoSell, TMMobcoins, RevEnchants, WildTools, X-Prison, EdPrison ]
 commands:
   armor:
     description: Main command to manage Custom Armors
